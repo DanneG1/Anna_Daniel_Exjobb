@@ -17,6 +17,9 @@ namespace Read_Header_generate_CppCode
 {
     class Program
     {
+        //Dannes sökvägar
+        //public static string textFile = @"C:\Users\Danne\Documents\MATLAB\addition_times_5_v2_ert_shrlib_rtw\addition_times_5_v2.h";
+        //public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
 
         public static string textFile = @"C:\Users\Danne\Documents\MATLAB\addition_times_5_v2_ert_shrlib_rtw\addition_times_5_v2.h";
         public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
