@@ -18,9 +18,9 @@ namespace Read_Header_generate_CppCode
     class Program
     {
         //Dannes sökvägar
-        //public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
+        public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
         //Annas sökväg
-        public static string textFile2 = @"C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.h";
+       // public static string textFile2 = @"C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.h";
 
 
         public static List<String> inputs = new List<String>();
@@ -28,6 +28,7 @@ namespace Read_Header_generate_CppCode
 
         public static string referenceInput = "";
         public static string referenceOutput = "";
+        public static string modelName = "";
 
         public static IEnumerable<String> ReadFile()
         {
@@ -39,6 +40,7 @@ namespace Read_Header_generate_CppCode
         {
             Boolean foundInputs = false;
             Boolean foundOutputs = false;
+            Boolean foundConstructor = false;
             Regex inputRegex = new Regex("(.*)ExtU(.*)");
             Regex outputRegex = new Regex("(.*)ExtY(.*)");
 
@@ -78,6 +80,17 @@ namespace Read_Header_generate_CppCode
                     }
                     if (line.Contains("<Root>") && line.Contains("//"))
                         outputs.Add(line);
+                }
+                if (line.Contains("Constructor")||foundConstructor)
+                {
+                    if (!foundConstructor)
+                        foundConstructor = true;
+                    else
+                    {
+                        string[] splitLine = line.Split('(');
+                        modelName = splitLine[0];
+                        foundConstructor = false;
+                    }
                 }
                 if (inputMatch.Success)
                 {
@@ -123,7 +136,7 @@ namespace Read_Header_generate_CppCode
             string functionType = "double";
             string functionName = "TestFunction";
             string parameters = "";
-            string modelname = "trippleinput_different_datatypesModelClass"; //Fixa så den hittar modellnamnet automatiskt.
+            //string modelname = "trippleinput_different_datatypesModelClass"; //Fixa så den hittar modellnamnet automatiskt.
             String[] inportname = new string[inputs.Count()];
 
             //Skapa rätt antal parametrar med standard namnen in0, in1 etc.
@@ -163,7 +176,7 @@ namespace Read_Header_generate_CppCode
                 //Skapa modellen
                 else if (line.Contains("!modelName"))
                 {
-                    newContent.Add(modelname + " rObj;");
+                    newContent.Add(modelName + " rObj;");
                 }
 
                 //Sätt inportsen till parameterna från funktionen
