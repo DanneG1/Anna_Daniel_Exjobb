@@ -18,9 +18,9 @@ namespace Read_Header_generate_CppCode
     class Program
     {
         //Dannes sökvägar
-        public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
+        //public static string textFile2 = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h";
         //Annas sökväg
-        //public static string textFile2 = @"C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.h";
+        public static string textFile2 = @"C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.h";
 
 
         public static List<String> inputs = new List<String>();
@@ -121,8 +121,8 @@ namespace Read_Header_generate_CppCode
         public static void GenerateCppFile()
         {
             //string exampleFilePath = @"C:\Users\Danne\Desktop\Universitet\year3\Exjobb\exampleCppDLL.txt"
-            string exampleFilePath = @"\SourceFiles\exampleCppDLL.txt";
-
+            string exampleFilePath = @"..\..\SourceFiles\exampleCppDLL.txt";
+            
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
             List<String> newContent = new List<String>();
             string hPath = textFile2;
