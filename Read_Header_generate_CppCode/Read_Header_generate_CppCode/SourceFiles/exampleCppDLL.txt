@@ -1,0 +1,14 @@
+#include " !.h "
+#include " !.cpp "
+
+extern "C" __declspec(dllexport) !functionType !functionName( !parameters )
+{
+	!modelName rObj;
+	rObj.initialize();
+	
+	!setInports
+
+	rObj.step();
+
+	return !return
+}

@@ -120,7 +120,9 @@ namespace Read_Header_generate_CppCode
 
         public static void GenerateCppFile()
         {
-            string exampleFilePath = @"C:\Users\Danne\Desktop\Universitet\year3\Exjobb\exampleCppDLL.txt";
+            //string exampleFilePath = @"C:\Users\Danne\Desktop\Universitet\year3\Exjobb\exampleCppDLL.txt"
+            string exampleFilePath = @"\SourceFiles\exampleCppDLL.txt";
+
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
             List<String> newContent = new List<String>();
             string hPath = textFile2;
