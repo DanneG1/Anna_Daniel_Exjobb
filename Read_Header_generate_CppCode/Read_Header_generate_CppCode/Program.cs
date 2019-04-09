@@ -32,17 +32,11 @@ namespace Read_Header_generate_CppCode
         public static IEnumerable<String> ReadFile()
         {
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(textFile2);
-            /* foreach(var line in lines)
-             {
-                 System.Console.WriteLine(line);
-             }*/
             return lines;
         }
 
         public static void FindIO(IEnumerable<String> lines)
         {
-            //List<String> inputs=new List<String>();
-            //List<String> outputs = new List<String>();
             Boolean foundInputs = false;
             Boolean foundOutputs = false;
             Regex inputRegex = new Regex("(.*)ExtU(.*)");
@@ -99,7 +93,6 @@ namespace Read_Header_generate_CppCode
                     referenceOutput = referenceOutput.Replace(';', '.');
 
                     System.Console.WriteLine(referenceOutput);
-
                 }
             }
 
@@ -131,14 +124,13 @@ namespace Read_Header_generate_CppCode
             string functionName = "TestFunction";
             string parameters = "";
             string modelname = "trippleinput_different_datatypesModelClass"; //Fixa så den hittar modellnamnet automatiskt.
-            string instanceModel = "trippleinput_different_data_Obj"; //Fixa så den hittar instancen av modellens namn automatiskt.
             String[] inportname = new string[inputs.Count()];
 
             //Skapa rätt antal parametrar med standard namnen in0, in1 etc.
             int paramCount = inputs.Count();
             for (int i = 0; i < paramCount; ++i)
             {
-                if (!(i == paramCount - 1))
+                if (i != paramCount - 1)
                     parameters += "double in" + i + " ,";
                 else
                     parameters += "double in" + i;
@@ -191,7 +183,7 @@ namespace Read_Header_generate_CppCode
                     string outputFunction = "double outputs[" + outputs.Count() + "] ={ ";
                     for (int i = 0; i < outputs.Count(); ++i)
                     {
-                        if (!(i == outputs.Count() - 1))
+                        if (i != outputs.Count() - 1)
                             outputFunction += "rObj." + referenceOutput + outputs[i] + ",";
                         else
                             outputFunction += "rObj." + referenceOutput + outputs[i];
@@ -245,7 +237,6 @@ namespace Read_Header_generate_CppCode
             formatIO();
             PrintIO();
             GenerateCppFile();
-            //hej
         }
     }
 }
