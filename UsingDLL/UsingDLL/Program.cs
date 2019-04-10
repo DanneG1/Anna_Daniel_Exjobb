@@ -4,34 +4,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace UsingDLL
 {
     class Program
     {
+        private const string Path = @"../../dll/GenerateDLL.dll";
         [DllImport
-            (@"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll", CallingConvention = CallingConvention.Cdecl)]
+            (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialize();
 
         [DllImport
-            (@"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll", CallingConvention = CallingConvention.Cdecl)]
+            (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void step();
 
         [DllImport
-            (@"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll", CallingConvention = CallingConvention.Cdecl)]
+            (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern double getInputs(int port);
 
         [DllImport
-            (@"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll", CallingConvention = CallingConvention.Cdecl)]
+            (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void setInputs(int port,double value);
 
         [DllImport
-            (@"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll", CallingConvention = CallingConvention.Cdecl)]
+            (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void terminate();
 
         static void Main(string[] args)
         {
             initialize();
+            System.Console.WriteLine(Directory.GetCurrentDirectory());
             setInputs(0, 1.0);
             setInputs(1, 1.0);
             setInputs(2, 1.0);
@@ -41,6 +44,7 @@ namespace UsingDLL
             {
                 System.Console.WriteLine(value);
             }
+            System.Console.ReadKey();
             terminate();
         }
     }
