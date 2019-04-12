@@ -14,6 +14,7 @@ namespace ReadDllForm
     {
         private string hPath = "";
         private string cppPath = "";
+        
         public Form1()
         {
             InitializeComponent();
@@ -47,7 +48,8 @@ namespace ReadDllForm
         {
             if (cppPath != "" && hPath != "")
             {
-
+                createDll dll=new createDll(hPath,cppPath);
+                dll.createFile();
             }
         }
     }
