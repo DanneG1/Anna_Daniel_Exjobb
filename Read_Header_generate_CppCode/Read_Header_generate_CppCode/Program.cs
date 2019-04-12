@@ -131,7 +131,6 @@ namespace Read_Header_generate_CppCode
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
             List<String> newContent = new List<String>();
             string hPath = textFile2;
-            String[] inportname = new string[inputs.Count()];
 
             foreach (var line in lines)
             {
@@ -154,10 +153,10 @@ namespace Read_Header_generate_CppCode
                 //Skapa switch case för setInputs
                 else if (line.Contains("!setInputCase"))
                 {
-                    for(int i=0;i<inportname.Count();++i)
+                    for(int i=0;i<inputs.Count();++i)
                     {
                         newContent.Add("case " + i + ":");
-                        newContent.Add("rObj." + referenceInput + inportname[i] + "= value;");
+                        newContent.Add("rObj." + referenceInput + inputs[i] + "= value;");
                         newContent.Add("break;");
                     }
                 }
