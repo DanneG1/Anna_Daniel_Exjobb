@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReadDllForm", "ReadDllForm\ReadDllForm.csproj", "{65CADFF1-376A-4702-B7B6-80DC6791BF67}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65CADFF1-376A-4702-B7B6-80DC6791BF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65CADFF1-376A-4702-B7B6-80DC6791BF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65CADFF1-376A-4702-B7B6-80DC6791BF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65CADFF1-376A-4702-B7B6-80DC6791BF67}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9A4A11C3-DD57-43BA-922D-73494D750569}
+	EndGlobalSection
+EndGlobal
