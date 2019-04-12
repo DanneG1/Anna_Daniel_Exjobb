@@ -21,7 +21,7 @@ namespace UsingDLL
 
         [DllImport
             (Path, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getInputs(int port);
+        public static extern double getOutputs(int port);
 
         [DllImport
             (Path, CallingConvention = CallingConvention.Cdecl)]
@@ -39,7 +39,7 @@ namespace UsingDLL
             setInputs(1, 1.0);
             setInputs(2, 1.0);
             step();
-            double[] result = { getInputs(0), getInputs(1), getInputs(2) };
+            double[] result = { getOutputs(0), getOutputs(1), getOutputs(2) };
             foreach(var value in result)
             {
                 System.Console.WriteLine(value);
