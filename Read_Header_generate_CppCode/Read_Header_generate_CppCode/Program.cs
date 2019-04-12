@@ -125,34 +125,13 @@ namespace Read_Header_generate_CppCode
         }
         public static void GenerateCppFile()
         {
-            //string exampleFilePath = @"C:\Users\Danne\Desktop\Universitet\year3\Exjobb\exampleCppDLL.txt"
-            string exampleFilePath = @"..\..\SourceFiles\exampleCppDLL.txt";
             string cppPath = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.cpp";
+            string exampleFilePath = @"..\..\SourceFiles\exampleCppDLL.txt";
+
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
             List<String> newContent = new List<String>();
             string hPath = textFile2;
-            //string cppPath=
-            //string functionType = "double";
-            //string functionName = "TestFunction";
-            string parameters = "";
-            //string modelname = "trippleinput_different_datatypesModelClass"; //Fixa så den hittar modellnamnet automatiskt.
             String[] inportname = new string[inputs.Count()];
-
-            //Skapa rätt antal parametrar med standard namnen in0, in1 etc.
-            int paramCount = inputs.Count();
-            for (int i = 0; i < paramCount; ++i)
-            {
-                if (i != paramCount - 1)
-                    parameters += "double in" + i + " ,";
-                else
-                    parameters += "double in" + i;
-
-            }
-            for (int i = 0; i < inputs.Count(); ++i)
-            {
-                //funkar inte som den borde, slarvig för att se om konceptet fungerar
-                inportname[i] = inputs[i];
-            }
 
             foreach (var line in lines)
             {
@@ -171,7 +150,8 @@ namespace Read_Header_generate_CppCode
                 {
                     newContent.Add(modelName + " rObj;");
                 }
-                //Skapa switch case för setInports
+
+                //Skapa switch case för setInputs
                 else if (line.Contains("!setInputCase"))
                 {
                     for(int i=0;i<inportname.Count();++i)
@@ -181,7 +161,8 @@ namespace Read_Header_generate_CppCode
                         newContent.Add("break;");
                     }
                 }
-                //Skapa switch case för getOutports
+
+                //Skapa switch case för getOutputs
                 else if (line.Contains("!getOutputCase"))
                 {
                     for (int i = 0; i < outputs.Count(); ++i)
