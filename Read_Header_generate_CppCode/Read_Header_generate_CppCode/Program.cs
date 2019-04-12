@@ -123,18 +123,17 @@ namespace Read_Header_generate_CppCode
                 System.Console.WriteLine(line);
             }
         }
-
         public static void GenerateCppFile()
         {
             //string exampleFilePath = @"C:\Users\Danne\Desktop\Universitet\year3\Exjobb\exampleCppDLL.txt"
             string exampleFilePath = @"..\..\SourceFiles\exampleCppDLL.txt";
-            
+            string cppPath = @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.cpp";
             System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
             List<String> newContent = new List<String>();
             string hPath = textFile2;
             //string cppPath=
-            string functionType = "double";
-            string functionName = "TestFunction";
+            //string functionType = "double";
+            //string functionName = "TestFunction";
             string parameters = "";
             //string modelname = "trippleinput_different_datatypesModelClass"; //Fixa så den hittar modellnamnet automatiskt.
             String[] inportname = new string[inputs.Count()];
@@ -160,17 +159,11 @@ namespace Read_Header_generate_CppCode
                 //Sätt paths till .h och .cpp fil
                 if (line.Contains("!.h "))
                 {
-                    newContent.Add("#include \"" + @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h" + "\"");
+                    newContent.Add("#include \"" + hPath + "\"");
                 }
                 else if (line.Contains(" !.cpp "))
                 {
-                    newContent.Add("#include \"" + @"C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.cpp" + "\"");
-                }
-
-                //Sätt information till funktionen
-                else if (line.Contains("!functionType"))
-                {
-                    newContent.Add("extern \"C\" __declspec(dllexport) " + functionType + " " + functionName + "(" + parameters + " )");
+                    newContent.Add("#include \"" + cppPath + "\"");
                 }
 
                 //Skapa modellen
@@ -178,37 +171,24 @@ namespace Read_Header_generate_CppCode
                 {
                     newContent.Add(modelName + " rObj;");
                 }
-
-                //Sätt inportsen till parameterna från funktionen
-                else if (line.Contains("!setInports"))
+                //Skapa switch case för setInports
+                else if (line.Contains("!setInputCase"))
                 {
-                    for (int i = 0; i < paramCount; ++i)
+                    for(int i=0;i<inportname.Count();++i)
                     {
-                        newContent.Add("rObj." + referenceInput + inportname[i] + "= in" + i + ";");
+                        newContent.Add("case " + i + ":");
+                        newContent.Add("rObj." + referenceInput + inportname[i] + "= value;");
+                        newContent.Add("break;");
                     }
                 }
-
-                //Skapa Array med alla outputs
-
-                //Skapa return
-                else if (line.Contains("!return"))
+                //Skapa switch case för getOutports
+                else if (line.Contains("!getOutputCase"))
                 {
-                    string outputFunction = "double outputs[" + outputs.Count() + "] ={ ";
                     for (int i = 0; i < outputs.Count(); ++i)
                     {
-                        if (i != outputs.Count() - 1)
-                            outputFunction += "rObj." + referenceOutput + outputs[i] + ",";
-                        else
-                            outputFunction += "rObj." + referenceOutput + outputs[i];
-
+                        newContent.Add("case " + i + ":");
+                        newContent.Add(" return rObj." + referenceOutput + outputs[i] + ";");
                     }
-                    outputFunction += "\n}";
-                    newContent.Add(outputFunction);
-                    newContent.Add("return outputs;");
-
-                    //newContent.Add("double[" + outputs.Count() + "] outputs; ");
-
-                    //newContent.Add("return 1");
                 }
 
                 //Annars kopiera från default fil
@@ -218,7 +198,7 @@ namespace Read_Header_generate_CppCode
                 }
             }
 
-            File.WriteAllLines("newDLLfile.cpp", newContent);
+            File.WriteAllLines("newDLLfileV2.cpp", newContent);
 
         }
         public static void formatIO()

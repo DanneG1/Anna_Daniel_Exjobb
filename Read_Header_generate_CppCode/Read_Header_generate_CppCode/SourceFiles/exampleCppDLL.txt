@@ -1,14 +1,52 @@
 #include " !.h "
 #include " !.cpp "
 
-extern "C" __declspec(dllexport) !functionType !functionName( !parameters )
-{
 	!modelName rObj;
+
+
+//extern "C" __declspec(dllexport) !functionType !functionName( !parameters )
+
+extern "C" __declspec(dllexport) void initialize() 
+{
 	rObj.initialize();
-	
-	!setInports
+}
 
+extern "C" __declspec(dllexport) void setInputs(int port,double value) 
+{
+//Skapa switchcases baserat på antalet portar och nytt värde.
+
+/*Exempel 
+	switch (port) {
+	case 0:
+		rObj.trippleinput_different_dataty_U.Input1_signal = value;
+		break;
+	}*/
+
+	switch(port){
+		!setInputCase
+	}
+}
+
+extern "C" __declspec(dllexport) double getOutputs(int port) 
+{
+//Skapa switchcase för att returnera angiven output
+
+/*Exempel:
+	switch (port) {
+	case 0:
+		return rObj.trippleinput_different_dataty_Y.Addition_output;
+	}*/
+	switch(port){
+	!getOutputCase
+	}
+}
+
+extern "C" __declspec(dllexport) void step()
+{
 	rObj.step();
+}
 
-	return !return
+extern "C" __declspec(dllexport) void terminate()
+{
+	rObj.terminate();
 }
