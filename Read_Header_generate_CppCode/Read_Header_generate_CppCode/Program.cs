@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Reflection;
+using System.CodeDom.Compiler;
 
 
 /*
@@ -203,13 +205,43 @@ namespace Read_Header_generate_CppCode
             outputs = newOutputs;
         }
 
+        public static void generateDLL()
+        {
+            //Commandot som ska in
+            //cl.exe /LD C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\Read_Header_generate_CppCode\Read_Header_generate_CppCode\bin\Debug\newDLLfileV2.cpp
+
+            //Funkar typ, måste skriva in kommandot manuellt från det öppnade kommandofönstret
+
+            string cppPath = @"C:\Users\Danne\Source\Repos\Anna_Daniel_Exjobb\Read_Header_generate_CppCode\Read_Header_generate_CppCode\bin\Debug\newDLLfileV2.cpp";
+            string command ="cl.exe /LD "+cppPath;
+            string cmdDirectory = @"C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Visual Studio 2015\Visual Studio Tools";
+            string cmdName = "Developer Command Prompt for VS2015";
+ 
+             Console.WriteLine(command);
+            //System.Diagnostics.Process.Start("cmd.exe", command);
+
+           System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WorkingDirectory = cmdDirectory;
+            startInfo.FileName = cmdName;
+            startInfo.Arguments = command;
+            startInfo.Verb = "runas";               //Run as admin
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+
+
+
+        }
+
         static void Main(string[] args)
         {
-            IEnumerable<String> text = ReadFile();
-            FindIO(text);
-            formatIO();
-            PrintIO();
-            GenerateCppFile();
+            //IEnumerable<String> text = ReadFile();
+            //FindIO(text);
+            //formatIO();
+            //PrintIO();
+            //GenerateCppFile();
+            generateDLL();
         }
     }
 }

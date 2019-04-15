@@ -11,31 +11,17 @@ extern "C" __declspec(dllexport) void initialize()
 	rObj.initialize();
 }
 
+//Skapa switchcases baserat på antalet portar och nytt värde.
 extern "C" __declspec(dllexport) void setInputs(int port,double value) 
 {
-//Skapa switchcases baserat på antalet portar och nytt värde.
-
-/*Exempel 
-	switch (port) {
-	case 0:
-		rObj.trippleinput_different_dataty_U.Input1_signal = value;
-		break;
-	}*/
-
 	switch(port){
 		!setInputCase
 	}
 }
 
+//Skapa switchcase för att returnera angiven output
 extern "C" __declspec(dllexport) double getOutputs(int port) 
 {
-//Skapa switchcase för att returnera angiven output
-
-/*Exempel:
-	switch (port) {
-	case 0:
-		return rObj.trippleinput_different_dataty_Y.Addition_output;
-	}*/
 	switch(port){
 	!getOutputCase
 	}

@@ -10,7 +10,8 @@ namespace UsingDLL
 {
     class Program
     {
-        private const string Path = @"../../dll/GenerateDLL.dll";
+        private const string Path = @"C:\Windows\SysWOW64\newDLLfileV2.dll";
+        //private const string Path = @"../../dll/GenerateDLL.dll";
         [DllImport
             (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialize();
