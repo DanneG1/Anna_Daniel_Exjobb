@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +53,33 @@ namespace ReadDllForm
                 createDll dll=new createDll(hPath,cppPath);
                 dll.createFile();
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string msbuild= @"""C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\amd64\MSBuild.exe""";
+            string sulution= @"""C:\Users\Anna Forsberg\Source\Repos\DanneG1\Anna_Daniel_Exjobb\Read_Header_generate_CppCode\Read_Header_generate_CppCode.sln""";
+            string cl = @"""C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC\14.13.26128\bin\Hostx64\x64\cl.exe""";
+            string cpp =@"""C:\Users\Anna Forsberg\Source\Repos\DanneG1\Anna_Daniel_Exjobb\ReadDllForm\ReadDllForm\bin\Debug\newDLLfileV2.cpp""";
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.RedirectStandardError = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+            cmd.StandardInput.WriteLine("cd..");
+            //cmd.StandardInput.WriteLine(cl +" /LD "+cpp);
+            cmd.StandardInput.WriteLine(msbuild+" "+ sulution);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+            Console.WriteLine(cmd.StandardError.ReadToEnd());
+
+           
+
         }
     }
 }
