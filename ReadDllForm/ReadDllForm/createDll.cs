@@ -26,15 +26,11 @@ namespace ReadDllForm
         public static string referenceOutput = "";
         public static string modelName; 
 
-
-        public createDll(string h, string cpp)
+        public void createFile(string h, string cpp)
         {
             hPath = h;
             cppPath = cpp;
-        }
 
-        public void createFile()
-        {
             IEnumerable<String> text = ReadFile();
             FindIO(text);
             formatIO();
@@ -167,8 +163,8 @@ namespace ReadDllForm
                         }
                     }
 
-                    //Annars kopiera från default fil
-                    else
+                //Annars kopiera från default fil
+                else
                     {
                         newContent.Add(line);
                     }
@@ -179,7 +175,7 @@ namespace ReadDllForm
 
 
         }
-        public static void formatIO()
+            public static void formatIO()
             {
                 List<String> newInputs = new List<string>();
                 List<String> newOutputs = new List<string>();
@@ -211,14 +207,14 @@ namespace ReadDllForm
             cmd.StartInfo.RedirectStandardInput = true;
             cmd.StartInfo.RedirectStandardOutput = true;
             cmd.StartInfo.RedirectStandardError = true;
-            cmd.StartInfo.CreateNoWindow = true;
+            //cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.Start();
             cmd.StandardInput.WriteLine("cd..");
             cmd.StandardInput.WriteLine(msbuild + " " + solution);
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
-            cmd.WaitForExit();
+            //cmd.WaitForExit();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             Console.WriteLine(cmd.StandardError.ReadToEnd());
         }

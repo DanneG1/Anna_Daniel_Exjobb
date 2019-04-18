@@ -10,8 +10,12 @@ namespace UsingDLL
 {
     class Program
     {
-        private const string Path = @"C:\Windows\SysWOW64\newDLLfileV2.dll";
+        //private const string Path = @"C:\Windows\SysWOW64\newDLLfileV2.dll";
+        //private const string Path = @"C:\Users\Danne\Documents\simulinkmodels\GenerateDLL.dll";
+        private const string Path = @"C:\Users\Danne\source\repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll";
+        //private const string Path = @"C:\Users\Danne\Documents\simulinkmodels\Annas\GenerateDLL.dll";
         //private const string Path = @"../../dll/GenerateDLL.dll";
+
         [DllImport
             (Path, CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialize();
@@ -45,6 +49,8 @@ namespace UsingDLL
             {
                 System.Console.WriteLine(value);
             }
+            
+
             System.Console.ReadKey();
             terminate();
         }
