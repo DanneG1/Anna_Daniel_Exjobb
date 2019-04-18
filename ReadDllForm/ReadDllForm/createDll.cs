@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ReadDllForm.Properties;
 
 namespace ReadDllForm
 {
@@ -119,9 +121,6 @@ namespace ReadDllForm
             }
             public static void GenerateCppFile()
             {
-               
-                
-
                 System.Collections.Generic.IEnumerable<String> lines = File.ReadLines(exampleFilePath);
                 List<String> newContent = new List<String>();
                
@@ -197,6 +196,27 @@ namespace ReadDllForm
                 outputs = newOutputs;
             }
 
-     
+        public void genDll()
+        {
+            string msbuild = "\""+Settings.Default["MsBuild"].ToString()+"\"";
+            string solution = "\"" + Settings.Default["Solution"].ToString()+ "\"";
+
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.RedirectStandardError = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+            cmd.StandardInput.WriteLine("cd..");
+            cmd.StandardInput.WriteLine(msbuild + " " + solution);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            Console.WriteLine(cmd.StandardOutput.ReadToEnd());
+            Console.WriteLine(cmd.StandardError.ReadToEnd());
         }
+
+    }
 }

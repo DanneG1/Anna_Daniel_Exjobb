@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ReadDllForm.Properties;
 
 namespace ReadDllForm
 {
@@ -20,6 +21,9 @@ namespace ReadDllForm
         public Form1()
         {
             InitializeComponent();
+            textBoxMsBuild.Text = Settings.Default["MsBuild"].ToString();
+            textBoxSolution.Text = Settings.Default["Solution"].ToString();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,7 +67,7 @@ namespace ReadDllForm
             string solution= @"""C:\Users\Anna Forsberg\Source\Repos\DanneG1\Anna_Daniel_Exjobb\GenerateDLL\GenerateDLL.sln""";
             */
             //DANNES SÖKVÄGAR
-            string msbuild = @"""C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe""";
+           /* string msbuild = @"""C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin\amd64\MSBuild.exe""";
             string solution = @"""C:\Users\Danne\source\repos\Anna_Daniel_Exjobb\GenerateDLL\GenerateDLL.sln""";
 
             Process cmd = new Process();
@@ -80,8 +84,36 @@ namespace ReadDllForm
             cmd.StandardInput.Close();
             cmd.WaitForExit();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
-            Console.WriteLine(cmd.StandardError.ReadToEnd());
+            Console.WriteLine(cmd.StandardError.ReadToEnd());*/
+            createDll dll=new createDll(hPath,cppPath);
+            dll.genDll();
 
+        }
+
+        private void btnMSBuild_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+           // openH.Filter = "h files(*.h)|*.h";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default["MsBuild"] = open.FileName;
+
+                textBoxMsBuild.Text = Settings.Default["MsBuild"].ToString();
+                Settings.Default.Save();
+            }
+        }
+
+        private void btnSolution_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            // openH.Filter = "h files(*.h)|*.h";
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default["Solution"] = open.FileName;
+
+                textBoxSolution.Text = Settings.Default["Solution"].ToString();
+                Settings.Default.Save();
+            }
         }
     }
 }

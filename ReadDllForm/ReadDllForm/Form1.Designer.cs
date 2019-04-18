@@ -35,6 +35,10 @@
             this.txtBoxCpp = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.textBoxSolution = new System.Windows.Forms.TextBox();
+            this.btnSolution = new System.Windows.Forms.Button();
+            this.btnMSBuild = new System.Windows.Forms.Button();
+            this.textBoxMsBuild = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
@@ -95,11 +99,49 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // textBoxSolution
+            // 
+            this.textBoxSolution.Location = new System.Drawing.Point(409, 29);
+            this.textBoxSolution.Name = "textBoxSolution";
+            this.textBoxSolution.Size = new System.Drawing.Size(250, 22);
+            this.textBoxSolution.TabIndex = 6;
+            // 
+            // btnSolution
+            // 
+            this.btnSolution.Location = new System.Drawing.Point(679, 29);
+            this.btnSolution.Name = "btnSolution";
+            this.btnSolution.Size = new System.Drawing.Size(75, 23);
+            this.btnSolution.TabIndex = 7;
+            this.btnSolution.Text = "Solution";
+            this.btnSolution.UseVisualStyleBackColor = true;
+            this.btnSolution.Click += new System.EventHandler(this.btnSolution_Click);
+            // 
+            // btnMSBuild
+            // 
+            this.btnMSBuild.Location = new System.Drawing.Point(679, 81);
+            this.btnMSBuild.Name = "btnMSBuild";
+            this.btnMSBuild.Size = new System.Drawing.Size(75, 23);
+            this.btnMSBuild.TabIndex = 8;
+            this.btnMSBuild.Text = "MSBuild";
+            this.btnMSBuild.UseVisualStyleBackColor = true;
+            this.btnMSBuild.Click += new System.EventHandler(this.btnMSBuild_Click);
+            // 
+            // textBoxMsBuild
+            // 
+            this.textBoxMsBuild.Location = new System.Drawing.Point(409, 91);
+            this.textBoxMsBuild.Name = "textBoxMsBuild";
+            this.textBoxMsBuild.Size = new System.Drawing.Size(250, 22);
+            this.textBoxMsBuild.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxMsBuild);
+            this.Controls.Add(this.btnMSBuild);
+            this.Controls.Add(this.btnSolution);
+            this.Controls.Add(this.textBoxSolution);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.txtBoxCpp);
@@ -122,6 +164,10 @@
         private System.Windows.Forms.TextBox txtBoxCpp;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.TextBox textBoxSolution;
+        private System.Windows.Forms.Button btnSolution;
+        private System.Windows.Forms.Button btnMSBuild;
+        private System.Windows.Forms.TextBox textBoxMsBuild;
     }
 }
 
