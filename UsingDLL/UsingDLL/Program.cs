@@ -13,6 +13,7 @@ namespace UsingDLL
         //private const string Path = @"C:\Windows\SysWOW64\newDLLfileV2.dll";
         //private const string Path = @"C:\Users\Danne\Documents\simulinkmodels\GenerateDLL.dll";
         private const string Path = @"C:\Users\Danne\source\repos\Anna_Daniel_Exjobb\GenerateDLL\Debug\GenerateDLL.dll";
+        //private const string Path = @"C:\Users\Danne\source\repos\Anna_Daniel_Exjobb\GenerateDLL\x64\Debug\GenerateDLL.dll";
         //private const string Path = @"C:\Users\Danne\Documents\simulinkmodels\Annas\GenerateDLL.dll";
         //private const string Path = @"../../dll/GenerateDLL.dll";
 

@@ -202,6 +202,15 @@ namespace ReadDllForm
             string msbuild = "\""+Settings.Default["MsBuild"].ToString()+"\"";
             string solution = "\"" + Settings.Default["Solution"].ToString()+ "\"";
 
+            string targetDir= "\"" + Settings.Default["TargetFolder"].ToString() + "\"";
+            string targetFile = "\""+Settings.Default["Solution"].ToString() + "/Debug/GenerateDLL.dll"+"\"";
+
+            string newFileName = "NySimulinkModell.dll";
+            string renameCommand = "ren " + targetFile + " " + newFileName;
+            string moveCommand = "move " + "\"" + Settings.Default["Solution"].ToString() + "/Debug/" + newFileName + " " + targetDir;
+
+            Console.WriteLine(renameCommand + moveCommand);
+
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
             cmd.StartInfo.RedirectStandardInput = true;
@@ -210,13 +219,17 @@ namespace ReadDllForm
             //cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
             cmd.Start();
-            cmd.StandardInput.WriteLine("cd..");
             cmd.StandardInput.WriteLine(msbuild + " " + solution);
+            cmd.StandardInput.WriteLine(renameCommand);
+            cmd.StandardInput.WriteLine(moveCommand);
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             //cmd.WaitForExit();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             Console.WriteLine(cmd.StandardError.ReadToEnd());
+
+
+
         }
 
     }
