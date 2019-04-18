@@ -197,7 +197,7 @@ namespace ReadDllForm
                 outputs = newOutputs;
             }
 
-        public void genDll()
+        public void generateDll()
         {
             string msbuild = "\""+Settings.Default["MsBuild"].ToString()+"\"";
             string solution = "\"" + Settings.Default["Solution"].ToString()+ "\"";

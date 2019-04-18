@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ReadDllForm.Properties;
 
+
 namespace ReadDllForm
 {
     public partial class Form1 : Form
@@ -23,10 +24,11 @@ namespace ReadDllForm
             InitializeComponent();
             textBoxMsBuild.Text = Settings.Default["MsBuild"].ToString();
             textBoxSolution.Text = Settings.Default["Solution"].ToString();
+            textBoxTarget.Text = Settings.Default["TargetFolder"].ToString();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnHeader_Click(object sender, EventArgs e)
         {
             OpenFileDialog openH = new OpenFileDialog();
             openH.Filter="h files(*.h)|*.h";
@@ -38,7 +40,7 @@ namespace ReadDllForm
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnCppFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openCpp = new OpenFileDialog();
             openCpp.Filter = "cpp files(*.cpp)|*.cpp";
@@ -50,7 +52,7 @@ namespace ReadDllForm
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnGenerateDll_Click(object sender, EventArgs e)
         {
             if (cppPath != "" && hPath != "")
             {
@@ -62,7 +64,7 @@ namespace ReadDllForm
         private void button4_Click(object sender, EventArgs e)
         {
             createDll dll=new createDll();
-            dll.genDll();
+            dll.generateDll();
         }
 
         private void btnMSBuild_Click(object sender, EventArgs e)
@@ -89,6 +91,23 @@ namespace ReadDllForm
                 textBoxSolution.Text = Settings.Default["Solution"].ToString();
                 Settings.Default.Save();
             }
+        }
+
+        private void btnTargetFolder_Click(object sender, EventArgs e)
+        {
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    Settings.Default["TargetFolder"] = fbd.SelectedPath;
+
+                    textBoxTarget.Text = Settings.Default["TargetFolder"].ToString();
+                    Settings.Default.Save();
+                }
+            }
+          
         }
     }
 }

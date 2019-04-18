@@ -28,38 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnHeaderFile = new System.Windows.Forms.Button();
+            this.btnCppFile = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.txtBoxH = new System.Windows.Forms.TextBox();
             this.txtBoxCpp = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnGenerateDll = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.textBoxSolution = new System.Windows.Forms.TextBox();
             this.btnSolution = new System.Windows.Forms.Button();
             this.btnMSBuild = new System.Windows.Forms.Button();
             this.textBoxMsBuild = new System.Windows.Forms.TextBox();
+            this.textBoxTarget = new System.Windows.Forms.TextBox();
+            this.btnTargetFolder = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnHeaderFile
             // 
-            this.button1.Location = new System.Drawing.Point(313, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 35);
-            this.button1.TabIndex = 0;
-            this.button1.Text = ".h";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnHeaderFile.Location = new System.Drawing.Point(313, 29);
+            this.btnHeaderFile.Name = "btnHeaderFile";
+            this.btnHeaderFile.Size = new System.Drawing.Size(75, 35);
+            this.btnHeaderFile.TabIndex = 0;
+            this.btnHeaderFile.Text = ".h";
+            this.btnHeaderFile.UseVisualStyleBackColor = true;
+            this.btnHeaderFile.Click += new System.EventHandler(this.btnHeader_Click);
             // 
-            // button2
+            // btnCppFile
             // 
-            this.button2.Location = new System.Drawing.Point(313, 81);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 32);
-            this.button2.TabIndex = 1;
-            this.button2.Text = ".cpp";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCppFile.Location = new System.Drawing.Point(313, 81);
+            this.btnCppFile.Name = "btnCppFile";
+            this.btnCppFile.Size = new System.Drawing.Size(75, 32);
+            this.btnCppFile.TabIndex = 1;
+            this.btnCppFile.Text = ".cpp";
+            this.btnCppFile.UseVisualStyleBackColor = true;
+            this.btnCppFile.Click += new System.EventHandler(this.btnCppFile_Click);
             // 
             // openFileDialog1
             // 
@@ -79,15 +81,15 @@
             this.txtBoxCpp.Size = new System.Drawing.Size(243, 22);
             this.txtBoxCpp.TabIndex = 3;
             // 
-            // button3
+            // btnGenerateDll
             // 
-            this.button3.Location = new System.Drawing.Point(313, 150);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Generate Dll";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnGenerateDll.Location = new System.Drawing.Point(250, 162);
+            this.btnGenerateDll.Name = "btnGenerateDll";
+            this.btnGenerateDll.Size = new System.Drawing.Size(138, 23);
+            this.btnGenerateDll.TabIndex = 4;
+            this.btnGenerateDll.Text = "Generate Dll";
+            this.btnGenerateDll.UseVisualStyleBackColor = true;
+            this.btnGenerateDll.Click += new System.EventHandler(this.btnGenerateDll_Click);
             // 
             // button4
             // 
@@ -133,21 +135,40 @@
             this.textBoxMsBuild.Size = new System.Drawing.Size(250, 22);
             this.textBoxMsBuild.TabIndex = 9;
             // 
+            // textBoxTarget
+            // 
+            this.textBoxTarget.Location = new System.Drawing.Point(409, 136);
+            this.textBoxTarget.Name = "textBoxTarget";
+            this.textBoxTarget.Size = new System.Drawing.Size(250, 22);
+            this.textBoxTarget.TabIndex = 11;
+            // 
+            // btnTargetFolder
+            // 
+            this.btnTargetFolder.Location = new System.Drawing.Point(679, 135);
+            this.btnTargetFolder.Name = "btnTargetFolder";
+            this.btnTargetFolder.Size = new System.Drawing.Size(75, 23);
+            this.btnTargetFolder.TabIndex = 10;
+            this.btnTargetFolder.Text = "Target";
+            this.btnTargetFolder.UseVisualStyleBackColor = true;
+            this.btnTargetFolder.Click += new System.EventHandler(this.btnTargetFolder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxTarget);
+            this.Controls.Add(this.btnTargetFolder);
             this.Controls.Add(this.textBoxMsBuild);
             this.Controls.Add(this.btnMSBuild);
             this.Controls.Add(this.btnSolution);
             this.Controls.Add(this.textBoxSolution);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnGenerateDll);
             this.Controls.Add(this.txtBoxCpp);
             this.Controls.Add(this.txtBoxH);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCppFile);
+            this.Controls.Add(this.btnHeaderFile);
             this.Name = "Form1";
             this.Text = "Wrapper";
             this.ResumeLayout(false);
@@ -157,17 +178,19 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnHeaderFile;
+        private System.Windows.Forms.Button btnCppFile;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtBoxH;
         private System.Windows.Forms.TextBox txtBoxCpp;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnGenerateDll;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBoxSolution;
         private System.Windows.Forms.Button btnSolution;
         private System.Windows.Forms.Button btnMSBuild;
         private System.Windows.Forms.TextBox textBoxMsBuild;
+        private System.Windows.Forms.TextBox textBoxTarget;
+        private System.Windows.Forms.Button btnTargetFolder;
     }
 }
 

@@ -46,5 +46,17 @@ namespace ReadDllForm.Properties {
                 this["Solution"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TargetFolder {
+            get {
+                return ((string)(this["TargetFolder"]));
+            }
+            set {
+                this["TargetFolder"] = value;
+            }
+        }
     }
 }
