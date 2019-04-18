@@ -38,6 +38,13 @@ namespace ReadDllForm
             formatIO();
             GenerateCppFile();
             generateDll();
+            reset();
+        }
+
+        public void reset()
+        {
+            inputs.Clear();
+            outputs.Clear();
         }
        
            
