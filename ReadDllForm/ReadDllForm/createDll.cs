@@ -15,13 +15,16 @@ namespace ReadDllForm
         public static string hPath;
         static string exampleFilePath = @"..\..\files\exampleCppDLL.txt";
         private static string cppPath;
+        private static string solutionFileName = Settings.Default["Solution"].ToString();
+        private static string solutionDirectory = Path.GetDirectoryName(solutionFileName);
+        private static string targetFileName= solutionDirectory + "\\GenerateDLL\\GenerateDLL.cpp";
 
         public static List<String> inputs = new List<String>();
         public static List<String> outputs = new List<String>();
 
         public static string referenceInput = "";
         public static string referenceOutput = "";
-        public static string modelName = "";
+        public static string modelName; 
 
 
         public createDll(string h, string cpp)
@@ -171,10 +174,12 @@ namespace ReadDllForm
                     }
                 }
 
-                File.WriteAllLines("newDLLfileV2.cpp", newContent);
+                //File.WriteAllLines("newDLLfileV2.cpp", newContent);
+                File.WriteAllLines(targetFileName, newContent);
 
-            }
-            public static void formatIO()
+
+        }
+        public static void formatIO()
             {
                 List<String> newInputs = new List<string>();
                 List<String> newOutputs = new List<string>();
