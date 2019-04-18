@@ -57,15 +57,11 @@ namespace ReadDllForm
             if (cppPath != "" && hPath != "")
             {
                 createDll dll=new createDll();
-                dll.createFile(hPath, cppPath);
+                dll.createFile(hPath, cppPath,textBoxModelName.Text);
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            createDll dll=new createDll();
-            dll.generateDll();
-        }
+    
 
         private void btnMSBuild_Click(object sender, EventArgs e)
         {

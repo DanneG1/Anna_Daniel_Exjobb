@@ -34,13 +34,13 @@
             this.txtBoxH = new System.Windows.Forms.TextBox();
             this.txtBoxCpp = new System.Windows.Forms.TextBox();
             this.btnGenerateDll = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.textBoxSolution = new System.Windows.Forms.TextBox();
             this.btnSolution = new System.Windows.Forms.Button();
             this.btnMSBuild = new System.Windows.Forms.Button();
             this.textBoxMsBuild = new System.Windows.Forms.TextBox();
             this.textBoxTarget = new System.Windows.Forms.TextBox();
             this.btnTargetFolder = new System.Windows.Forms.Button();
+            this.textBoxModelName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -83,23 +83,13 @@
             // 
             // btnGenerateDll
             // 
-            this.btnGenerateDll.Location = new System.Drawing.Point(250, 162);
+            this.btnGenerateDll.Location = new System.Drawing.Point(616, 284);
             this.btnGenerateDll.Name = "btnGenerateDll";
             this.btnGenerateDll.Size = new System.Drawing.Size(138, 23);
             this.btnGenerateDll.TabIndex = 4;
             this.btnGenerateDll.Text = "Generate Dll";
             this.btnGenerateDll.UseVisualStyleBackColor = true;
             this.btnGenerateDll.Click += new System.EventHandler(this.btnGenerateDll_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(325, 284);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 5;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBoxSolution
             // 
@@ -152,18 +142,25 @@
             this.btnTargetFolder.UseVisualStyleBackColor = true;
             this.btnTargetFolder.Click += new System.EventHandler(this.btnTargetFolder_Click);
             // 
+            // textBoxModelName
+            // 
+            this.textBoxModelName.Location = new System.Drawing.Point(409, 284);
+            this.textBoxModelName.Name = "textBoxModelName";
+            this.textBoxModelName.Size = new System.Drawing.Size(191, 22);
+            this.textBoxModelName.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBoxModelName);
             this.Controls.Add(this.textBoxTarget);
             this.Controls.Add(this.btnTargetFolder);
             this.Controls.Add(this.textBoxMsBuild);
             this.Controls.Add(this.btnMSBuild);
             this.Controls.Add(this.btnSolution);
             this.Controls.Add(this.textBoxSolution);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.btnGenerateDll);
             this.Controls.Add(this.txtBoxCpp);
             this.Controls.Add(this.txtBoxH);
@@ -184,13 +181,13 @@
         private System.Windows.Forms.TextBox txtBoxH;
         private System.Windows.Forms.TextBox txtBoxCpp;
         private System.Windows.Forms.Button btnGenerateDll;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBoxSolution;
         private System.Windows.Forms.Button btnSolution;
         private System.Windows.Forms.Button btnMSBuild;
         private System.Windows.Forms.TextBox textBoxMsBuild;
         private System.Windows.Forms.TextBox textBoxTarget;
         private System.Windows.Forms.Button btnTargetFolder;
+        private System.Windows.Forms.TextBox textBoxModelName;
     }
 }
 

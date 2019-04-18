@@ -24,17 +24,20 @@ namespace ReadDllForm
 
         public static string referenceInput = "";
         public static string referenceOutput = "";
-        public static string modelName; 
+        public static string modelName;
+        public static string newModelName;
 
-        public void createFile(string h, string cpp)
+        public void createFile(string h, string cpp, string textBoxModelname)
         {
             hPath = h;
             cppPath = cpp;
+            newModelName = textBoxModelname;
 
             IEnumerable<String> text = ReadFile();
             FindIO(text);
             formatIO();
             GenerateCppFile();
+            generateDll();
         }
        
            
@@ -201,13 +204,13 @@ namespace ReadDllForm
         {
             string msbuild = "\""+Settings.Default["MsBuild"].ToString()+"\"";
             string solution = "\"" + Settings.Default["Solution"].ToString()+ "\"";
-
+            string solutionDirectory = Path.GetDirectoryName(Settings.Default["Solution"].ToString());
             string targetDir= "\"" + Settings.Default["TargetFolder"].ToString() + "\"";
-            string targetFile = "\""+Settings.Default["Solution"].ToString() + "/Debug/GenerateDLL.dll"+"\"";
+            string targetFile = "\""+solutionDirectory + "\\Debug\\GenerateDLL.dll"+"\"";
 
-            string newFileName = "NySimulinkModell.dll";
+            string newFileName = newModelName+".dll";
             string renameCommand = "ren " + targetFile + " " + newFileName;
-            string moveCommand = "move " + "\"" + Settings.Default["Solution"].ToString() + "/Debug/" + newFileName + " " + targetDir;
+            string moveCommand = "move " + "\"" + solutionDirectory + "\\Debug\\" + newFileName +"\"" +" " + targetDir;
 
             Console.WriteLine(renameCommand + moveCommand);
 
