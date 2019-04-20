@@ -16,30 +16,60 @@ namespace ReadDllForm
 {
     public partial class Form1 : Form
     {
-        private string hPath = "";
-        private string cppPath = "";
+        private const string Solution = "Solution";
+        private const string MsBuild = "MsBuild";
+        private const string TargetFolder = "TargetFolder";
+        private string hPath;
+        private string cppPath;
         
         public Form1()
         {
             InitializeComponent();
-            textBoxMsBuild.Text = Settings.Default["MsBuild"].ToString();
-            textBoxSolution.Text = Settings.Default["Solution"].ToString();
-            textBoxTarget.Text = Settings.Default["TargetFolder"].ToString();
+            FillOutFieldsFromSettings();
+        }
+        private void FillOutFieldsFromSettings()
+        {
+            textBoxMsBuild.Text = Settings.Default[MsBuild].ToString();
+            textBoxSolution.Text = Settings.Default[Solution].ToString();
+            textBoxTarget.Text = Settings.Default[TargetFolder].ToString();
 
+            //Show end of file path
+            textBoxMsBuild.SelectionStart = textBoxMsBuild.Text.Length;
+            textBoxSolution.SelectionStart = textBoxSolution.Text.Length;
+            textBoxTarget.SelectionStart = textBoxTarget.Text.Length;
+        }
+        private bool AllFieldsOk()
+        {
+            return cppPath != "" 
+                   && hPath != "" 
+                   && textBoxModelName.Text != "" 
+                   && textBoxSolution.Text != "" 
+                   && textBoxMsBuild.Text != "" 
+                   && textBoxTarget.Text != "";
         }
 
-        private void btnHeader_Click(object sender, EventArgs e)
+        #region buttonEvents
+        private void btnGenerateDll_Click(object sender, EventArgs e)
+        {
+            if (AllFieldsOk())
+            {
+                createDll dll = new createDll();
+                dll.CreateFile(hPath, cppPath, textBoxModelName.Text);
+                textBoxModelName.Text = "";
+            }
+        }
+        private void btnHeaderFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openH = new OpenFileDialog();
-            openH.Filter="h files(*.h)|*.h";
+            openH.Filter = "h files(*.h)|*.h";
             if (openH.ShowDialog() == DialogResult.OK)
             {
                 string hFileName = openH.FileName;
                 hPath = hFileName;
                 txtBoxH.Text = hFileName;
+                txtBoxH.SelectionStart = txtBoxH.Text.Length;
             }
         }
-
         private void btnCppFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openCpp = new OpenFileDialog();
@@ -49,24 +79,12 @@ namespace ReadDllForm
                 string cPpFileName = openCpp.FileName;
                 cppPath = cPpFileName;
                 txtBoxCpp.Text = cPpFileName;
+                txtBoxCpp.SelectionStart = txtBoxCpp.Text.Length;
             }
         }
-
-        private void btnGenerateDll_Click(object sender, EventArgs e)
-        {
-            if (cppPath != "" && hPath != "")
-            {
-                createDll dll=new createDll();
-                dll.createFile(hPath, cppPath,textBoxModelName.Text);
-            }
-        }
-
-    
-
         private void btnMSBuild_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-           // openH.Filter = "h files(*.h)|*.h";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default["MsBuild"] = open.FileName;
@@ -75,7 +93,6 @@ namespace ReadDllForm
                 Settings.Default.Save();
             }
         }
-
         private void btnSolution_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -88,7 +105,6 @@ namespace ReadDllForm
                 Settings.Default.Save();
             }
         }
-
         private void btnTargetFolder_Click(object sender, EventArgs e)
         {
             using (var fbd = new FolderBrowserDialog())
@@ -103,7 +119,10 @@ namespace ReadDllForm
                     Settings.Default.Save();
                 }
             }
-          
+
         }
+
+        #endregion
+
     }
 }
