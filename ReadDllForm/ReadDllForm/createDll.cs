@@ -240,15 +240,16 @@ namespace ReadDllForm
         private static void writeXML(string fileName)
         {
             XmlTextWriter xWriter=new XmlTextWriter(fileName, Encoding.UTF8);
-            /*xWriter.WriteStartElement("NumInSignals");
+            xWriter.WriteStartElement("Signal");
+
+            xWriter.WriteStartElement("NumInSignals");
             xWriter.WriteString(inputs.Count.ToString());
             xWriter.WriteEndElement();
 
             xWriter.WriteStartElement("NumOutSignals");
             xWriter.WriteString(outputs.Count.ToString());
-            xWriter.WriteEndElement();*/
+            xWriter.WriteEndElement();
 
-            xWriter.WriteStartElement("Signal");
             for (int i = 0; i < inputs.Count; i++)
             {
                 xWriter.WriteStartElement("InSignal");
@@ -263,6 +264,8 @@ namespace ReadDllForm
                 xWriter.WriteEndElement();
             }
             xWriter.WriteEndElement();
+
+
             xWriter.Close();
 
 
