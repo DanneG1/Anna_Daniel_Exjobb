@@ -207,11 +207,15 @@ namespace ReadDllForm
             string targetDir = "\"" + Settings.Default[TargetFolder] + "\"";
             string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
 
-            string newFileName = newModelName + ".dll";
-            string renameCommand = "ren " + targetFile + " " + newFileName;
-            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + newFileName + "\"" + " " + targetDir;
+            //string newFileName = newModelName + ".dll";
+            string modelName = "model.dll";
+            string renameCommand = "ren " + targetFile + " " + modelName;
+            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + newModelName+"\"";
+            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " + "\"" + targetDir + "\\" + newModelName + "\""; ;
 
-            Console.WriteLine(renameCommand + moveCommand);
+            //Console.WriteLine(renameCommand + moveCommand);
+            Console.WriteLine(mkDirectoryCommand);
+            Console.WriteLine(moveCommand);
 
             Process cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
@@ -223,6 +227,7 @@ namespace ReadDllForm
             cmd.Start();
             cmd.StandardInput.WriteLine(msbuild + " " + solution);
             cmd.StandardInput.WriteLine(renameCommand);
+            cmd.StandardInput.WriteLine(mkDirectoryCommand);
             cmd.StandardInput.WriteLine(moveCommand);
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();

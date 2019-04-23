@@ -10,7 +10,7 @@ namespace ReadDllForm
 {
     class SimulinkModel
     {
-        private const string ModelDll = @"ModelDll.dll";
+        private const string ModelDll = @"model.dll";
         private string DirectoryPath;
 
         public SimulinkModel(string path)
