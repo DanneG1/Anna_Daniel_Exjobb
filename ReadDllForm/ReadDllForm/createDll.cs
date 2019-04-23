@@ -204,7 +204,7 @@ namespace ReadDllForm
             string msbuild = "\"" + Settings.Default[MsBuild] + "\"";
             string solution = "\"" + Settings.Default[Solution] + "\"";
             string solutionDir = Path.GetDirectoryName(Settings.Default[Solution].ToString());
-            string targetDir = "\"" + Settings.Default[TargetFolder] + "\"";
+            string targetDir =  Settings.Default[TargetFolder].ToString();
             string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
 
             //string newFileName = newModelName + ".dll";
