@@ -15,7 +15,9 @@ namespace ReadDllForm
 
         public SimulinkModel(string path)
         {
-            DirectoryPath = path;
+            DirectoryPath = path; //kanske inte behövs till något!
+            SetDllDirectory(path);
+            LoadLibrary(path);
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
