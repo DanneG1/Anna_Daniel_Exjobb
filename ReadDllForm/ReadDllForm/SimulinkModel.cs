@@ -18,6 +18,12 @@ namespace ReadDllForm
             DirectoryPath = path;
         }
 
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetDllDirectory(string path);
+        [DllImport("kernel32", SetLastError = true)]
+        static extern IntPtr LoadLibrary(string path);
+
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void initialize();
