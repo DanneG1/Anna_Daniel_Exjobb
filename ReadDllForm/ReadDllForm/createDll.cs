@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using ReadDllForm.Properties;
 using System.Xml;
+using System.Xml.Linq;
+using ReadDllForm.Properties;
 
 namespace ReadDllForm
 {
@@ -207,16 +208,12 @@ namespace ReadDllForm
             string solutionDir = Path.GetDirectoryName(Settings.Default[Solution].ToString());
             string targetDir =  Settings.Default[TargetFolder].ToString();
             string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
-
-            //string newFileName = newModelName + ".dll";
-            string newModelDir = "\"" + targetDir + "\\" + newModelName + "\"";
-            string parameterModelDir = targetDir + "\\" + newModelName+"\\";
+            
             string modelName = "model.dll";
             string renameCommand = "ren " + targetFile + " " + modelName;
-            string mkDirectoryCommand = "mkDir " +newModelDir;
-            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " +newModelDir;
-
-            //Console.WriteLine(renameCommand + moveCommand);
+            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + newModelName+"\"";
+            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " + "\"" + targetDir + "\\" + newModelName + "\""; ;
+            string parameterModelDir = targetDir + "\\" + newModelName + "\\"+"modelXML.xml";
             Console.WriteLine(mkDirectoryCommand);
             Console.WriteLine(moveCommand);
 
@@ -237,56 +234,53 @@ namespace ReadDllForm
             //cmd.WaitForExit();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             Console.WriteLine(cmd.StandardError.ReadToEnd());
-
-            writeInOutTXT(parameterModelDir);
-            //writeInOutXML(parameterModelDir);
+            writeXML(parameterModelDir);
         }
-        private static void writeInOutXML(string dir)
+
+        private static void writeXML(string fileName)
         {
-            XmlTextWriter textWriter = new XmlTextWriter(dir+"myXmFile.xml", null);
-            textWriter.WriteStartDocument();
-            textWriter.WriteStartElement("Input");
-            for(int i = 0; i < inputs.Count(); ++i)
-            {
-                textWriter.WriteString(i.ToString());
-                textWriter.WriteString(inputs[i]);
-            }
-            textWriter.WriteEndElement();
+            XmlTextWriter xWriter=new XmlTextWriter(fileName, Encoding.UTF8);
+            xWriter.WriteStartElement("Signal");
 
-            textWriter.WriteStartElement("Output");
-            for (int i = 0; i < outputs.Count(); ++i)
-            {
-                textWriter.WriteString(i.ToString());
-                textWriter.WriteString(outputs[i]);
-            }
-            textWriter.WriteEndElement();
+            xWriter.WriteStartElement("NumInSignals");
+            xWriter.WriteString(inputs.Count.ToString());
+            xWriter.WriteEndElement();
 
-            textWriter.WriteEndDocument();
-            textWriter.Close();
+            xWriter.WriteStartElement("NumOutSignals");
+            xWriter.WriteString(outputs.Count.ToString());
+            xWriter.WriteEndElement();
+
+            for (int i = 0; i < inputs.Count; i++)
+            {
+                xWriter.WriteStartElement("InSignal");
+                writeSignal(xWriter,i,inputs[i]);
+                xWriter.WriteEndElement();
+            }
+           
+            for (int i = 0; i < outputs.Count; i++)
+            {
+                xWriter.WriteStartElement("OutSignal");
+                writeSignal(xWriter, i,outputs[i]);
+                xWriter.WriteEndElement();
+            }
+            xWriter.WriteEndElement();
+
+
+            xWriter.Close();
+
 
         }
 
-
-        private static void writeInOutTXT(string dir)
+        private static void writeSignal(XmlTextWriter xWriter, int i,string name)
         {
-            using (StreamWriter writer = new StreamWriter(dir+"model.txt"))
-            {
-                writer.WriteLine("model");
-                writer.WriteLine("inputCount ",inputs.Count());
-                for(int i=0;i<inputs.Count();++i)
-                {
-                    Console.WriteLine(inputs[i]);
-                    writer.WriteLine(i.ToString()+" "+inputs[i].ToString());
-                }
-                writer.WriteLine("outputCount ", outputs.Count().ToString());
-                for (int i = 0; i < outputs.Count(); ++i)
-                {
-                    writer.WriteLine(i.ToString()+" "+outputs[i].ToString());
-                }
-                writer.Flush();
-                writer.Close();
-            }
+            xWriter.WriteStartElement("Name");
+            xWriter.WriteString(name);
+            xWriter.WriteEndElement();
+            xWriter.WriteStartElement("Port");
+            xWriter.WriteString(i.ToString());
+            xWriter.WriteEndElement();
         }
+
         private static void ResetIOLists()
         {
             inputs.Clear();
