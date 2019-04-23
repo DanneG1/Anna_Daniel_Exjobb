@@ -124,5 +124,16 @@ namespace ReadDllForm
 
         #endregion
 
+        private void buttonLoadModel_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openDll = new OpenFileDialog();
+            openDll.Filter = "dll files(*.dll)|*.dll";
+            if (openDll.ShowDialog() == DialogResult.OK)
+            {
+                string dllFileName = openDll.FileName;
+                textBoxDll.Text = dllFileName;
+                textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
+            }
+        }
     }
 }

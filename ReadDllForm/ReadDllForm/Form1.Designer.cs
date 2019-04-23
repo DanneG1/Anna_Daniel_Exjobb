@@ -47,10 +47,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.buttonLoadModel = new System.Windows.Forms.Button();
+            this.textBoxDll = new System.Windows.Forms.TextBox();
+            this.labelModelLoad = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -224,6 +228,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.labelModelLoad);
+            this.tabPage2.Controls.Add(this.textBoxDll);
+            this.tabPage2.Controls.Add(this.buttonLoadModel);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -231,6 +238,32 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // buttonLoadModel
+            // 
+            this.buttonLoadModel.Location = new System.Drawing.Point(321, 22);
+            this.buttonLoadModel.Name = "buttonLoadModel";
+            this.buttonLoadModel.Size = new System.Drawing.Size(75, 23);
+            this.buttonLoadModel.TabIndex = 0;
+            this.buttonLoadModel.Text = "Browse..";
+            this.buttonLoadModel.UseVisualStyleBackColor = true;
+            this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
+            // 
+            // textBoxDll
+            // 
+            this.textBoxDll.Location = new System.Drawing.Point(100, 22);
+            this.textBoxDll.Name = "textBoxDll";
+            this.textBoxDll.Size = new System.Drawing.Size(215, 22);
+            this.textBoxDll.TabIndex = 1;
+            // 
+            // labelModelLoad
+            // 
+            this.labelModelLoad.AutoSize = true;
+            this.labelModelLoad.Location = new System.Drawing.Point(8, 22);
+            this.labelModelLoad.Name = "labelModelLoad";
+            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
+            this.labelModelLoad.TabIndex = 2;
+            this.labelModelLoad.Text = "Model (.dll) :";
             // 
             // Form1
             // 
@@ -247,6 +280,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -272,6 +307,9 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label labelModelLoad;
+        private System.Windows.Forms.TextBox textBoxDll;
+        private System.Windows.Forms.Button buttonLoadModel;
     }
 }
 
