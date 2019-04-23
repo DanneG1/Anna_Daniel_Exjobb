@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.h"
-#include "C:\Users\Anna Forsberg\MATLAB\Projects\testproject\work\codegen\addition_ert_rtw\addition.cpp"
+#include "C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h"
+#include "C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.cpp"
 
-  additionModelClass rObj;
+  trippleinput_different_datatypesModelClass rObj;
 
 
 //extern "C" __declspec(dllexport) !functionType !functionName( !parameters )
@@ -16,10 +16,13 @@ extern "C" __declspec(dllexport) void setInputs(int port,double value)
 {
 	switch(port){
 case 0:
-rObj.rtU.In1 = value;
+rObj.trippleinput_different_dataty_U.Input1_signal = value;
 break;
 case 1:
-rObj.rtU.In2 = value;
+rObj.trippleinput_different_dataty_U.input2_signal = value;
+break;
+case 2:
+rObj.trippleinput_different_dataty_U.Input3_signal = value;
 break;
 	}
 }
@@ -28,7 +31,11 @@ extern "C" __declspec(dllexport) double getOutputs(int port)
 {
 	switch(port){
 case 0:
- return rObj.rtY.Out1 ;
+ return rObj.trippleinput_different_dataty_Y.Addition_output ;
+case 1:
+ return rObj.trippleinput_different_dataty_Y.Input1_copyOutport ;
+case 2:
+ return rObj.trippleinput_different_dataty_Y.Multiply_Output ;
 	default:
 		return -1;
 	}

@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ReadDllForm.Properties;
+using System.Xml;
 
 namespace ReadDllForm
 {
@@ -208,10 +209,12 @@ namespace ReadDllForm
             string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
 
             //string newFileName = newModelName + ".dll";
+            string newModelDir = "\"" + targetDir + "\\" + newModelName + "\"";
+            string parameterModelDir = targetDir + "\\" + newModelName+"\\";
             string modelName = "model.dll";
             string renameCommand = "ren " + targetFile + " " + modelName;
-            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + newModelName+"\"";
-            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " + "\"" + targetDir + "\\" + newModelName + "\""; ;
+            string mkDirectoryCommand = "mkDir " +newModelDir;
+            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " +newModelDir;
 
             //Console.WriteLine(renameCommand + moveCommand);
             Console.WriteLine(mkDirectoryCommand);
@@ -235,6 +238,54 @@ namespace ReadDllForm
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             Console.WriteLine(cmd.StandardError.ReadToEnd());
 
+            writeInOutTXT(parameterModelDir);
+            //writeInOutXML(parameterModelDir);
+        }
+        private static void writeInOutXML(string dir)
+        {
+            XmlTextWriter textWriter = new XmlTextWriter(dir+"myXmFile.xml", null);
+            textWriter.WriteStartDocument();
+            textWriter.WriteStartElement("Input");
+            for(int i = 0; i < inputs.Count(); ++i)
+            {
+                textWriter.WriteString(i.ToString());
+                textWriter.WriteString(inputs[i]);
+            }
+            textWriter.WriteEndElement();
+
+            textWriter.WriteStartElement("Output");
+            for (int i = 0; i < outputs.Count(); ++i)
+            {
+                textWriter.WriteString(i.ToString());
+                textWriter.WriteString(outputs[i]);
+            }
+            textWriter.WriteEndElement();
+
+            textWriter.WriteEndDocument();
+            textWriter.Close();
+
+        }
+
+
+        private static void writeInOutTXT(string dir)
+        {
+            using (StreamWriter writer = new StreamWriter(dir+"model.txt"))
+            {
+                writer.WriteLine("model");
+                writer.WriteLine("inputCount ",inputs.Count());
+                for(int i=0;i<inputs.Count();++i)
+                {
+                    Console.WriteLine(inputs[i]);
+                    writer.WriteLine(i.ToString()+" "+inputs[i].ToString());
+                }
+                writer.WriteLine("outputCount ", outputs.Count().ToString());
+                for (int i = 0; i < outputs.Count(); ++i)
+                {
+                    writer.WriteLine(i.ToString()+" "+outputs[i].ToString());
+                }
+                writer.Flush();
+                writer.Close();
+            }
         }
         private static void ResetIOLists()
         {
