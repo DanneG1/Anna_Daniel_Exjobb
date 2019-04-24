@@ -140,7 +140,7 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             model=new SimulinkModel(textBoxDll.Text);
-            textBoxModel.Text=model.getSignals();
+            textBoxModel.Text=model.GetSignalsAsString();
         }
     }
 }

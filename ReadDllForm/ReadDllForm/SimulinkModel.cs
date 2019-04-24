@@ -16,8 +16,8 @@ namespace ReadDllForm
         private string DirectoryPath;
         private int numberOfInputs;
         private int numberOfOutputs;
-        private List<Signal> inSignals = new List<Signal>();
-        private List<Signal> outSignals = new List<Signal>();
+        private List<ISignal> inSignals = new List<ISignal>();
+        private List<ISignal> outSignals = new List<ISignal>();
         private string path;
 
         public SimulinkModel(string path)
@@ -27,9 +27,12 @@ namespace ReadDllForm
             SetDllDirectory(path);
             LoadLibrary(path);
             initialize();
+
             ReadXML();
+            step();
         }
 
+        #region DllFunctions
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetDllDirectory(string path);
@@ -44,17 +47,13 @@ namespace ReadDllForm
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void step();
 
-        /*[DllImport
-            (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getOutputs(int port);
-
-        [DllImport
-            (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void setInputs(int port, double value);*/
-
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void terminate();
+        #endregion
+
+
+
 
         private void ReadXML()
         {
@@ -74,21 +73,22 @@ namespace ReadDllForm
                     }
                     else if (reader.Name == "InSignal")
                     {
-                        string Name = "";
-                        int port = 0;
                         reader.Read();
+                        string Name = "";
                         if (reader.Name == "Name")
                         {
                             Name = reader.ReadString();
                         }
-                        reader.Read();
+
+                        reader.Read();  
+                        int port = -1;
                         if (reader.Name == "Port")
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        Signal signal = new Signal(port, Name,path);
-                        signal.setInput(5);
-                        inSignals.Add(signal);
+                        InSignal inSignal = new InSignal(port, Name,path);
+                        inSignal.SetSignal(5);
+                        inSignals.Add(inSignal);
                         
 
                     }
@@ -106,29 +106,28 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        Signal signal=new Signal(port,Name,path);
-                        outSignals.Add(signal);
+                        OutSignal outSignal=new OutSignal(port,Name,path);
+                        outSignals.Add(outSignal);
                     }
                 }
             }           
         }
 
-        public string getSignals()
+        public string GetSignalsAsString()
         {
             string signals="";
             signals += "In signals: " + Environment.NewLine;
             foreach (var signal in inSignals)
             {
-               signals+= signal.getSignalAsString();
+                signals+= signal.GetSignalAsString();
                 signals += "\n";
             }
             signals += Environment.NewLine+ "Out signals: " + Environment.NewLine;
             foreach (var signal in outSignals)
             {
-                signals += signal.getSignalAsString();
+                signals += signal.GetSignalAsString();
             }
             return signals;
-
         }
 
         ~SimulinkModel()

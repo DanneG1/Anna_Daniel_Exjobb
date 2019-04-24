@@ -240,7 +240,7 @@ namespace ReadDllForm
         private static void writeXML(string fileName)
         {
             XmlTextWriter xWriter=new XmlTextWriter(fileName, Encoding.UTF8);
-            xWriter.WriteStartElement("Signal");
+            xWriter.WriteStartElement("InSignal");
 
             xWriter.WriteStartElement("NumInSignals");
             xWriter.WriteString(inputs.Count.ToString());
