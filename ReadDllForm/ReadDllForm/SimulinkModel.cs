@@ -118,6 +118,11 @@ namespace ReadDllForm
             }           
         }
 
+        public void Step()
+        {
+            step();
+        }
+
         public string GetSignalsAsString()
         {
             string signals="";
