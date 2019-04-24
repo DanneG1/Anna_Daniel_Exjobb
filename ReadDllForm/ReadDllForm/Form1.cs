@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,8 @@ namespace ReadDllForm
         private const string TargetFolder = "TargetFolder";
         private string hPath;
         private string cppPath;
-        
+        private SimulinkModel model;
+
         public Form1()
         {
             InitializeComponent();
@@ -134,6 +136,55 @@ namespace ReadDllForm
                 textBoxDll.Text = dllFileName;
                 textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
             }
+        }
+
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            model=new SimulinkModel(textBoxDll.Text);
+            textBoxModel.Text=model.GetSignalsAsString();
+            CreateInputs();
+        }
+
+        private void CreateInputs()
+        {
+            List<ISignal> inSignals = model.GetSignals();
+            /*Label lb1 = new Label();
+            lb1.Name = "InSignal" + 0;
+            lb1.Text = inSignals[0].GetSignalName();
+            lb1.Location = new Point(20, + 20 * 0+ 20);
+            groupBoxInSignals.Controls.Add(lb1);
+
+            Label lbl2 = new Label();
+            lbl2.Name = "InSignal" + 1;
+            lbl2.Text = inSignals[1].GetSignalName();
+            lbl2.Location = new Point(20,20 * 1+ 20);
+            groupBoxInSignals.Controls.Add(lbl2);*/
+           
+            for (int i=0;i<inSignals.Count;i++ )
+            {
+                Label lb1 = new Label();
+                lb1.Name = "InSignal" + i;
+                lb1.Text = inSignals[i].GetSignalName();
+                lb1.Location = new Point(20, +20 * i + 20);
+                lb1.AutoSize = true;
+                groupBoxInSignals.Controls.Add(lb1);
+
+                TextBox txt = new TextBox();
+                txt.Text = inSignals[i].GetSignal().ToString();
+                txt.AutoSize = true;
+                txt.MinimumSize=new Size(20,20);
+                txt.Location = new Point(50,  20 * i+ 20);
+                groupBoxInSignals.Controls.Add(txt);
+               
+
+            }
+            
+            
+        }
+
+        private void buttonStep_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

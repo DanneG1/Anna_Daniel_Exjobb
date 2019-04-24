@@ -41,6 +41,18 @@ case 2:
 	}
 }
 
+extern "C" __declspec(dllexport) double getInputs(int port) 
+{
+	switch(port){
+case 0:
+ return rObj.rtU.In1 ;
+case 1:
+ return rObj.rtU.In2 ;
+	default:
+		return -1;
+	}
+}
+
 extern "C" __declspec(dllexport) void step()
 {
 	rObj.step();
