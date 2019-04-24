@@ -13,5 +13,7 @@ namespace ReadDllForm
         double GetSignal();
 
         string GetSignalAsString();
+
+        string GetSignalName();
     }
 }

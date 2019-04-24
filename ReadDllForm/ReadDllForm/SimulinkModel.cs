@@ -20,6 +20,11 @@ namespace ReadDllForm
         private List<ISignal> outSignals = new List<ISignal>();
         private string path;
 
+        public List<ISignal> GetSignals()
+        {
+            return inSignals;
+        }
+
         public SimulinkModel(string path)
         {
             this.path = path;
@@ -129,6 +134,7 @@ namespace ReadDllForm
             }
             return signals;
         }
+        
 
         ~SimulinkModel()
         {

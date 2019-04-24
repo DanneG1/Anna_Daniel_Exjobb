@@ -52,5 +52,10 @@ namespace ReadDllForm
         {
             return portName + "\t" + GetSignal() + Environment.NewLine;
         }
+
+        public string GetSignalName()
+        {
+            return portName;
+        }
     }
 }
