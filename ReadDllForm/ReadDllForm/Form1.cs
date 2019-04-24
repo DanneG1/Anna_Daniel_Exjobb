@@ -22,6 +22,7 @@ namespace ReadDllForm
         private const string TargetFolder = "TargetFolder";
         private string hPath;
         private string cppPath;
+        private int count=0;
         private List<SimulinkModel> models = new List<SimulinkModel>();
 
         public Form1()
@@ -141,7 +142,7 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            textBoxModel.Text=model.GetSignalsAsString();
+            textBoxModel.Text+=model.GetSignalsAsString();
             models.Add(model);
             CreateInputs();
         }
@@ -166,42 +167,37 @@ namespace ReadDllForm
                 for (int i = 0; i < inSignals.Count; i++)
                 {
                     Label lb1 = new Label();
-                    lb1.Name = "InSignal" + i;
+                    count++;
+                    lb1.Name = "InSignal" + count;
                     lb1.Text = inSignals[i].GetSignalName();
-                    lb1.Location = new Point(20, +40 * i + 20);
+                    lb1.Location = new Point(20, +40 * count + 20);
                     lb1.AutoSize = true;
-                    groupBoxInSignals.Controls.Add(lb1);
+                    inSignalPanel.Controls.Add(lb1);
 
                     TextBox txt = new TextBox();
                     txt.Text = inSignals[i].GetSignal().ToString();
                     txt.AutoSize = true;
                     txt.MinimumSize = new Size(20, 20);
-                    txt.Location = new Point(50, 50 * i + 20);
-                    groupBoxInSignals.Controls.Add(txt);
-                    txt.Tag = i;
+                    txt.Location = new Point(50, 40 * count + 20);
+                    inSignalPanel.Controls.Add(txt);
 
+                    //textboxen kommer att bli dubbellänkad om flera komponenter laddas in, tack vare "tag i" inte blir unik
+                    txt.Tag = i;
                     txt.TextChanged += delegate {
-                        //ChangeInText(inSignals[i], txt.Text);
                         inSignals[Convert.ToInt32(txt.Tag)].SetSignal(Convert.ToDouble(txt.Text));
-                        StepAndUpdate();
                      };
 
                 }
             }     
         }
-        public void StepAndUpdate()
+        private void buttonStep_Click(object sender, EventArgs e)
         {
+            textBoxModel.Clear();
             foreach (var modell in models)
             {
                 modell.Step();
-                textBoxModel.Text = modell.GetSignalsAsString();
+                textBoxModel.Text += modell.GetSignalsAsString();
             }
-        }
-
-
-        private void buttonStep_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

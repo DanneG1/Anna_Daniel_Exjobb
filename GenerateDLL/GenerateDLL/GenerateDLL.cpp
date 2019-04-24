@@ -45,9 +45,11 @@ extern "C" __declspec(dllexport) double getInputs(int port)
 {
 	switch(port){
 case 0:
- return rObj.rtU.In1 ;
+ return rObj.trippleinput_different_dataty_U.Input1_signal ;
 case 1:
- return rObj.rtU.In2 ;
+ return rObj.trippleinput_different_dataty_U.input2_signal ;
+case 2:
+ return rObj.trippleinput_different_dataty_U.Input3_signal ;
 	default:
 		return -1;
 	}
