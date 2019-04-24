@@ -21,7 +21,8 @@ namespace ReadDllForm
         private const string TargetFolder = "TargetFolder";
         private string hPath;
         private string cppPath;
-        
+        private SimulinkModel model;
+
         public Form1()
         {
             InitializeComponent();
@@ -134,6 +135,12 @@ namespace ReadDllForm
                 textBoxDll.Text = dllFileName;
                 textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
             }
+        }
+
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            model=new SimulinkModel(textBoxDll.Text);
+            textBoxModel.Text=model.getSignals();
         }
     }
 }

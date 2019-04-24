@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace ReadDllForm
 {
@@ -12,12 +14,17 @@ namespace ReadDllForm
     {
         private const string ModelDll = @"model.dll";
         private string DirectoryPath;
+        private int numberOfInputs;
+        private int numberOfOutputs;
+        private List<Signal> inSignals = new List<Signal>();
+        private List<Signal> outSignals = new List<Signal>();
 
         public SimulinkModel(string path)
         {
-            DirectoryPath = path; //kanske inte behövs till något!
+            DirectoryPath = path;
             SetDllDirectory(path);
             LoadLibrary(path);
+            ReadXML();
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -46,6 +53,79 @@ namespace ReadDllForm
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void terminate();
 
-        
+        private void ReadXML()
+        {
+            XmlTextReader reader = new XmlTextReader(@"C:\Users\Anna Forsberg\Documents\MODELLER\hurra\modelXML.xml");
+            reader.Read();
+            while (reader.Read())
+            {
+                if (reader.IsStartElement())
+                {
+                    if (reader.Name == "NumInSignals")
+                    {
+                        numberOfInputs = Convert.ToInt32(reader.ReadString());
+                    }
+                    else if (reader.Name == "NumOutSignals")
+                    {
+                        numberOfOutputs = Convert.ToInt32(reader.ReadString());
+                    }
+                    else if (reader.Name == "InSignal")
+                    {
+                        string Name = "";
+                        int port = 0;
+                        reader.Read();
+                        if (reader.Name == "Name")
+                        {
+                            Name = reader.ReadString();
+                        }
+                        reader.Read();
+                        if (reader.Name == "Port")
+                        {
+                            port = Convert.ToInt32(reader.ReadString());
+                        }
+                        Signal signal = new Signal(port, Name);
+                        inSignals.Add(signal);
+
+                    }
+                    else if (reader.Name == "OutSignal")
+                    {
+                        string Name = "";
+                        int port = 0;
+                        reader.Read();
+                        if (reader.Name == "Name")
+                        {
+                            Name = reader.ReadString();
+                        }
+                        reader.Read();
+                        if (reader.Name == "Port")
+                        {
+                            port = Convert.ToInt32(reader.ReadString());
+                        }
+                        Signal signal=new Signal(port,Name);
+                        outSignals.Add(signal);
+                    }
+                }
+            }           
+        }
+
+        public string getSignals()
+        {
+            string signals="";
+            signals += "In signals: " + Environment.NewLine;
+            foreach (var signal in inSignals)
+            {
+               signals+= signal.getSignalAsString();
+                signals += "\n";
+            }
+            signals += Environment.NewLine+ "Out signals: " + Environment.NewLine;
+            foreach (var signal in outSignals)
+            {
+                signals += signal.getSignalAsString();
+            }
+            return signals;
+
+        }
+
+
     }
 }

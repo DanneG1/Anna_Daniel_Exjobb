@@ -47,9 +47,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.textBoxDll = new System.Windows.Forms.TextBox();
             this.labelModelLoad = new System.Windows.Forms.Label();
+            this.textBoxDll = new System.Windows.Forms.TextBox();
+            this.buttonLoadModel = new System.Windows.Forms.Button();
+            this.buttonLoad = new System.Windows.Forms.Button();
+            this.textBoxModel = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -228,6 +230,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxModel);
+            this.tabPage2.Controls.Add(this.buttonLoad);
             this.tabPage2.Controls.Add(this.labelModelLoad);
             this.tabPage2.Controls.Add(this.textBoxDll);
             this.tabPage2.Controls.Add(this.buttonLoadModel);
@@ -239,6 +243,22 @@
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // labelModelLoad
+            // 
+            this.labelModelLoad.AutoSize = true;
+            this.labelModelLoad.Location = new System.Drawing.Point(8, 22);
+            this.labelModelLoad.Name = "labelModelLoad";
+            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
+            this.labelModelLoad.TabIndex = 2;
+            this.labelModelLoad.Text = "Model (.dll) :";
+            // 
+            // textBoxDll
+            // 
+            this.textBoxDll.Location = new System.Drawing.Point(100, 22);
+            this.textBoxDll.Name = "textBoxDll";
+            this.textBoxDll.Size = new System.Drawing.Size(215, 22);
+            this.textBoxDll.TabIndex = 1;
+            // 
             // buttonLoadModel
             // 
             this.buttonLoadModel.Location = new System.Drawing.Point(321, 22);
@@ -249,21 +269,23 @@
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // textBoxDll
+            // buttonLoad
             // 
-            this.textBoxDll.Location = new System.Drawing.Point(100, 22);
-            this.textBoxDll.Name = "textBoxDll";
-            this.textBoxDll.Size = new System.Drawing.Size(215, 22);
-            this.textBoxDll.TabIndex = 1;
+            this.buttonLoad.Location = new System.Drawing.Point(417, 21);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(121, 23);
+            this.buttonLoad.TabIndex = 3;
+            this.buttonLoad.Text = "Load model";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
-            // labelModelLoad
+            // textBoxModel
             // 
-            this.labelModelLoad.AutoSize = true;
-            this.labelModelLoad.Location = new System.Drawing.Point(8, 22);
-            this.labelModelLoad.Name = "labelModelLoad";
-            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
-            this.labelModelLoad.TabIndex = 2;
-            this.labelModelLoad.Text = "Model (.dll) :";
+            this.textBoxModel.Location = new System.Drawing.Point(100, 113);
+            this.textBoxModel.Multiline = true;
+            this.textBoxModel.Name = "textBoxModel";
+            this.textBoxModel.Size = new System.Drawing.Size(296, 223);
+            this.textBoxModel.TabIndex = 4;
             // 
             // Form1
             // 
@@ -310,6 +332,8 @@
         private System.Windows.Forms.Label labelModelLoad;
         private System.Windows.Forms.TextBox textBoxDll;
         private System.Windows.Forms.Button buttonLoadModel;
+        private System.Windows.Forms.Button buttonLoad;
+        private System.Windows.Forms.TextBox textBoxModel;
     }
 }
 
