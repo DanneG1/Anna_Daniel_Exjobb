@@ -18,12 +18,15 @@ namespace ReadDllForm
         private int numberOfOutputs;
         private List<Signal> inSignals = new List<Signal>();
         private List<Signal> outSignals = new List<Signal>();
+        private string path;
 
         public SimulinkModel(string path)
         {
-            DirectoryPath = path;
+            this.path = path;
+            DirectoryPath = Path.GetDirectoryName(path);
             SetDllDirectory(path);
             LoadLibrary(path);
+            initialize();
             ReadXML();
         }
 
@@ -41,13 +44,13 @@ namespace ReadDllForm
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void step();
 
-        [DllImport
+        /*[DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern double getOutputs(int port);
 
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void setInputs(int port, double value);
+        public static extern void setInputs(int port, double value);*/
 
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
@@ -55,7 +58,7 @@ namespace ReadDllForm
 
         private void ReadXML()
         {
-            XmlTextReader reader = new XmlTextReader(@"C:\Users\Anna Forsberg\Documents\MODELLER\hurra\modelXML.xml");
+            XmlTextReader reader = new XmlTextReader(DirectoryPath+"\\modelXML.xml");
             reader.Read();
             while (reader.Read())
             {
@@ -83,8 +86,10 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        Signal signal = new Signal(port, Name);
+                        Signal signal = new Signal(port, Name,path);
+                        signal.setInput(5);
                         inSignals.Add(signal);
+                        
 
                     }
                     else if (reader.Name == "OutSignal")
@@ -101,7 +106,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        Signal signal=new Signal(port,Name);
+                        Signal signal=new Signal(port,Name,path);
                         outSignals.Add(signal);
                     }
                 }
@@ -126,6 +131,9 @@ namespace ReadDllForm
 
         }
 
-
+        ~SimulinkModel()
+        {
+            terminate();
+        }
     }
 }
