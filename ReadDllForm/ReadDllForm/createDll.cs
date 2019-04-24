@@ -191,6 +191,14 @@ namespace ReadDllForm
                         newContent.Add(" return rObj." + referenceOutput + outputs[i] + ";");
                     }
                 }
+                else if (line.Contains("!getInputCase"))
+                {
+                    for (int i = 0; i < inputs.Count(); ++i)
+                    {
+                        newContent.Add("case " + i + ":");
+                        newContent.Add(" return rObj." + referenceInput + inputs[i] + ";");
+                    }
+                }
 
                 //Annars kopiera från default fil
                 else

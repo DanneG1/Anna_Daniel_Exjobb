@@ -40,6 +40,10 @@ namespace ReadDllForm
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
         public static extern void setInputs(int port, double value);
+
+        [DllImport
+            (ModelDll, CallingConvention = CallingConvention.Cdecl)]
+        public static extern double getInputs(int port);
         #endregion
 
         public void SetSignal(double value)
@@ -49,8 +53,7 @@ namespace ReadDllForm
 
         public double GetSignal()
         {
-           // skriv funktion för att hämta insignal
-            return -1;
+            return getInputs(portNumber);
         }
 
         public string GetSignalAsString()
