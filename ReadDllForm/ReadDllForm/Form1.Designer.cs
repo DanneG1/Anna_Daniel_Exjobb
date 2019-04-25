@@ -50,14 +50,15 @@
             this.groupBoxModels = new System.Windows.Forms.GroupBox();
             this.componentListBox = new System.Windows.Forms.ListBox();
             this.outSignalBox = new System.Windows.Forms.GroupBox();
+            this.listBoxOutSignals = new System.Windows.Forms.ListBox();
             this.buttonStep = new System.Windows.Forms.Button();
             this.groupBoxInSignals = new System.Windows.Forms.GroupBox();
+            this.listBoxInputs = new System.Windows.Forms.ListBox();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.listBoxInputs = new System.Windows.Forms.ListBox();
-            this.listBoxOutSignals = new System.Windows.Forms.ListBox();
+            this.buttonConnectSignal = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -239,6 +240,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.buttonConnectSignal);
             this.tabPage2.Controls.Add(this.groupBoxModels);
             this.tabPage2.Controls.Add(this.outSignalBox);
             this.tabPage2.Controls.Add(this.buttonStep);
@@ -287,6 +289,18 @@
             this.outSignalBox.TabStop = false;
             this.outSignalBox.Text = "OutSignal";
             // 
+            // listBoxOutSignals
+            // 
+            this.listBoxOutSignals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxOutSignals.FormattingEnabled = true;
+            this.listBoxOutSignals.HorizontalScrollbar = true;
+            this.listBoxOutSignals.ItemHeight = 16;
+            this.listBoxOutSignals.Location = new System.Drawing.Point(3, 18);
+            this.listBoxOutSignals.Name = "listBoxOutSignals";
+            this.listBoxOutSignals.ScrollAlwaysVisible = true;
+            this.listBoxOutSignals.Size = new System.Drawing.Size(252, 200);
+            this.listBoxOutSignals.TabIndex = 1;
+            // 
             // buttonStep
             // 
             this.buttonStep.Location = new System.Drawing.Point(771, 356);
@@ -306,6 +320,20 @@
             this.groupBoxInSignals.TabIndex = 5;
             this.groupBoxInSignals.TabStop = false;
             this.groupBoxInSignals.Text = "InSignals";
+            // 
+            // listBoxInputs
+            // 
+            this.listBoxInputs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxInputs.FormattingEnabled = true;
+            this.listBoxInputs.HorizontalScrollbar = true;
+            this.listBoxInputs.ItemHeight = 16;
+            this.listBoxInputs.Location = new System.Drawing.Point(3, 18);
+            this.listBoxInputs.Name = "listBoxInputs";
+            this.listBoxInputs.ScrollAlwaysVisible = true;
+            this.listBoxInputs.Size = new System.Drawing.Size(246, 200);
+            this.listBoxInputs.TabIndex = 0;
+            this.listBoxInputs.SelectedIndexChanged += new System.EventHandler(this.listBoxInputs_SelectedIndexChanged);
+            this.listBoxInputs.DoubleClick += new System.EventHandler(this.listBoxInputs_DoubleClick);
             // 
             // buttonLoad
             // 
@@ -343,25 +371,15 @@
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // listBoxInputs
+            // buttonConnectSignal
             // 
-            this.listBoxInputs.FormattingEnabled = true;
-            this.listBoxInputs.ItemHeight = 16;
-            this.listBoxInputs.Location = new System.Drawing.Point(6, 35);
-            this.listBoxInputs.Name = "listBoxInputs";
-            this.listBoxInputs.Size = new System.Drawing.Size(218, 132);
-            this.listBoxInputs.TabIndex = 0;
-            this.listBoxInputs.SelectedIndexChanged += new System.EventHandler(this.listBoxInputs_SelectedIndexChanged);
-            this.listBoxInputs.DoubleClick += new System.EventHandler(this.listBoxInputs_DoubleClick);
-            // 
-            // listBoxOutSignals
-            // 
-            this.listBoxOutSignals.FormattingEnabled = true;
-            this.listBoxOutSignals.ItemHeight = 16;
-            this.listBoxOutSignals.Location = new System.Drawing.Point(6, 35);
-            this.listBoxOutSignals.Name = "listBoxOutSignals";
-            this.listBoxOutSignals.Size = new System.Drawing.Size(218, 132);
-            this.listBoxOutSignals.TabIndex = 1;
+            this.buttonConnectSignal.Location = new System.Drawing.Point(361, 341);
+            this.buttonConnectSignal.Name = "buttonConnectSignal";
+            this.buttonConnectSignal.Size = new System.Drawing.Size(120, 31);
+            this.buttonConnectSignal.TabIndex = 7;
+            this.buttonConnectSignal.Text = "Connect signal";
+            this.buttonConnectSignal.UseVisualStyleBackColor = true;
+            this.buttonConnectSignal.Click += new System.EventHandler(this.buttonConnectSignal_Click);
             // 
             // Form1
             // 
@@ -419,6 +437,7 @@
         private System.Windows.Forms.GroupBox groupBoxModels;
         private System.Windows.Forms.ListBox listBoxInputs;
         private System.Windows.Forms.ListBox listBoxOutSignals;
+        private System.Windows.Forms.Button buttonConnectSignal;
     }
 }
 

@@ -25,6 +25,9 @@ namespace ReadDllForm
         private int count=0;
         private List<SimulinkModel> models = new List<SimulinkModel>();
         private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
+        private SimulinkModel selectedModel;
+        private List<ISignal> inSignals=new List<ISignal>();
+        private List<ISignal> outSignals=new List<ISignal>();
 
         public Form1()
         {
@@ -151,10 +154,10 @@ namespace ReadDllForm
         private void CreateInputs(SimulinkModel model)
         {
             
-            
-            //inSignalPanel.Controls.Clear();
-                List<ISignal> inSignals = model.GetInSignals();
-            List<ISignal> outSignals = model.GetOutSignals();
+            listBoxInputs.Items.Clear();
+            listBoxOutSignals.Items.Clear();
+            inSignals = model.GetInSignals();
+            outSignals = model.GetOutSignals();
             for (int i = 0; i < inSignals.Count; i++)
             {
                 listBoxInputs.Items.Add(inSignals[i].GetSignalName()+"\t\t"+inSignals[i].GetSignal());
@@ -199,6 +202,7 @@ namespace ReadDllForm
             foreach (var modell in models)
             {
                 modell.Step();
+                CreateInputs(selectedModel);
                 //textBoxModel.Text += modell.GetSignalsAsString();
             }
         }
@@ -206,8 +210,8 @@ namespace ReadDllForm
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string name = componentListBox.SelectedItem.ToString();
-            SimulinkModel model = keyValue[name];
-            CreateInputs(model);
+            selectedModel = keyValue[name];
+            CreateInputs(selectedModel);
         }
 
        
@@ -222,6 +226,13 @@ namespace ReadDllForm
            
 
             //listBoxInputs.SelectedItem
+        }
+
+        private void buttonConnectSignal_Click(object sender, EventArgs e)
+        {
+            inSignals[listBoxInputs.SelectedIndex].SetSignal(6);
+           
+            CreateInputs(selectedModel);
         }
     }
 }
