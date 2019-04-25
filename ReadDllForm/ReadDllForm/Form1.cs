@@ -184,8 +184,11 @@ namespace ReadDllForm
                     //textboxen kommer att bli dubbellänkad om flera komponenter laddas in, tack vare "tag i" inte blir unik
                     txt.Tag = i;
                     txt.TextChanged += delegate {
-                        inSignals[Convert.ToInt32(txt.Tag)].SetSignal(Convert.ToDouble(txt.Text));
-                     };
+                        if (txt.Text != "")
+                        {
+                            inSignals[Convert.ToInt32(txt.Tag)].SetSignal(Convert.ToDouble(txt.Text));
+                        }
+                    };
 
                 }
             }     
