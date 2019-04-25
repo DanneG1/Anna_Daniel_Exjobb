@@ -24,6 +24,7 @@ namespace ReadDllForm
         private string cppPath;
         private int count=0;
         private List<SimulinkModel> models = new List<SimulinkModel>();
+        private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
 
         public Form1()
         {
@@ -142,16 +143,19 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            textBoxModel.Text+=model.GetSignalsAsString();
+            // textBoxModel.Text+=model.GetSignalsAsString();
+            componentListBox.Items.Add(model.name);
+            keyValue.Add(model.name, model);
             models.Add(model);
-            CreateInputs();
+            //CreateInputs();
         }
 
-        private void CreateInputs()
+        private void CreateInputs(SimulinkModel model)
         {
-            foreach (var model in models)
-            {
-                List<ISignal> inSignals = model.GetSignals();
+            //foreach (var model in models)
+            //{
+                inSignalPanel.Controls.Clear();
+                 List<ISignal> inSignals = model.GetSignals();
                 /*Label lb1 = new Label();
                 lb1.Name = "InSignal" + 0;
                 lb1.Text = inSignals[0].GetSignalName();
@@ -190,7 +194,7 @@ namespace ReadDllForm
                         }
                     };
 
-                }
+                //}
             }     
         }
         private void buttonStep_Click(object sender, EventArgs e)
@@ -199,8 +203,16 @@ namespace ReadDllForm
             foreach (var modell in models)
             {
                 modell.Step();
-                textBoxModel.Text += modell.GetSignalsAsString();
+                //textBoxModel.Text += modell.GetSignalsAsString();
             }
+        }
+
+        private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string name = componentListBox.SelectedItem.ToString();
+            SimulinkModel model = keyValue[name];
+            textBoxModel.Text += model.GetSignalsAsString();
+            CreateInputs(model);
         }
     }
 }

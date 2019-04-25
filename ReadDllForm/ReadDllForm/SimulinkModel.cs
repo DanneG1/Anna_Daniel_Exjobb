@@ -19,6 +19,7 @@ namespace ReadDllForm
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
         private string path;
+        public string name;
 
         public List<ISignal> GetSignals()
         {
@@ -29,10 +30,10 @@ namespace ReadDllForm
         {
             this.path = path;
             DirectoryPath = Path.GetDirectoryName(path);
+            name = new DirectoryInfo(DirectoryPath).Name;
             SetDllDirectory(path);
             LoadLibrary(path);
             initialize();
-
             ReadXML();
             step();
         }
