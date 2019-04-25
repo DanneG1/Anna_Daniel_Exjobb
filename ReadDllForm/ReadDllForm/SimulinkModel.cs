@@ -21,9 +21,13 @@ namespace ReadDllForm
         private string path;
         public string name;
 
-        public List<ISignal> GetSignals()
+        public List<ISignal> GetInSignals()
         {
             return inSignals;
+        }
+        public List<ISignal> GetOutSignals()
+        {
+            return outSignals;
         }
 
         public SimulinkModel(string path)

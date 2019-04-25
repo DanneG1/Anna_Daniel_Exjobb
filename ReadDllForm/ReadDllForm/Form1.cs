@@ -143,47 +143,44 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            // textBoxModel.Text+=model.GetSignalsAsString();
             componentListBox.Items.Add(model.name);
             keyValue.Add(model.name, model);
             models.Add(model);
-            //CreateInputs();
         }
 
         private void CreateInputs(SimulinkModel model)
         {
-            //foreach (var model in models)
-            //{
-                inSignalPanel.Controls.Clear();
-                 List<ISignal> inSignals = model.GetSignals();
-                /*Label lb1 = new Label();
-                lb1.Name = "InSignal" + 0;
-                lb1.Text = inSignals[0].GetSignalName();
-                lb1.Location = new Point(20, + 20 * 0+ 20);
-                groupBoxInSignals.Controls.Add(lb1);
-
-                Label lbl2 = new Label();
-                lbl2.Name = "InSignal" + 1;
-                lbl2.Text = inSignals[1].GetSignalName();
-                lbl2.Location = new Point(20,20 * 1+ 20);
-                groupBoxInSignals.Controls.Add(lbl2);*/
-
-                for (int i = 0; i < inSignals.Count; i++)
+            
+            
+            //inSignalPanel.Controls.Clear();
+                List<ISignal> inSignals = model.GetInSignals();
+            List<ISignal> outSignals = model.GetOutSignals();
+            for (int i = 0; i < inSignals.Count; i++)
+            {
+                listBoxInputs.Items.Add(inSignals[i].GetSignalName()+"\t\t"+inSignals[i].GetSignal());
+            }
+            for (int i = 0; i < outSignals.Count; i++)
+            {
+                listBoxOutSignals.Items.Add(outSignals[i].GetSignalName() + "\t\t" + outSignals[i].GetSignal());
+            }
+            /*
+            for (int i = 0; i < inSignals.Count; i++)
                 {
+                
                     Label lb1 = new Label();
                     count++;
                     lb1.Name = "InSignal" + count;
                     lb1.Text = inSignals[i].GetSignalName();
                     lb1.Location = new Point(20, +40 * count + 20);
                     lb1.AutoSize = true;
-                    inSignalPanel.Controls.Add(lb1);
+                    //inSignalPanel.Controls.Add(lb1);
 
                     TextBox txt = new TextBox();
                     txt.Text = inSignals[i].GetSignal().ToString();
                     txt.AutoSize = true;
                     txt.MinimumSize = new Size(20, 20);
                     txt.Location = new Point(50, 40 * count + 20);
-                    inSignalPanel.Controls.Add(txt);
+                    //inSignalPanel.Controls.Add(txt);
 
                     //textboxen kommer att bli dubbellänkad om flera komponenter laddas in, tack vare "tag i" inte blir unik
                     txt.Tag = i;
@@ -192,14 +189,13 @@ namespace ReadDllForm
                         {
                             inSignals[Convert.ToInt32(txt.Tag)].SetSignal(Convert.ToDouble(txt.Text));
                         }
-                    };
+                    };*/
 
                 //}
-            }     
+            //}     
         }
         private void buttonStep_Click(object sender, EventArgs e)
         {
-            textBoxModel.Clear();
             foreach (var modell in models)
             {
                 modell.Step();
@@ -211,8 +207,21 @@ namespace ReadDllForm
         {
             string name = componentListBox.SelectedItem.ToString();
             SimulinkModel model = keyValue[name];
-            textBoxModel.Text += model.GetSignalsAsString();
             CreateInputs(model);
+        }
+
+       
+
+        private void listBoxInputs_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBoxInputs_DoubleClick(object sender, EventArgs e)
+        {
+           
+
+            //listBoxInputs.SelectedItem
         }
     }
 }
