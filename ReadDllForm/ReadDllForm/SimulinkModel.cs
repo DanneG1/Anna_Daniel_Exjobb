@@ -48,7 +48,7 @@ namespace ReadDllForm
             this.path = path;
             directoryPath = Path.GetDirectoryName(path);
             pDll = NativeMethods.LoadLibrary(path);
-
+            name = new DirectoryInfo(directoryPath).Name;
             initialze();
             ReadXML();
             Step();

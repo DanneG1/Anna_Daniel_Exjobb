@@ -22,12 +22,9 @@ namespace ReadDllForm
         private const string TargetFolder = "TargetFolder";
         private string hPath;
         private string cppPath;
-        private int count=0;
         private List<SimulinkModel> models = new List<SimulinkModel>();
         private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
         private SimulinkModel selectedModel;
-        private List<ISignal> inSignals=new List<ISignal>();
-        private List<ISignal> outSignals=new List<ISignal>();
 
         public Form1()
         {
@@ -156,55 +153,19 @@ namespace ReadDllForm
             
             listBoxInputs.Items.Clear();
             listBoxOutSignals.Items.Clear();
-            inSignals = model.GetInSignals();
-            outSignals = model.GetOutSignals();
-            for (int i = 0; i < inSignals.Count; i++)
+            for (int i = 0; i < model.GetInSignals().Count; i++)
             {
-                listBoxInputs.Items.Add(inSignals[i].GetSignalName()+"\t\t"+inSignals[i].GetSignal());
+                listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal());
             }
-            for (int i = 0; i < outSignals.Count; i++)
+            for (int i = 0; i < model.GetOutSignals().Count; i++)
             {
-                listBoxOutSignals.Items.Add(outSignals[i].GetSignalName() + "\t\t" + outSignals[i].GetSignal());
-            }
-            /*
-            for (int i = 0; i < inSignals.Count; i++)
-                {
-                
-                    Label lb1 = new Label();
-                    count++;
-                    lb1.Name = "InSignal" + count;
-                    lb1.Text = inSignals[i].GetSignalName();
-                    lb1.Location = new Point(20, +40 * count + 20);
-                    lb1.AutoSize = true;
-                    //inSignalPanel.Controls.Add(lb1);
-
-                    TextBox txt = new TextBox();
-                    txt.Text = inSignals[i].GetSignal().ToString();
-                    txt.AutoSize = true;
-                    txt.MinimumSize = new Size(20, 20);
-                    txt.Location = new Point(50, 40 * count + 20);
-                    //inSignalPanel.Controls.Add(txt);
-
-                    //textboxen kommer att bli dubbellänkad om flera komponenter laddas in, tack vare "tag i" inte blir unik
-                    txt.Tag = i;
-                    txt.TextChanged += delegate {
-                        if (txt.Text != "")
-                        {
-                            inSignals[Convert.ToInt32(txt.Tag)].SetSignal(Convert.ToDouble(txt.Text));
-                        }
-                    };*/
-
-                //}
-            //}     
+                listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal());
+            }  
         }
         private void buttonStep_Click(object sender, EventArgs e)
         {
-            foreach (var modell in models)
-            {
-                modell.Step();
-                CreateInputs(selectedModel);
-                //textBoxModel.Text += modell.GetSignalsAsString();
-            }
+            selectedModel.Step();
+            CreateInputs(selectedModel);
         }
 
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,14 +185,11 @@ namespace ReadDllForm
         private void listBoxInputs_DoubleClick(object sender, EventArgs e)
         {
            
-
-            //listBoxInputs.SelectedItem
         }
 
         private void buttonConnectSignal_Click(object sender, EventArgs e)
         {
-            inSignals[listBoxInputs.SelectedIndex].SetSignal(6);
-           
+            selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(6);          
             CreateInputs(selectedModel);
         }
     }
