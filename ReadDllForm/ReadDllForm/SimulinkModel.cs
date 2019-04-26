@@ -17,8 +17,6 @@ namespace ReadDllForm
         private string path;
         public string name;
         private IntPtr pDll;
-        private int numberOfInputs;
-        private int numberOfOutputs;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
@@ -89,15 +87,7 @@ namespace ReadDllForm
             {
                 if (reader.IsStartElement())
                 {
-                    if (reader.Name == "NumInSignals")
-                    {
-                        numberOfInputs = Convert.ToInt32(reader.ReadString());
-                    }
-                    else if (reader.Name == "NumOutSignals")
-                    {
-                        numberOfOutputs = Convert.ToInt32(reader.ReadString());
-                    }
-                    else if (reader.Name == "InSignal")
+                    if (reader.Name == "InSignal")
                     {
                         reader.Read();
                         string Name = "";
