@@ -18,9 +18,6 @@ namespace ReadDllForm
         private delegate double getOutputs(int port);
         #endregion
 
-
-
-
         public OutSignal(int port, string Name, string path)
         {
             portNumber = port;

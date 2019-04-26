@@ -11,8 +11,7 @@ namespace ReadDllForm
     {
         private IntPtr pDll;
         private int portNumber;
-        private string portName;
-        
+        private string portName;       
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -28,9 +27,7 @@ namespace ReadDllForm
             portName = Name;
             pDll = NativeMethods.LoadLibrary(path);
 
-        }
-
-       
+        } 
 
         #region DllFunctions
         public void SetSignal(double value)

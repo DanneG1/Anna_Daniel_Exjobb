@@ -22,7 +22,6 @@ namespace ReadDllForm
         private const string TargetFolder = "TargetFolder";
         private string hPath;
         private string cppPath;
-        private List<SimulinkModel> models = new List<SimulinkModel>();
         private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
         private SimulinkModel selectedModel;
 
@@ -143,14 +142,14 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            componentListBox.Items.Add(model.name);
-            keyValue.Add(model.name, model);
-            models.Add(model);
+            if (!keyValue.ContainsKey(model.name)){
+                componentListBox.Items.Add(model.name);
+                keyValue.Add(model.name, model);
+            }
         }
 
         private void CreateInputs(SimulinkModel model)
         {
-            
             listBoxInputs.Items.Clear();
             listBoxOutSignals.Items.Clear();
             for (int i = 0; i < model.GetInSignals().Count; i++)
@@ -162,6 +161,7 @@ namespace ReadDllForm
                 listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal());
             }  
         }
+
         private void buttonStep_Click(object sender, EventArgs e)
         {
             selectedModel.Step();
@@ -170,27 +170,22 @@ namespace ReadDllForm
 
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string name = componentListBox.SelectedItem.ToString();
-            selectedModel = keyValue[name];
-            CreateInputs(selectedModel);
-        }
-
-       
-
-        private void listBoxInputs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBoxInputs_DoubleClick(object sender, EventArgs e)
-        {
-           
+            if (componentListBox.SelectedIndex != -1)
+            {
+                string name = componentListBox.SelectedItem.ToString();
+                selectedModel = keyValue[name];
+                CreateInputs(selectedModel);
+            }
         }
 
         private void buttonConnectSignal_Click(object sender, EventArgs e)
         {
-            selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(6);          
-            CreateInputs(selectedModel);
+            double value;
+            if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text,out value))
+            {
+                selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
+                CreateInputs(selectedModel);
+            }
         }
     }
 }
