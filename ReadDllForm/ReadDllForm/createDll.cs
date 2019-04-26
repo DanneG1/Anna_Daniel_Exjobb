@@ -27,17 +27,18 @@ namespace ReadDllForm
         private static string referenceInput;
         private static string referenceOutput;
         private static string modelName;
-        private static string newModelName;
+        private static string modelFolderName;
+        private static string modelDllName;
 
         public static List<String> inputs = new List<String>();
         public static List<String> outputs = new List<String>();
 
-        public void CreateFile(string h, string cpp, string modelName)
+        public void CreateFile(string h, string cpp, string modelNameRef)
         {
             hPath = h;
             cppPath = cpp;
-            newModelName = modelName;
-            
+            modelFolderName = modelNameRef;
+            modelDllName = modelNameRef + ".dll";
             FindIO();
             FormatIO();
             GenerateCppFile();
@@ -217,11 +218,11 @@ namespace ReadDllForm
             string targetDir =  Settings.Default[TargetFolder].ToString();
             string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
             
-            string modelName = "model.dll";
-            string renameCommand = "ren " + targetFile + " " + modelName;
-            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + newModelName+"\"";
-            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelName + "\"" + " " + "\"" + targetDir + "\\" + newModelName + "\""; ;
-            string parameterModelDir = targetDir + "\\" + newModelName + "\\"+"modelXML.xml";
+            //string modelName = "model.dll";
+            string renameCommand = "ren " + targetFile + " " + modelDllName;
+            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + modelFolderName+"\"";
+            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelDllName + "\"" + " " + "\"" + targetDir + "\\" + modelFolderName + "\""; ;
+            string parameterModelDir = targetDir + "\\" + modelFolderName + "\\"+"modelXML.xml";
             Console.WriteLine(mkDirectoryCommand);
             Console.WriteLine(moveCommand);
 
