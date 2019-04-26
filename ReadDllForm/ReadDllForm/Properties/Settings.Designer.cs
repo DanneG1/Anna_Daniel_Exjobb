@@ -58,5 +58,17 @@ namespace ReadDllForm.Properties {
                 this["TargetFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelFilePath {
+            get {
+                return ((string)(this["ModelFilePath"]));
+            }
+            set {
+                this["ModelFilePath"] = value;
+            }
+        }
     }
 }

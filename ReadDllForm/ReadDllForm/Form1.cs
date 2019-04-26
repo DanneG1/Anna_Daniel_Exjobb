@@ -20,6 +20,7 @@ namespace ReadDllForm
         private const string Solution = "Solution";
         private const string MsBuild = "MsBuild";
         private const string TargetFolder = "TargetFolder";
+        private const string ModelFilePath = "ModelFilePath";
         private string hPath;
         private string cppPath;
         private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
@@ -65,23 +66,35 @@ namespace ReadDllForm
         {
             OpenFileDialog openH = new OpenFileDialog();
             openH.Filter = "h files(*.h)|*.h";
+            if (Settings.Default[ModelFilePath].ToString() != "")
+            {
+                openH.InitialDirectory = Path.GetDirectoryName(Settings.Default[ModelFilePath].ToString());
+            }
             if (openH.ShowDialog() == DialogResult.OK)
             {
                 string hFileName = openH.FileName;
                 hPath = hFileName;
                 txtBoxH.Text = hFileName;
                 txtBoxH.SelectionStart = txtBoxH.Text.Length;
+                Settings.Default[ModelFilePath] = openH.FileName;
+                Settings.Default.Save();
             }
         }
         private void btnCppFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openCpp = new OpenFileDialog();
             openCpp.Filter = "cpp files(*.cpp)|*.cpp";
+            if (Settings.Default[ModelFilePath].ToString() != "")
+            {
+                openCpp.InitialDirectory = Path.GetDirectoryName(Settings.Default[ModelFilePath].ToString());
+            }
             if (openCpp.ShowDialog() == DialogResult.OK)
             {
-                string cPpFileName = openCpp.FileName;
-                cppPath = cPpFileName;
-                txtBoxCpp.Text = cPpFileName;
+                string cppFileName = openCpp.FileName;
+                cppPath = cppFileName;
+                txtBoxCpp.Text = cppFileName;
+                Settings.Default[ModelFilePath] = openCpp.FileName;
+                Settings.Default.Save();
                 txtBoxCpp.SelectionStart = txtBoxCpp.Text.Length;
             }
         }
@@ -90,9 +103,9 @@ namespace ReadDllForm
             OpenFileDialog open = new OpenFileDialog();
             if (open.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default["MsBuild"] = open.FileName;
+                Settings.Default[MsBuild] = open.FileName;
 
-                textBoxMsBuild.Text = Settings.Default["MsBuild"].ToString();
+                textBoxMsBuild.Text = Settings.Default[MsBuild].ToString();
                 Settings.Default.Save();
             }
         }
@@ -102,9 +115,9 @@ namespace ReadDllForm
             // openH.Filter = "h files(*.h)|*.h";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                Settings.Default["Solution"] = open.FileName;
+                Settings.Default[Solution] = open.FileName;
 
-                textBoxSolution.Text = Settings.Default["Solution"].ToString();
+                textBoxSolution.Text = Settings.Default[Solution].ToString();
                 Settings.Default.Save();
             }
         }
@@ -116,9 +129,9 @@ namespace ReadDllForm
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
                 {
-                    Settings.Default["TargetFolder"] = fbd.SelectedPath;
+                    Settings.Default[TargetFolder] = fbd.SelectedPath;
 
-                    textBoxTarget.Text = Settings.Default["TargetFolder"].ToString();
+                    textBoxTarget.Text = Settings.Default[TargetFolder].ToString();
                     Settings.Default.Save();
                 }
             }
@@ -130,6 +143,11 @@ namespace ReadDllForm
         private void buttonLoadModel_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDll = new OpenFileDialog();
+            if (Settings.Default[TargetFolder].ToString() != "")
+            {
+                openDll.InitialDirectory = Settings.Default[TargetFolder].ToString();
+            }
+            
             openDll.Filter = "dll files(*.dll)|*.dll";
             if (openDll.ShowDialog() == DialogResult.OK)
             {
