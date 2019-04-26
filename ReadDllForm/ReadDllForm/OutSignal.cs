@@ -13,18 +13,25 @@ namespace ReadDllForm
         public int portNumber;
         public string portName;
         public string path;
+        private IntPtr pDll;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate double getOutputs(int port);
+
+        
 
         public OutSignal(int port, string Name, string path)
         {
             this.path = path;
             portNumber = port;
             portName = Name;
-            SetDllDirectory(path);
-            LoadLibrary(path);
+            pDll = NativeMethods.LoadLibrary(path);
+            //SetDllDirectory(path);
+            //LoadLibrary(path);
         }
 
         #region DllFunctions
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+       /* [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetDllDirectory(string path);
 
@@ -33,7 +40,7 @@ namespace ReadDllForm
 
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getOutputs(int port);
+        public static extern double getOutputs(int port);*/
         #endregion
 
 
@@ -45,7 +52,13 @@ namespace ReadDllForm
 
         public double GetSignal()
         {
-            return getOutputs(portNumber);
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "getOutputs");
+            getOutputs GetOutputs =
+                (getOutputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(getOutputs));
+
+            
+
+            return GetOutputs(portNumber);
         }
 
         public string GetSignalAsString()

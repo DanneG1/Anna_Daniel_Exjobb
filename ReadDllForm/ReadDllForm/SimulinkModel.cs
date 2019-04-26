@@ -10,6 +10,7 @@ using System.Xml;
 
 namespace ReadDllForm
 {
+
     class SimulinkModel
     {
         private const string ModelDll = @"model.dll";
@@ -20,6 +21,17 @@ namespace ReadDllForm
         private List<ISignal> outSignals = new List<ISignal>();
         private string path;
         public string name;
+        private IntPtr pDll;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void initialize();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void step();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void terminate();
+
+
+
 
         public List<ISignal> GetInSignals()
         {
@@ -35,15 +47,27 @@ namespace ReadDllForm
             this.path = path;
             DirectoryPath = Path.GetDirectoryName(path);
             name = new DirectoryInfo(DirectoryPath).Name;
-            SetDllDirectory(path);
-            LoadLibrary(path);
-            initialize();
+
+            pDll = NativeMethods.LoadLibrary(path);
+
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "initialize");
+            initialize Initialize =
+                (initialize) Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(initialize));
+
+            Initialize();
+
             ReadXML();
-            step();
+            
+            Step();
+            /* SetDllDirectory(path);
+             LoadLibrary(path);
+             initialize();
+             
+             step();*/
         }
 
         #region DllFunctions
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        /*[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetDllDirectory(string path);
         [DllImport("kernel32", SetLastError = true)]
@@ -59,7 +83,7 @@ namespace ReadDllForm
 
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void terminate();
+        public static extern void terminate();*/
         #endregion
 
 
@@ -125,7 +149,10 @@ namespace ReadDllForm
 
         public void Step()
         {
-            step();
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "step");
+            step Step =
+                (step)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(step));
+            Step();
         }
 
         public string GetSignalsAsString()
@@ -148,7 +175,7 @@ namespace ReadDllForm
 
         ~SimulinkModel()
         {
-            terminate();
+           // terminate();
         }
     }
 }

@@ -13,14 +13,26 @@ namespace ReadDllForm
         public int portNumber;
         public string portName;
         public string path;
+        private IntPtr pDll;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate void setInputs(int port, double value);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        private delegate double getInputs(int port);
 
         public InSignal(int port,string Name, string path)
         {
             this.path = path;
             portNumber = port;
             portName = Name;
-            SetDllDirectory(path);
-            LoadLibrary(path);
+
+            pDll = NativeMethods.LoadLibrary(path);
+
+           
+
+            //SetDllDirectory(path);
+            //LoadLibrary(path);
         }
 
         public void PrintSignal()
@@ -30,7 +42,7 @@ namespace ReadDllForm
         }
 
         #region DllFunctions
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+       /* [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetDllDirectory(string path);
 
@@ -43,17 +55,27 @@ namespace ReadDllForm
 
         [DllImport
             (ModelDll, CallingConvention = CallingConvention.Cdecl)]
-        public static extern double getInputs(int port);
+        public static extern double getInputs(int port);*/
         #endregion
 
         public void SetSignal(double value)
         {
-            setInputs(portNumber, value);
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "setInputs");
+            setInputs Setinputs =
+                (setInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(setInputs));
+
+            Setinputs(portNumber,value);
+            
         }
 
         public double GetSignal()
         {
-            return getInputs(portNumber);
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "getInputs");
+            getInputs GetInputs =
+                (getInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(getInputs));
+
+            
+            return GetInputs(portNumber);
         }
 
         public string GetSignalAsString()
