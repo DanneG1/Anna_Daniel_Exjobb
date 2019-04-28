@@ -13,10 +13,10 @@ namespace ReadDllForm
 
     class SimulinkModel
     {
-        private string directoryPath;
-        private string path;
-        public string name;
-        private IntPtr pDll;
+        private readonly IntPtr _pDll;
+        private readonly string _directoryPath;
+        private readonly string _path;
+        private readonly string _name;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
@@ -40,24 +40,29 @@ namespace ReadDllForm
             return outSignals;
         }
 
+        public string GetName()
+        {
+            return _name;
+        }
 
         #endregion
 
         public SimulinkModel(string path)
         {
-            this.path = path;
-            directoryPath = Path.GetDirectoryName(path);
-            pDll = NativeMethods.LoadLibrary(path);
-            name = new DirectoryInfo(directoryPath).Name;
-            initialze();
-            ReadXML();
-            Step();
+            _pDll = NativeMethods.LoadLibrary(path);
+            _path = path;
+            _directoryPath = Path.GetDirectoryName(path);
+            _name = new DirectoryInfo(_directoryPath).Name;
+
+            Initialze();
+            ReadXml();
+            Step();//kanske inte ska steppa här?
         }       
 
         #region dllFunctions
-        private void initialze()
+        private void Initialze()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "initialize");
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "initialize");
             initialize Initialize =
                 (initialize)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(initialize));
             Initialize();
@@ -65,23 +70,22 @@ namespace ReadDllForm
         }
         public void Step()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "step");
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "step");
             step Step =
                 (step)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(step));
             Step();
         }
         private void Terminate()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "terminate");
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "terminate");
             terminate Terminate =
                 (terminate)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(terminate));
             Terminate();
         }
         #endregion
-
-        private void ReadXML()
+        private void ReadXml()
         {
-            XmlTextReader reader = new XmlTextReader(directoryPath + "\\modelXML.xml");
+            XmlTextReader reader = new XmlTextReader(_directoryPath + "\\modelXML.xml");
             reader.Read();
             while (reader.Read())
             {
@@ -102,7 +106,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        InSignal inSignal = new InSignal(port, Name, path);
+                        InSignal inSignal = new InSignal(port, Name, _path);
                         inSignal.SetSignal(5);
                         inSignals.Add(inSignal);
 
@@ -122,7 +126,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        OutSignal outSignal = new OutSignal(port, Name, path);
+                        OutSignal outSignal = new OutSignal(port, Name, _path);
                         outSignals.Add(outSignal);
                     }
                 }

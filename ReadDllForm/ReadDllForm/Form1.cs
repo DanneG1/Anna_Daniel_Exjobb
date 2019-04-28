@@ -88,7 +88,7 @@ namespace ReadDllForm
         private void btnHeaderFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openH = new OpenFileDialog();
-            openH.Filter = "h files(*.h)|*.h";
+            openH.Filter = @"h files(*.h)|*.h";
             if (Settings.Default[ModelFilePath].ToString() != "")
             {
                 openH.InitialDirectory = Path.GetDirectoryName(Settings.Default[ModelFilePath].ToString());
@@ -106,7 +106,7 @@ namespace ReadDllForm
         private void btnCppFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openCpp = new OpenFileDialog();
-            openCpp.Filter = "cpp files(*.cpp)|*.cpp";
+            openCpp.Filter = @"cpp files(*.cpp)|*.cpp";
             if (Settings.Default[ModelFilePath].ToString() != "")
             {
                 openCpp.InitialDirectory = Path.GetDirectoryName(Settings.Default[ModelFilePath].ToString());
@@ -135,7 +135,7 @@ namespace ReadDllForm
         private void btnSolution_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-            // openH.Filter = "h files(*.h)|*.h";
+            open.Filter = @"Solution(*.sln)|*.sln";
             if (open.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default[Solution] = open.FileName;
@@ -194,7 +194,7 @@ namespace ReadDllForm
                 openDll.InitialDirectory = Settings.Default[TargetFolder].ToString();
             }
 
-            openDll.Filter = "dll files(*.dll)|*.dll";
+            openDll.Filter = @"dll files(*.dll)|*.dll";
             if (openDll.ShowDialog() == DialogResult.OK)
             {
                 string dllFileName = openDll.FileName;
@@ -205,10 +205,10 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model = new SimulinkModel(textBoxDll.Text);
-            if (!_modelsDictionary.ContainsKey(model.name))
+            if (!_modelsDictionary.ContainsKey(model.GetName()))
             {
-                componentListBox.Items.Add(model.name);
-                _modelsDictionary.Add(model.name, model);
+                componentListBox.Items.Add(model.GetName());
+                _modelsDictionary.Add(model.GetName(), model);
             }
         }
         private void buttonStep_Click(object sender, EventArgs e)

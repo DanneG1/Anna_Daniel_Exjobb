@@ -15,10 +15,10 @@ namespace ReadDllForm
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate void setInputs(int port, double value);
+        private delegate void SetInputs(int port, double value);
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        private delegate double getInputs(int port);
+        private delegate double GetInputs(int port);
         #endregion
 
         public InSignal(int port,string Name, string path)
@@ -33,17 +33,17 @@ namespace ReadDllForm
         public void SetSignal(double value)
         {
             IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "setInputs");
-            setInputs Setinputs =
-                (setInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(setInputs));
+            SetInputs setinputs =
+                (SetInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(SetInputs));
 
-            Setinputs(_portNumber, value);
+            setinputs(_portNumber, value);
         }
         public double GetSignal()
         {
             IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "getInputs");
-            getInputs GetInputs =
-                (getInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(getInputs));
-            return GetInputs(_portNumber);
+            GetInputs getInputs =
+                (GetInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(GetInputs));
+            return getInputs(_portNumber);
         }
         #endregion
 
