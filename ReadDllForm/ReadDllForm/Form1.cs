@@ -36,7 +36,7 @@ namespace ReadDllForm
             textBoxMsBuild.Text = Settings.Default[MsBuild].ToString();
             textBoxSolution.Text = Settings.Default[Solution].ToString();
             textBoxTarget.Text = Settings.Default[TargetFolder].ToString();
-
+            
             //Show end of file path
             textBoxMsBuild.SelectionStart = textBoxMsBuild.Text.Length;
             textBoxSolution.SelectionStart = textBoxSolution.Text.Length;
@@ -50,6 +50,29 @@ namespace ReadDllForm
                    && textBoxSolution.Text != "" 
                    && textBoxMsBuild.Text != "" 
                    && textBoxTarget.Text != "";
+        }
+     
+        private void ShowSignals(SimulinkModel model)
+        {
+            listBoxInputs.Items.Clear();
+            listBoxOutSignals.Items.Clear();
+            for (int i = 0; i < model.GetInSignals().Count; i++)
+            {
+                listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal());
+            }
+            for (int i = 0; i < model.GetOutSignals().Count; i++)
+            {
+                listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal());
+            }  
+        }
+        private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (componentListBox.SelectedIndex != -1)
+            {
+                string name = componentListBox.SelectedItem.ToString();
+                _selectedModel = _modelsDictionary[name];
+                ShowSignals(_selectedModel);
+            }
         }
 
         #region buttonEvents
@@ -137,9 +160,32 @@ namespace ReadDllForm
             }
 
         }
-
-        #endregion
-
+        private void buttonRemoveModel_Click(object sender, EventArgs e)
+        {
+            if (componentListBox.SelectedIndex != -1)
+            {
+                string message = $@"Are you sure you want to remove model {componentListBox.SelectedItem}";
+                string title = "Remove model";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNoCancel;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
+                {
+                    _modelsDictionary.Remove(componentListBox.SelectedItem.ToString());
+                    componentListBox.Items.Remove(componentListBox.SelectedItem.ToString());
+                    listBoxInputs.Items.Clear();
+                    listBoxOutSignals.Items.Clear();
+                }
+            }
+        }
+        private void buttonConnectSignal_Click(object sender, EventArgs e)
+        {
+            double value;
+            if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text, out value))
+            {
+                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
+                ShowSignals(_selectedModel);
+            }
+        }
         private void buttonLoadModel_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDll = new OpenFileDialog();
@@ -147,7 +193,7 @@ namespace ReadDllForm
             {
                 openDll.InitialDirectory = Settings.Default[TargetFolder].ToString();
             }
-            
+
             openDll.Filter = "dll files(*.dll)|*.dll";
             if (openDll.ShowDialog() == DialogResult.OK)
             {
@@ -156,54 +202,27 @@ namespace ReadDllForm
                 textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
             }
         }
-
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            if (!_modelsDictionary.ContainsKey(model.name)){
+            SimulinkModel model = new SimulinkModel(textBoxDll.Text);
+            if (!_modelsDictionary.ContainsKey(model.name))
+            {
                 componentListBox.Items.Add(model.name);
                 _modelsDictionary.Add(model.name, model);
             }
         }
-
-        private void CreateInputs(SimulinkModel model)
-        {
-            listBoxInputs.Items.Clear();
-            listBoxOutSignals.Items.Clear();
-            for (int i = 0; i < model.GetInSignals().Count; i++)
-            {
-                listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal());
-            }
-            for (int i = 0; i < model.GetOutSignals().Count; i++)
-            {
-                listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal());
-            }  
-        }
-
         private void buttonStep_Click(object sender, EventArgs e)
-        {
-            _selectedModel.Step();
-            CreateInputs(_selectedModel);
-        }
-
-        private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (componentListBox.SelectedIndex != -1)
             {
-                string name = componentListBox.SelectedItem.ToString();
-                _selectedModel = _modelsDictionary[name];
-                CreateInputs(_selectedModel);
+                _selectedModel.Step();
+                ShowSignals(_selectedModel);
             }
+            
         }
+        #endregion
 
-        private void buttonConnectSignal_Click(object sender, EventArgs e)
-        {
-            double value;
-            if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text,out value))
-            {
-                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
-                CreateInputs(_selectedModel);
-            }
-        }
+
+
     }
 }

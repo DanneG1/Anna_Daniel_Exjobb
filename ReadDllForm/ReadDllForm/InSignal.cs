@@ -9,9 +9,9 @@ namespace ReadDllForm
 {
     public class InSignal:ISignal
     {
-        private IntPtr pDll;
-        private int portNumber;
-        private string portName;       
+        private readonly IntPtr _pDll;
+        private readonly int _portNumber;
+        private readonly string _portName;       
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -23,43 +23,43 @@ namespace ReadDllForm
 
         public InSignal(int port,string Name, string path)
         {
-            portNumber = port;
-            portName = Name;
-            pDll = NativeMethods.LoadLibrary(path);
+            _portNumber = port;
+            _portName = Name;
+            _pDll = NativeMethods.LoadLibrary(path);
 
         } 
 
         #region DllFunctions
         public void SetSignal(double value)
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "setInputs");
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "setInputs");
             setInputs Setinputs =
                 (setInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(setInputs));
 
-            Setinputs(portNumber, value);
+            Setinputs(_portNumber, value);
         }
         public double GetSignal()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(pDll, "getInputs");
+            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "getInputs");
             getInputs GetInputs =
                 (getInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(getInputs));
-            return GetInputs(portNumber);
+            return GetInputs(_portNumber);
         }
         #endregion
 
         public void PrintSignal()
         {
-            Console.WriteLine("Name =" + portName);
-            Console.WriteLine("Port= " + portNumber);
+            Console.WriteLine("Name =" + _portName);
+            Console.WriteLine("Port= " + _portNumber);
         }
         public string GetSignalAsString()
         {
-            return portName + "\t" + GetSignal() + Environment.NewLine;
+            return _portName + "\t" + GetSignal() + Environment.NewLine;
         }
 
         public string GetSignalName()
         {
-            return portName;
+            return _portName;
         }
     }
 }
