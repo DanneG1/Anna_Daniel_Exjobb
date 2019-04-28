@@ -21,10 +21,10 @@ namespace ReadDllForm
         private const string MsBuild = "MsBuild";
         private const string TargetFolder = "TargetFolder";
         private const string ModelFilePath = "ModelFilePath";
-        private string hPath;
-        private string cppPath;
-        private Dictionary<string,SimulinkModel> keyValue=new Dictionary<string, SimulinkModel>();
-        private SimulinkModel selectedModel;
+        private string _hPath;
+        private string _cppPath;
+        private readonly Dictionary<string,SimulinkModel> _modelsDictionary=new Dictionary<string, SimulinkModel>();
+        private SimulinkModel _selectedModel;
 
         public Form1()
         {
@@ -44,8 +44,8 @@ namespace ReadDllForm
         }
         private bool AllFieldsOk()
         {
-            return cppPath != "" 
-                   && hPath != "" 
+            return _cppPath != "" 
+                   && _hPath != "" 
                    && textBoxModelName.Text != "" 
                    && textBoxSolution.Text != "" 
                    && textBoxMsBuild.Text != "" 
@@ -57,8 +57,8 @@ namespace ReadDllForm
         {
             if (AllFieldsOk())
             {
-                createDll dll = new createDll();
-                dll.CreateFile(hPath, cppPath, textBoxModelName.Text);
+                CreateDll dll = new CreateDll();
+                dll.CreateFile(_hPath, _cppPath, textBoxModelName.Text);
                 textBoxModelName.Text = "";
             }
         }
@@ -73,7 +73,7 @@ namespace ReadDllForm
             if (openH.ShowDialog() == DialogResult.OK)
             {
                 string hFileName = openH.FileName;
-                hPath = hFileName;
+                _hPath = hFileName;
                 txtBoxH.Text = hFileName;
                 txtBoxH.SelectionStart = txtBoxH.Text.Length;
                 Settings.Default[ModelFilePath] = openH.FileName;
@@ -91,7 +91,7 @@ namespace ReadDllForm
             if (openCpp.ShowDialog() == DialogResult.OK)
             {
                 string cppFileName = openCpp.FileName;
-                cppPath = cppFileName;
+                _cppPath = cppFileName;
                 txtBoxCpp.Text = cppFileName;
                 Settings.Default[ModelFilePath] = openCpp.FileName;
                 Settings.Default.Save();
@@ -160,9 +160,9 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model=new SimulinkModel(textBoxDll.Text);
-            if (!keyValue.ContainsKey(model.name)){
+            if (!_modelsDictionary.ContainsKey(model.name)){
                 componentListBox.Items.Add(model.name);
-                keyValue.Add(model.name, model);
+                _modelsDictionary.Add(model.name, model);
             }
         }
 
@@ -182,8 +182,8 @@ namespace ReadDllForm
 
         private void buttonStep_Click(object sender, EventArgs e)
         {
-            selectedModel.Step();
-            CreateInputs(selectedModel);
+            _selectedModel.Step();
+            CreateInputs(_selectedModel);
         }
 
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,8 +191,8 @@ namespace ReadDllForm
             if (componentListBox.SelectedIndex != -1)
             {
                 string name = componentListBox.SelectedItem.ToString();
-                selectedModel = keyValue[name];
-                CreateInputs(selectedModel);
+                _selectedModel = _modelsDictionary[name];
+                CreateInputs(_selectedModel);
             }
         }
 
@@ -201,8 +201,8 @@ namespace ReadDllForm
             double value;
             if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text,out value))
             {
-                selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
-                CreateInputs(selectedModel);
+                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
+                CreateInputs(_selectedModel);
             }
         }
     }

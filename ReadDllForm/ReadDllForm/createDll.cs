@@ -12,33 +12,33 @@ using ReadDllForm.Properties;
 
 namespace ReadDllForm
 {
-    class createDll
+    public class CreateDll
     {
         private const string Solution = "Solution";
         private const string MsBuild = "MsBuild";
         private const string TargetFolder = "TargetFolder";
-        private static readonly string ExampleFilePath = @"..\..\files\exampleCppDLL.txt";
+        private const string ExampleFilePath = @"..\..\files\exampleCppDLL.txt";
         private static readonly string SolutionFileName = Settings.Default["Solution"].ToString();
         private static readonly string SolutionDirectory = Path.GetDirectoryName(SolutionFileName);
-        private static readonly string TargetFileName = SolutionDirectory + "\\GenerateDLL\\GenerateDLL.cpp";
+        private static readonly string TargetFileName = $@"{SolutionDirectory}{"\\GenerateDLL\\GenerateDLL.cpp"}";
 
-        private static string hPath;
-        private static string cppPath;
-        private static string referenceInput;
-        private static string referenceOutput;
-        private static string modelName;
-        private static string modelFolderName;
-        private static string modelDllName;
+        private static string _hPath;
+        private static string _cppPath;
+        private static string _referenceInput;
+        private static string _referenceOutput;
+        private static string _modelName;
+        private static string _modelFolderName;
+        private static string _modelDllName;
 
-        public static List<String> inputs = new List<String>();
-        public static List<String> outputs = new List<String>();
+        public static List<string> Inputs = new List<string>();
+        public static List<string> Outputs = new List<string>();
 
-        public void CreateFile(string h, string cpp, string modelNameRef)
+        public void CreateFile(string hPath, string cppPath, string modelFolderName)
         {
-            hPath = h;
-            cppPath = cpp;
-            modelFolderName = modelNameRef;
-            modelDllName = modelNameRef + ".dll";
+            _hPath = hPath;
+            _cppPath = cppPath;
+            _modelFolderName = modelFolderName;
+            _modelDllName = modelFolderName + ".dll";
             FindIO();
             FormatIO();
             GenerateCppFile();
@@ -48,7 +48,7 @@ namespace ReadDllForm
 
         private static IEnumerable<String> ReadFile()
         {
-            IEnumerable<String> lines = File.ReadLines(hPath);
+            IEnumerable<String> lines = File.ReadLines(_hPath);
             return lines;
         }
         private static void FindIO()
@@ -80,7 +80,7 @@ namespace ReadDllForm
                         continue;
                     }
                     if (line.Contains("<Root>") && line.Contains("//"))
-                        inputs.Add(line);
+                        Inputs.Add(line);
 
                 }
                 else if (line.Contains("External outputs") || foundOutputs.Equals(true))
@@ -96,7 +96,7 @@ namespace ReadDllForm
                         continue;
                     }
                     if (line.Contains("<Root>") && line.Contains("//"))
-                        outputs.Add(line);
+                        Outputs.Add(line);
                 }
                 if (line.Contains("Constructor") || foundConstructor)
                 {
@@ -105,48 +105,48 @@ namespace ReadDllForm
                     else
                     {
                         string[] splitLine = line.Split('(');
-                        modelName = splitLine[0];
+                        _modelName = splitLine[0];
                         foundConstructor = false;
                     }
                 }
                 if (inputMatch.Success)
                 {
                     string[] splitLine = line.Split(' ');
-                    referenceInput = splitLine[3];
-                    referenceInput = referenceInput.Replace(';', '.');
-                    System.Console.WriteLine(referenceInput);
+                    _referenceInput = splitLine[3];
+                    _referenceInput = _referenceInput.Replace(';', '.');
+                    System.Console.WriteLine(_referenceInput);
                 }
                 if (outputMatch.Success)
                 {
                     string[] splitLine = line.Split(' ');
-                    referenceOutput = splitLine[3];
-                    referenceOutput = referenceOutput.Replace(';', '.');
+                    _referenceOutput = splitLine[3];
+                    _referenceOutput = _referenceOutput.Replace(';', '.');
 
-                    System.Console.WriteLine(referenceOutput);
+                    System.Console.WriteLine(_referenceOutput);
                 }
             }
 
         }
         private static void FormatIO()
         {
-            List<String> newInputs = new List<string>();
-            List<String> newOutputs = new List<string>();
+            List<string> newInputs = new List<string>();
+            List<string> newOutputs = new List<string>();
 
-            foreach (var input in inputs)
+            foreach (var input in Inputs)
             {
                 string[] inputArr = input.Split(' ');
                 inputArr[3] = inputArr[3].Replace(';', ' ');
                 newInputs.Add(inputArr[3]);
 
             }
-            foreach (var output in outputs)
+            foreach (var output in Outputs)
             {
                 string[] outputArr = output.Split(' ');
                 outputArr[3] = outputArr[3].Replace(';', ' ');
                 newOutputs.Add(outputArr[3]);
             }
-            inputs = newInputs;
-            outputs = newOutputs;
+            Inputs = newInputs;
+            Outputs = newOutputs;
         }
         private static void GenerateCppFile()
         {
@@ -159,26 +159,26 @@ namespace ReadDllForm
                 //Sätt paths till .h och .cpp fil
                 if (line.Contains("!.h "))
                 {
-                    newContent.Add("#include \"" + hPath + "\"");
+                    newContent.Add("#include \"" + _hPath + "\"");
                 }
                 else if (line.Contains(" !.cpp "))
                 {
-                    newContent.Add("#include \"" + cppPath + "\"");
+                    newContent.Add("#include \"" + _cppPath + "\"");
                 }
 
                 //Skapa modellen
                 else if (line.Contains("!modelName"))
                 {
-                    newContent.Add(modelName + " rObj;");
+                    newContent.Add(_modelName + " rObj;");
                 }
 
                 //Skapa switch case för setInputs
                 else if (line.Contains("!setInputCase"))
                 {
-                    for (int i = 0; i < inputs.Count(); ++i)
+                    for (int i = 0; i < Inputs.Count(); ++i)
                     {
                         newContent.Add("case " + i + ":");
-                        newContent.Add("rObj." + referenceInput + inputs[i] + "= value;");
+                        newContent.Add("rObj." + _referenceInput + Inputs[i] + "= value;");
                         newContent.Add("break;");
                     }
                 }
@@ -186,18 +186,18 @@ namespace ReadDllForm
                 //Skapa switch case för getOutputs
                 else if (line.Contains("!getOutputCase"))
                 {
-                    for (int i = 0; i < outputs.Count(); ++i)
+                    for (int i = 0; i < Outputs.Count(); ++i)
                     {
                         newContent.Add("case " + i + ":");
-                        newContent.Add(" return rObj." + referenceOutput + outputs[i] + ";");
+                        newContent.Add(" return rObj." + _referenceOutput + Outputs[i] + ";");
                     }
                 }
                 else if (line.Contains("!getInputCase"))
                 {
-                    for (int i = 0; i < inputs.Count(); ++i)
+                    for (int i = 0; i < Inputs.Count(); ++i)
                     {
                         newContent.Add("case " + i + ":");
-                        newContent.Add(" return rObj." + referenceInput + inputs[i] + ";");
+                        newContent.Add(" return rObj." + _referenceInput + Inputs[i] + ";");
                     }
                 }
 
@@ -212,29 +212,29 @@ namespace ReadDllForm
         }
         private static void CreateModelDll()
         {
-            string msbuild = "\"" + Settings.Default[MsBuild] + "\"";
-            string solution = "\"" + Settings.Default[Solution] + "\"";
-            string solutionDir = Path.GetDirectoryName(Settings.Default[Solution].ToString());
-            string targetDir =  Settings.Default[TargetFolder].ToString();
-            string targetFile = "\"" + solutionDir + "\\Debug\\GenerateDLL.dll" + "\"";
-            
-            //string modelName = "model.dll";
-            string renameCommand = "ren " + targetFile + " " + modelDllName;
-            string mkDirectoryCommand = "mkDir " +"\""+ targetDir + "\\" + modelFolderName+"\"";
-            string moveCommand = "move " + "\"" + solutionDir + "\\Debug\\" + modelDllName + "\"" + " " + "\"" + targetDir + "\\" + modelFolderName + "\""; ;
-            string parameterModelDir = targetDir + "\\" + modelFolderName + "\\"+"modelXML.xml";
+            string solutionDirectory = Path.GetDirectoryName(Settings.Default[Solution].ToString());
+
+            string msBuildCommand = $@"""{Settings.Default[MsBuild]}"" ""{Settings.Default[Solution]}""";
+            string renameCommand = $@"ren ""{solutionDirectory}{"\\Debug\\GenerateDLL.dll"}"" {_modelDllName}";
+            string mkDirectoryCommand = $@"mkDir ""{Settings.Default[TargetFolder]}{"\\"}{_modelFolderName}""";
+            string moveCommand = $@"move ""{solutionDirectory}{"\\Debug\\"}{_modelDllName}"" ""{Settings.Default[TargetFolder]}{"\\"}{_modelFolderName}""";
             Console.WriteLine(mkDirectoryCommand);
             Console.WriteLine(moveCommand);
 
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.RedirectStandardError = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
+            Process cmd = new Process
+            {
+                StartInfo =
+                {
+                    FileName = "cmd.exe",
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                }
+            };
             cmd.Start();
-            cmd.StandardInput.WriteLine(msbuild + " " + solution);
+            cmd.StandardInput.WriteLine(msBuildCommand);
             cmd.StandardInput.WriteLine(renameCommand);
             cmd.StandardInput.WriteLine(mkDirectoryCommand);
             cmd.StandardInput.WriteLine(moveCommand);
@@ -243,33 +243,34 @@ namespace ReadDllForm
             //cmd.WaitForExit();
             Console.WriteLine(cmd.StandardOutput.ReadToEnd());
             Console.WriteLine(cmd.StandardError.ReadToEnd());
-            writeXML(parameterModelDir);
-        }
 
-        private static void writeXML(string fileName)
+            string xmlFileNamePath = $@"{Settings.Default[TargetFolder]}{"\\"}{_modelFolderName}{"\\"}{"modelXML.xml"}";
+            WriteXml(xmlFileNamePath);
+        }
+        private static void WriteXml(string fileName)
         {
             XmlTextWriter xWriter=new XmlTextWriter(fileName, Encoding.UTF8);
             xWriter.WriteStartElement("InSignal");
 
             xWriter.WriteStartElement("NumInSignals");
-            xWriter.WriteString(inputs.Count.ToString());
+            xWriter.WriteString(Inputs.Count.ToString());
             xWriter.WriteEndElement();
 
             xWriter.WriteStartElement("NumOutSignals");
-            xWriter.WriteString(outputs.Count.ToString());
+            xWriter.WriteString(Outputs.Count.ToString());
             xWriter.WriteEndElement();
 
-            for (int i = 0; i < inputs.Count; i++)
+            for (int i = 0; i < Inputs.Count; i++)
             {
                 xWriter.WriteStartElement("InSignal");
-                writeSignal(xWriter,i,inputs[i]);
+                WriteXmlSignal(xWriter,i,Inputs[i]);
                 xWriter.WriteEndElement();
             }
            
-            for (int i = 0; i < outputs.Count; i++)
+            for (int i = 0; i < Outputs.Count; i++)
             {
                 xWriter.WriteStartElement("OutSignal");
-                writeSignal(xWriter, i,outputs[i]);
+                WriteXmlSignal(xWriter, i,Outputs[i]);
                 xWriter.WriteEndElement();
             }
             xWriter.WriteEndElement();
@@ -279,8 +280,7 @@ namespace ReadDllForm
 
 
         }
-
-        private static void writeSignal(XmlTextWriter xWriter, int i,string name)
+        private static void WriteXmlSignal(XmlTextWriter xWriter, int i,string name)
         {
             xWriter.WriteStartElement("Name");
             xWriter.WriteString(name);
@@ -289,11 +289,10 @@ namespace ReadDllForm
             xWriter.WriteString(i.ToString());
             xWriter.WriteEndElement();
         }
-
         private static void ResetIOLists()
         {
-            inputs.Clear();
-            outputs.Clear();
+            Inputs.Clear();
+            Outputs.Clear();
         }
     }
 }
