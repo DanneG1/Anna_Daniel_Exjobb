@@ -56,7 +56,7 @@ namespace ReadDllForm
 
             Initialze();
             ReadXml();
-            Step();//kanske inte ska steppa här?
+            //Step();//kanske inte ska steppa här?
         }       
 
         #region dllFunctions
@@ -107,7 +107,7 @@ namespace ReadDllForm
                             port = Convert.ToInt32(reader.ReadString());
                         }
                         InSignal inSignal = new InSignal(port, Name, _path);
-                        inSignal.SetSignal(5);
+                        //inSignal.SetSignal(5);
                         inSignals.Add(inSignal);
 
 

@@ -81,6 +81,14 @@ namespace ReadDllForm
         private void HandleConnectionOpened()
         {
             labelHiCoreConnection.Text = "Connected";
+
+            List<string> name = _hiCore.GetChannelNames("").ToList();
+            foreach(var n in name)
+            {
+                Console.WriteLine(n);
+                Console.WriteLine(_hiCore.GetValue("", n));
+                //sätta värde _hicore.SetValue();
+            }
         }
 
         private void HandleConnectionClosed()
