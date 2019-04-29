@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HiQ.HiMacs.WCF">
+      <HintPath>..\..\..\..\..\..\..\..\HiQ\Bin\HiQ.HiMacs.WCF.dll</HintPath>
+    </Reference>
+    <Reference Include="HiServices">
+      <HintPath>..\..\..\..\..\..\..\..\HiQ\Bin\HiServices.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

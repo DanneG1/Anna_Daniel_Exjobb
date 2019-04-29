@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ReadDllForm.Properties;
+using HiQ.HiMacs.HiServices;
+using HiQ.HiMacs.WCF;
+using HiQ.HiMacs.WCF.Client;
 
 
 namespace ReadDllForm
@@ -25,12 +28,66 @@ namespace ReadDllForm
         private string _cppPath;
         private readonly Dictionary<string,SimulinkModel> _modelsDictionary=new Dictionary<string, SimulinkModel>();
         private SimulinkModel _selectedModel;
+        private HiQ.HiMacs.WCF.Client.HiCoreClient _hiCore;
 
         public Form1()
         {
             InitializeComponent();
             FillOutFieldsFromSettings();
+            
+            Load += (s, e) =>
+            {
+                if (!this.DesignMode)
+                {
+                    OpenHiCoreConnection();
+                }
+            };
         }
+
+        private void OpenHiCoreConnection()
+        {
+            try
+            {
+                if (_hiCore == null)
+                {
+                    _hiCore = new HiCoreClient();
+                    _hiCore.ConnectionOpened += OnHiCoreConnectionOpened;
+                    _hiCore.ConnectionClosed += OnHiCoreConnectionClosed;
+                }
+                _hiCore.Connect();
+            }
+            catch(Exception e)
+            {
+            }
+        }
+
+        private async void OnHiCoreConnectionOpened(object sender, EventArgs e)
+        {
+            await Task.Delay(5000);
+            ThreadSafeRequest(() => HandleConnectionOpened());
+        }
+        private async void OnHiCoreConnectionClosed(object sender, EventArgs e)
+        {
+            await Task.Delay(5000);
+            ThreadSafeRequest(() => HandleConnectionClosed());
+        }
+
+        private void ThreadSafeRequest(Action action)
+        {
+            BeginInvoke(new MethodInvoker(delegate { action(); }));
+
+        }
+
+        private void HandleConnectionOpened()
+        {
+            labelHiCoreConnection.Text = "Connected";
+        }
+
+        private void HandleConnectionClosed()
+        {
+            labelHiCoreConnection.Text = "Disconnected";
+        }
+
         private void FillOutFieldsFromSettings()
         {
             textBoxMsBuild.Text = Settings.Default[MsBuild].ToString();
@@ -123,6 +180,7 @@ namespace ReadDllForm
         }
         private void btnMSBuild_Click(object sender, EventArgs e)
         {
+            
             OpenFileDialog open = new OpenFileDialog();
             if (open.ShowDialog() == DialogResult.OK)
             {
@@ -179,6 +237,7 @@ namespace ReadDllForm
         }
         private void buttonConnectSignal_Click(object sender, EventArgs e)
         {
+            
             double value;
             if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text, out value))
             {
