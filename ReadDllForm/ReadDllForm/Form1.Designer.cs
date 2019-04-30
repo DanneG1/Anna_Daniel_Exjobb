@@ -47,6 +47,10 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listViewInSignals = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.worstRuntimeInfoLabel = new System.Windows.Forms.Label();
             this.worstTimeLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -54,8 +58,6 @@
             this.buttonRemoveModel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.listBoxOutSignals = new System.Windows.Forms.ListBox();
-            this.listBoxInputs = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.componentListBox = new System.Windows.Forms.ListBox();
             this.buttonConnectSignal = new System.Windows.Forms.Button();
@@ -64,10 +66,10 @@
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listViewOutSignals = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -238,7 +240,7 @@
             this.tabPage1.Controls.Add(this.btnGenerateDll);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(901, 421);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
@@ -246,7 +248,8 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listView1);
+            this.tabPage2.Controls.Add(this.listViewOutSignals);
+            this.tabPage2.Controls.Add(this.listViewInSignals);
             this.tabPage2.Controls.Add(this.worstRuntimeInfoLabel);
             this.tabPage2.Controls.Add(this.worstTimeLabel);
             this.tabPage2.Controls.Add(this.button1);
@@ -254,8 +257,6 @@
             this.tabPage2.Controls.Add(this.buttonRemoveModel);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.listBoxOutSignals);
-            this.tabPage2.Controls.Add(this.listBoxInputs);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.componentListBox);
             this.tabPage2.Controls.Add(this.buttonConnectSignal);
@@ -266,11 +267,41 @@
             this.tabPage2.Controls.Add(this.buttonLoadModel);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(901, 421);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listViewInSignals
+            // 
+            this.listViewInSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listViewInSignals.FullRowSelect = true;
+            this.listViewInSignals.Location = new System.Drawing.Point(222, 107);
+            this.listViewInSignals.MultiSelect = false;
+            this.listViewInSignals.Name = "listViewInSignals";
+            this.listViewInSignals.Size = new System.Drawing.Size(341, 204);
+            this.listViewInSignals.TabIndex = 17;
+            this.listViewInSignals.UseCompatibleStateImageBehavior = false;
+            this.listViewInSignals.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 104;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.Width = 69;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Connection";
+            this.columnHeader3.Width = 183;
             // 
             // worstRuntimeInfoLabel
             // 
@@ -338,28 +369,6 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "In signals:";
             // 
-            // listBoxOutSignals
-            // 
-            this.listBoxOutSignals.FormattingEnabled = true;
-            this.listBoxOutSignals.HorizontalScrollbar = true;
-            this.listBoxOutSignals.ItemHeight = 16;
-            this.listBoxOutSignals.Location = new System.Drawing.Point(582, 107);
-            this.listBoxOutSignals.Name = "listBoxOutSignals";
-            this.listBoxOutSignals.ScrollAlwaysVisible = true;
-            this.listBoxOutSignals.Size = new System.Drawing.Size(306, 196);
-            this.listBoxOutSignals.TabIndex = 1;
-            // 
-            // listBoxInputs
-            // 
-            this.listBoxInputs.FormattingEnabled = true;
-            this.listBoxInputs.HorizontalScrollbar = true;
-            this.listBoxInputs.ItemHeight = 16;
-            this.listBoxInputs.Location = new System.Drawing.Point(253, 106);
-            this.listBoxInputs.Name = "listBoxInputs";
-            this.listBoxInputs.ScrollAlwaysVisible = true;
-            this.listBoxInputs.Size = new System.Drawing.Size(301, 196);
-            this.listBoxInputs.TabIndex = 0;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -374,7 +383,7 @@
             this.componentListBox.FormattingEnabled = true;
             this.componentListBox.ItemHeight = 16;
             this.componentListBox.Location = new System.Drawing.Point(11, 107);
-            this.componentListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.componentListBox.Margin = new System.Windows.Forms.Padding(2);
             this.componentListBox.Name = "componentListBox";
             this.componentListBox.Size = new System.Drawing.Size(193, 196);
             this.componentListBox.TabIndex = 7;
@@ -436,34 +445,34 @@
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // listView1
+            // listViewOutSignals
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(210, 169);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(429, 142);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewOutSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listViewOutSignals.FullRowSelect = true;
+            this.listViewOutSignals.Location = new System.Drawing.Point(570, 107);
+            this.listViewOutSignals.MultiSelect = false;
+            this.listViewOutSignals.Name = "listViewOutSignals";
+            this.listViewOutSignals.Size = new System.Drawing.Size(309, 204);
+            this.listViewOutSignals.TabIndex = 18;
+            this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
+            this.listViewOutSignals.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // columnHeader4
             // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 152;
+            this.columnHeader4.Text = "Name";
+            this.columnHeader4.Width = 129;
             // 
-            // columnHeader2
+            // columnHeader5
             // 
-            this.columnHeader2.Text = "Value";
-            this.columnHeader2.Width = 107;
+            this.columnHeader5.Text = "Value";
             // 
-            // columnHeader3
+            // columnHeader6
             // 
-            this.columnHeader3.Text = "Connection";
-            this.columnHeader3.Width = 183;
+            this.columnHeader6.Text = "Connection";
+            this.columnHeader6.Width = 130;
             // 
             // Form1
             // 
@@ -512,8 +521,6 @@
         private System.Windows.Forms.Button buttonLoadModel;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonStep;
-        private System.Windows.Forms.ListBox listBoxInputs;
-        private System.Windows.Forms.ListBox listBoxOutSignals;
         private System.Windows.Forms.Button buttonConnectSignal;
         private System.Windows.Forms.ListBox componentListBox;
         private System.Windows.Forms.Button buttonRemoveModel;
@@ -524,10 +531,14 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label worstTimeLabel;
         private System.Windows.Forms.Label worstRuntimeInfoLabel;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewInSignals;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ListView listViewOutSignals;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
 
