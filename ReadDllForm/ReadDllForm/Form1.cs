@@ -334,7 +334,6 @@ namespace ReadDllForm
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             SimulinkModel model = new SimulinkModel(textBoxDll.Text,_hiCore);
-            model.stepped += onStepped;
             if (!_modelsDictionary.ContainsKey(model.GetName()))
             {
                 componentListBox.Items.Add(model.GetName());
@@ -349,10 +348,7 @@ namespace ReadDllForm
                 }
             }
         }
-        private void onStepped(object source,EventArgs e)
-        {
-            ShowSignals(_selectedModel);
-        }
+  
         private void buttonStep_Click(object sender, EventArgs e)
         {
             if (componentListBox.SelectedIndex != -1)
@@ -373,14 +369,22 @@ namespace ReadDllForm
             {
                 _selectedModel.setRunning(false);
                 buttonRunModel.Text = "Run model";
+                timerUpdateLists.Stop();
+                _selectedModel.StopRun();
             }
             else
             {
                 _selectedModel.setRunning(true);
                 buttonRunModel.Text = "Stop model";
                 _selectedModel.setSleep(Convert.ToInt32(textBoxFrequency.Text));
-                _selectedModel.run();
+                _selectedModel.Run();
+                timerUpdateLists.Start();
             }
+        }
+
+        private void timerUpdateLists_Tick(object sender, EventArgs e)
+        {
+            ShowSignals(_selectedModel);
         }
     }
 }

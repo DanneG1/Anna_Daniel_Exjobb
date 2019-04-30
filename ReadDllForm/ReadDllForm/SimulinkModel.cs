@@ -25,10 +25,10 @@ namespace ReadDllForm
         private readonly string _worstTime;
         private Boolean running = false;
         private int sleep;
+        public Thread threadRun;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
-        public event EventHandler<EventArgs> stepped;
 
         #region Dlldelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -205,34 +205,38 @@ namespace ReadDllForm
             }
             return timer.Max().ToString();
         }
-        public void run()
+        public void Run()
         {
             //skapa någon slags funktion som kör samtidigt som hiCore är igång på samma freq
-            Thread t = new Thread(RunFunc)
+            threadRun = new Thread(RunFunc)
             {
                 IsBackground = true
             };
             try
             {
-                t.Start();
+                threadRun.Start();
             }
             catch(Exception e){}
             
         }
-        public virtual void onStepped()
+
+        public void StopRun()
         {
-            stepped?.Invoke(this, new EventArgs());
+            threadRun.Abort();
         }
+
 
         public void RunFunc()
         {
             while (running)
             {
                 Step();
-                onStepped();
                 Thread.Sleep(sleep);
             }
         }
+
+
+
         #endregion
         ~SimulinkModel()
         {
