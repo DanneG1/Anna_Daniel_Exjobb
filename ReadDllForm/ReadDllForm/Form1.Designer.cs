@@ -127,7 +127,7 @@
             // 
             // btnGenerateDll
             // 
-            this.btnGenerateDll.Location = new System.Drawing.Point(672, 313);
+            this.btnGenerateDll.Location = new System.Drawing.Point(679, 250);
             this.btnGenerateDll.Name = "btnGenerateDll";
             this.btnGenerateDll.Size = new System.Drawing.Size(97, 30);
             this.btnGenerateDll.TabIndex = 4;
@@ -188,7 +188,7 @@
             // 
             // textBoxModelName
             // 
-            this.textBoxModelName.Location = new System.Drawing.Point(412, 317);
+            this.textBoxModelName.Location = new System.Drawing.Point(419, 258);
             this.textBoxModelName.Name = "textBoxModelName";
             this.textBoxModelName.Size = new System.Drawing.Size(243, 22);
             this.textBoxModelName.TabIndex = 12;
@@ -201,7 +201,7 @@
             this.groupBox1.Controls.Add(this.btnMSBuild);
             this.groupBox1.Controls.Add(this.btnTargetFolder);
             this.groupBox1.Controls.Add(this.textBoxMsBuild);
-            this.groupBox1.Location = new System.Drawing.Point(8, 8);
+            this.groupBox1.Location = new System.Drawing.Point(22, 24);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(358, 185);
             this.groupBox1.TabIndex = 13;
@@ -211,7 +211,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(317, 320);
+            this.label1.Location = new System.Drawing.Point(324, 261);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 14;
@@ -223,7 +223,7 @@
             this.groupBox2.Controls.Add(this.btnHeaderFile);
             this.groupBox2.Controls.Add(this.btnCppFile);
             this.groupBox2.Controls.Add(this.txtBoxCpp);
-            this.groupBox2.Location = new System.Drawing.Point(406, 8);
+            this.groupBox2.Location = new System.Drawing.Point(413, 24);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(363, 185);
             this.groupBox2.TabIndex = 15;
@@ -251,7 +251,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage1.Size = new System.Drawing.Size(930, 421);
+            this.tabPage1.Size = new System.Drawing.Size(930, 555);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -306,9 +306,9 @@
             this.panelModelAndSignals.Controls.Add(this.buttonConnectInSignal);
             this.panelModelAndSignals.Controls.Add(this.label4);
             this.panelModelAndSignals.Enabled = false;
-            this.panelModelAndSignals.Location = new System.Drawing.Point(12, 165);
+            this.panelModelAndSignals.Location = new System.Drawing.Point(12, 168);
             this.panelModelAndSignals.Name = "panelModelAndSignals";
-            this.panelModelAndSignals.Size = new System.Drawing.Size(912, 276);
+            this.panelModelAndSignals.Size = new System.Drawing.Size(910, 276);
             this.panelModelAndSignals.TabIndex = 20;
             // 
             // componentListBox
@@ -363,7 +363,7 @@
             // 
             // buttonRemoveModel
             // 
-            this.buttonRemoveModel.Location = new System.Drawing.Point(13, 239);
+            this.buttonRemoveModel.Location = new System.Drawing.Point(79, 239);
             this.buttonRemoveModel.Name = "buttonRemoveModel";
             this.buttonRemoveModel.Size = new System.Drawing.Size(124, 30);
             this.buttonRemoveModel.TabIndex = 12;
@@ -373,7 +373,7 @@
             // 
             // btnConnectOutsignal
             // 
-            this.btnConnectOutsignal.Location = new System.Drawing.Point(750, 239);
+            this.btnConnectOutsignal.Location = new System.Drawing.Point(742, 239);
             this.btnConnectOutsignal.Name = "btnConnectOutsignal";
             this.btnConnectOutsignal.Size = new System.Drawing.Size(153, 30);
             this.btnConnectOutsignal.TabIndex = 14;
@@ -388,7 +388,7 @@
             this.columnHeader2,
             this.columnHeader3});
             this.listViewInSignals.FullRowSelect = true;
-            this.listViewInSignals.Location = new System.Drawing.Point(226, 37);
+            this.listViewInSignals.Location = new System.Drawing.Point(238, 37);
             this.listViewInSignals.MultiSelect = false;
             this.listViewInSignals.Name = "listViewInSignals";
             this.listViewInSignals.Size = new System.Drawing.Size(320, 200);
@@ -414,7 +414,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(223, 7);
+            this.label3.Location = new System.Drawing.Point(235, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 10;
@@ -422,7 +422,7 @@
             // 
             // buttonConnectInSignal
             // 
-            this.buttonConnectInSignal.Location = new System.Drawing.Point(388, 239);
+            this.buttonConnectInSignal.Location = new System.Drawing.Point(400, 239);
             this.buttonConnectInSignal.Name = "buttonConnectInSignal";
             this.buttonConnectInSignal.Size = new System.Drawing.Size(159, 30);
             this.buttonConnectInSignal.TabIndex = 7;
@@ -433,7 +433,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(572, 7);
+            this.label4.Location = new System.Drawing.Point(572, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 17);
             this.label4.TabIndex = 11;
@@ -536,7 +536,7 @@
             this.groupBox3.Controls.Add(this.textBoxFrequency);
             this.groupBox3.Controls.Add(this.worstTimeLabel);
             this.groupBox3.Controls.Add(this.worstRuntimeInfoLabel);
-            this.groupBox3.Location = new System.Drawing.Point(590, 16);
+            this.groupBox3.Location = new System.Drawing.Point(587, 16);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(308, 132);
             this.groupBox3.TabIndex = 23;
