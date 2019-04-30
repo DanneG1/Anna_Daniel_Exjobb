@@ -47,6 +47,8 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.worstRuntimeInfoLabel = new System.Windows.Forms.Label();
+            this.worstTimeLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.labelHiCoreConnection = new System.Windows.Forms.Label();
             this.buttonRemoveModel = new System.Windows.Forms.Button();
@@ -62,8 +64,10 @@
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.worstTimeLabel = new System.Windows.Forms.Label();
-            this.worstRuntimeInfoLabel = new System.Windows.Forms.Label();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -73,10 +77,9 @@
             // 
             // btnHeaderFile
             // 
-            this.btnHeaderFile.Location = new System.Drawing.Point(366, 52);
-            this.btnHeaderFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnHeaderFile.Location = new System.Drawing.Point(266, 35);
             this.btnHeaderFile.Name = "btnHeaderFile";
-            this.btnHeaderFile.Size = new System.Drawing.Size(103, 45);
+            this.btnHeaderFile.Size = new System.Drawing.Size(75, 30);
             this.btnHeaderFile.TabIndex = 0;
             this.btnHeaderFile.Text = ".h";
             this.btnHeaderFile.UseVisualStyleBackColor = true;
@@ -84,10 +87,9 @@
             // 
             // btnCppFile
             // 
-            this.btnCppFile.Location = new System.Drawing.Point(366, 128);
-            this.btnCppFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCppFile.Location = new System.Drawing.Point(266, 85);
             this.btnCppFile.Name = "btnCppFile";
-            this.btnCppFile.Size = new System.Drawing.Size(103, 45);
+            this.btnCppFile.Size = new System.Drawing.Size(75, 30);
             this.btnCppFile.TabIndex = 1;
             this.btnCppFile.Text = ".cpp";
             this.btnCppFile.UseVisualStyleBackColor = true;
@@ -99,26 +101,23 @@
             // 
             // txtBoxH
             // 
-            this.txtBoxH.Location = new System.Drawing.Point(8, 58);
-            this.txtBoxH.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxH.Location = new System.Drawing.Point(6, 39);
             this.txtBoxH.Name = "txtBoxH";
-            this.txtBoxH.Size = new System.Drawing.Size(333, 29);
+            this.txtBoxH.Size = new System.Drawing.Size(243, 22);
             this.txtBoxH.TabIndex = 2;
             // 
             // txtBoxCpp
             // 
-            this.txtBoxCpp.Location = new System.Drawing.Point(8, 134);
-            this.txtBoxCpp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxCpp.Location = new System.Drawing.Point(6, 89);
             this.txtBoxCpp.Name = "txtBoxCpp";
-            this.txtBoxCpp.Size = new System.Drawing.Size(333, 29);
+            this.txtBoxCpp.Size = new System.Drawing.Size(243, 22);
             this.txtBoxCpp.TabIndex = 3;
             // 
             // btnGenerateDll
             // 
-            this.btnGenerateDll.Location = new System.Drawing.Point(924, 470);
-            this.btnGenerateDll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGenerateDll.Location = new System.Drawing.Point(672, 313);
             this.btnGenerateDll.Name = "btnGenerateDll";
-            this.btnGenerateDll.Size = new System.Drawing.Size(133, 45);
+            this.btnGenerateDll.Size = new System.Drawing.Size(97, 30);
             this.btnGenerateDll.TabIndex = 4;
             this.btnGenerateDll.Text = "Generate Dll";
             this.btnGenerateDll.UseVisualStyleBackColor = true;
@@ -126,18 +125,16 @@
             // 
             // textBoxSolution
             // 
-            this.textBoxSolution.Location = new System.Drawing.Point(8, 58);
-            this.textBoxSolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxSolution.Location = new System.Drawing.Point(6, 39);
             this.textBoxSolution.Name = "textBoxSolution";
-            this.textBoxSolution.Size = new System.Drawing.Size(342, 29);
+            this.textBoxSolution.Size = new System.Drawing.Size(250, 22);
             this.textBoxSolution.TabIndex = 6;
             // 
             // btnSolution
             // 
-            this.btnSolution.Location = new System.Drawing.Point(380, 52);
-            this.btnSolution.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSolution.Location = new System.Drawing.Point(276, 35);
             this.btnSolution.Name = "btnSolution";
-            this.btnSolution.Size = new System.Drawing.Size(103, 45);
+            this.btnSolution.Size = new System.Drawing.Size(75, 30);
             this.btnSolution.TabIndex = 7;
             this.btnSolution.Text = "Solution";
             this.btnSolution.UseVisualStyleBackColor = true;
@@ -145,10 +142,9 @@
             // 
             // btnMSBuild
             // 
-            this.btnMSBuild.Location = new System.Drawing.Point(380, 130);
-            this.btnMSBuild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMSBuild.Location = new System.Drawing.Point(276, 87);
             this.btnMSBuild.Name = "btnMSBuild";
-            this.btnMSBuild.Size = new System.Drawing.Size(103, 45);
+            this.btnMSBuild.Size = new System.Drawing.Size(75, 30);
             this.btnMSBuild.TabIndex = 8;
             this.btnMSBuild.Text = "MSBuild";
             this.btnMSBuild.UseVisualStyleBackColor = true;
@@ -156,26 +152,23 @@
             // 
             // textBoxMsBuild
             // 
-            this.textBoxMsBuild.Location = new System.Drawing.Point(8, 134);
-            this.textBoxMsBuild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxMsBuild.Location = new System.Drawing.Point(6, 89);
             this.textBoxMsBuild.Name = "textBoxMsBuild";
-            this.textBoxMsBuild.Size = new System.Drawing.Size(342, 29);
+            this.textBoxMsBuild.Size = new System.Drawing.Size(250, 22);
             this.textBoxMsBuild.TabIndex = 9;
             // 
             // textBoxTarget
             // 
-            this.textBoxTarget.Location = new System.Drawing.Point(8, 213);
-            this.textBoxTarget.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxTarget.Location = new System.Drawing.Point(6, 142);
             this.textBoxTarget.Name = "textBoxTarget";
-            this.textBoxTarget.Size = new System.Drawing.Size(342, 29);
+            this.textBoxTarget.Size = new System.Drawing.Size(250, 22);
             this.textBoxTarget.TabIndex = 11;
             // 
             // btnTargetFolder
             // 
-            this.btnTargetFolder.Location = new System.Drawing.Point(380, 207);
-            this.btnTargetFolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnTargetFolder.Location = new System.Drawing.Point(276, 138);
             this.btnTargetFolder.Name = "btnTargetFolder";
-            this.btnTargetFolder.Size = new System.Drawing.Size(103, 45);
+            this.btnTargetFolder.Size = new System.Drawing.Size(75, 30);
             this.btnTargetFolder.TabIndex = 10;
             this.btnTargetFolder.Text = "Target";
             this.btnTargetFolder.UseVisualStyleBackColor = true;
@@ -183,10 +176,9 @@
             // 
             // textBoxModelName
             // 
-            this.textBoxModelName.Location = new System.Drawing.Point(566, 476);
-            this.textBoxModelName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxModelName.Location = new System.Drawing.Point(412, 317);
             this.textBoxModelName.Name = "textBoxModelName";
-            this.textBoxModelName.Size = new System.Drawing.Size(333, 29);
+            this.textBoxModelName.Size = new System.Drawing.Size(243, 22);
             this.textBoxModelName.TabIndex = 12;
             // 
             // groupBox1
@@ -197,11 +189,9 @@
             this.groupBox1.Controls.Add(this.btnMSBuild);
             this.groupBox1.Controls.Add(this.btnTargetFolder);
             this.groupBox1.Controls.Add(this.textBoxMsBuild);
-            this.groupBox1.Location = new System.Drawing.Point(11, 12);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(8, 8);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(492, 278);
+            this.groupBox1.Size = new System.Drawing.Size(358, 185);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
@@ -209,10 +199,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(436, 480);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(317, 320);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 25);
+            this.label1.Size = new System.Drawing.Size(89, 17);
             this.label1.TabIndex = 14;
             this.label1.Text = "Model name:";
             // 
@@ -222,11 +211,9 @@
             this.groupBox2.Controls.Add(this.btnHeaderFile);
             this.groupBox2.Controls.Add(this.btnCppFile);
             this.groupBox2.Controls.Add(this.txtBoxCpp);
-            this.groupBox2.Location = new System.Drawing.Point(558, 12);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(406, 8);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(499, 278);
+            this.groupBox2.Size = new System.Drawing.Size(363, 185);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Generated Code Files";
@@ -237,10 +224,9 @@
             this.tabControlInputs.Controls.Add(this.tabPage2);
             this.tabControlInputs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlInputs.Location = new System.Drawing.Point(0, 0);
-            this.tabControlInputs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlInputs.Name = "tabControlInputs";
             this.tabControlInputs.SelectedIndex = 0;
-            this.tabControlInputs.Size = new System.Drawing.Size(1250, 675);
+            this.tabControlInputs.Size = new System.Drawing.Size(909, 450);
             this.tabControlInputs.TabIndex = 16;
             // 
             // tabPage1
@@ -250,17 +236,17 @@
             this.tabPage1.Controls.Add(this.textBoxModelName);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.btnGenerateDll);
-            this.tabPage1.Location = new System.Drawing.Point(4, 33);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1242, 638);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(901, 421);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Controls.Add(this.worstRuntimeInfoLabel);
             this.tabPage2.Controls.Add(this.worstTimeLabel);
             this.tabPage2.Controls.Add(this.button1);
@@ -278,21 +264,39 @@
             this.tabPage2.Controls.Add(this.labelModelLoad);
             this.tabPage2.Controls.Add(this.textBoxDll);
             this.tabPage2.Controls.Add(this.buttonLoadModel);
-            this.tabPage2.Location = new System.Drawing.Point(4, 33);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1242, 638);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(901, 421);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // worstRuntimeInfoLabel
+            // 
+            this.worstRuntimeInfoLabel.AutoSize = true;
+            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(253, 363);
+            this.worstRuntimeInfoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.worstRuntimeInfoLabel.Name = "worstRuntimeInfoLabel";
+            this.worstRuntimeInfoLabel.Size = new System.Drawing.Size(100, 17);
+            this.worstRuntimeInfoLabel.TabIndex = 16;
+            this.worstRuntimeInfoLabel.Text = "Worst runtime:";
+            // 
+            // worstTimeLabel
+            // 
+            this.worstTimeLabel.AutoSize = true;
+            this.worstTimeLabel.Location = new System.Drawing.Point(359, 363);
+            this.worstTimeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.worstTimeLabel.Name = "worstTimeLabel";
+            this.worstTimeLabel.Size = new System.Drawing.Size(13, 17);
+            this.worstTimeLabel.TabIndex = 15;
+            this.worstTimeLabel.Text = "-";
+            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1011, 476);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(735, 317);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(210, 45);
+            this.button1.Size = new System.Drawing.Size(153, 30);
             this.button1.TabIndex = 14;
             this.button1.Text = "Connect to channel";
             this.button1.UseVisualStyleBackColor = true;
@@ -301,18 +305,16 @@
             // labelHiCoreConnection
             // 
             this.labelHiCoreConnection.AutoSize = true;
-            this.labelHiCoreConnection.Location = new System.Drawing.Point(839, 40);
-            this.labelHiCoreConnection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelHiCoreConnection.Location = new System.Drawing.Point(610, 27);
             this.labelHiCoreConnection.Name = "labelHiCoreConnection";
-            this.labelHiCoreConnection.Size = new System.Drawing.Size(0, 25);
+            this.labelHiCoreConnection.Size = new System.Drawing.Size(0, 17);
             this.labelHiCoreConnection.TabIndex = 13;
             // 
             // buttonRemoveModel
             // 
-            this.buttonRemoveModel.Location = new System.Drawing.Point(19, 476);
-            this.buttonRemoveModel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonRemoveModel.Location = new System.Drawing.Point(14, 317);
             this.buttonRemoveModel.Name = "buttonRemoveModel";
-            this.buttonRemoveModel.Size = new System.Drawing.Size(170, 45);
+            this.buttonRemoveModel.Size = new System.Drawing.Size(124, 30);
             this.buttonRemoveModel.TabIndex = 12;
             this.buttonRemoveModel.Text = "Remove model";
             this.buttonRemoveModel.UseVisualStyleBackColor = true;
@@ -321,20 +323,18 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(796, 124);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(579, 83);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 25);
+            this.label4.Size = new System.Drawing.Size(83, 17);
             this.label4.TabIndex = 11;
             this.label4.Text = "Out signals:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(348, 124);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(253, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 25);
+            this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 10;
             this.label3.Text = "In signals:";
             // 
@@ -342,52 +342,49 @@
             // 
             this.listBoxOutSignals.FormattingEnabled = true;
             this.listBoxOutSignals.HorizontalScrollbar = true;
-            this.listBoxOutSignals.ItemHeight = 24;
-            this.listBoxOutSignals.Location = new System.Drawing.Point(800, 160);
-            this.listBoxOutSignals.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxOutSignals.ItemHeight = 16;
+            this.listBoxOutSignals.Location = new System.Drawing.Point(582, 107);
             this.listBoxOutSignals.Name = "listBoxOutSignals";
             this.listBoxOutSignals.ScrollAlwaysVisible = true;
-            this.listBoxOutSignals.Size = new System.Drawing.Size(419, 292);
+            this.listBoxOutSignals.Size = new System.Drawing.Size(306, 196);
             this.listBoxOutSignals.TabIndex = 1;
             // 
             // listBoxInputs
             // 
             this.listBoxInputs.FormattingEnabled = true;
             this.listBoxInputs.HorizontalScrollbar = true;
-            this.listBoxInputs.ItemHeight = 24;
-            this.listBoxInputs.Location = new System.Drawing.Point(348, 159);
-            this.listBoxInputs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxInputs.ItemHeight = 16;
+            this.listBoxInputs.Location = new System.Drawing.Point(253, 106);
             this.listBoxInputs.Name = "listBoxInputs";
             this.listBoxInputs.ScrollAlwaysVisible = true;
-            this.listBoxInputs.Size = new System.Drawing.Size(412, 292);
+            this.listBoxInputs.Size = new System.Drawing.Size(301, 196);
             this.listBoxInputs.TabIndex = 0;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 128);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(11, 85);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 25);
+            this.label2.Size = new System.Drawing.Size(57, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "Models:";
             // 
             // componentListBox
             // 
             this.componentListBox.FormattingEnabled = true;
-            this.componentListBox.ItemHeight = 24;
-            this.componentListBox.Location = new System.Drawing.Point(15, 160);
+            this.componentListBox.ItemHeight = 16;
+            this.componentListBox.Location = new System.Drawing.Point(11, 107);
+            this.componentListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.componentListBox.Name = "componentListBox";
-            this.componentListBox.Size = new System.Drawing.Size(264, 292);
+            this.componentListBox.Size = new System.Drawing.Size(193, 196);
             this.componentListBox.TabIndex = 7;
             this.componentListBox.SelectedIndexChanged += new System.EventHandler(this.componentListBox_SelectedIndexChanged);
             // 
             // buttonConnectSignal
             // 
-            this.buttonConnectSignal.Location = new System.Drawing.Point(543, 476);
-            this.buttonConnectSignal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonConnectSignal.Location = new System.Drawing.Point(395, 317);
             this.buttonConnectSignal.Name = "buttonConnectSignal";
-            this.buttonConnectSignal.Size = new System.Drawing.Size(219, 45);
+            this.buttonConnectSignal.Size = new System.Drawing.Size(159, 30);
             this.buttonConnectSignal.TabIndex = 7;
             this.buttonConnectSignal.Text = "Connect to channel";
             this.buttonConnectSignal.UseVisualStyleBackColor = true;
@@ -395,10 +392,9 @@
             // 
             // buttonStep
             // 
-            this.buttonStep.Location = new System.Drawing.Point(1125, 574);
-            this.buttonStep.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonStep.Location = new System.Drawing.Point(818, 383);
             this.buttonStep.Name = "buttonStep";
-            this.buttonStep.Size = new System.Drawing.Size(103, 45);
+            this.buttonStep.Size = new System.Drawing.Size(75, 30);
             this.buttonStep.TabIndex = 6;
             this.buttonStep.Text = "Step";
             this.buttonStep.UseVisualStyleBackColor = true;
@@ -406,10 +402,9 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(553, 34);
-            this.buttonLoad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLoad.Location = new System.Drawing.Point(402, 23);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(133, 45);
+            this.buttonLoad.Size = new System.Drawing.Size(97, 30);
             this.buttonLoad.TabIndex = 3;
             this.buttonLoad.Text = "Load model";
             this.buttonLoad.UseVisualStyleBackColor = true;
@@ -418,57 +413,64 @@
             // labelModelLoad
             // 
             this.labelModelLoad.AutoSize = true;
-            this.labelModelLoad.Location = new System.Drawing.Point(11, 45);
-            this.labelModelLoad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelModelLoad.Location = new System.Drawing.Point(8, 30);
             this.labelModelLoad.Name = "labelModelLoad";
-            this.labelModelLoad.Size = new System.Drawing.Size(120, 25);
+            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
             this.labelModelLoad.TabIndex = 2;
             this.labelModelLoad.Text = "Model (.dll) :";
             // 
             // textBoxDll
             // 
-            this.textBoxDll.Location = new System.Drawing.Point(138, 40);
-            this.textBoxDll.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxDll.Location = new System.Drawing.Point(100, 27);
             this.textBoxDll.Name = "textBoxDll";
-            this.textBoxDll.Size = new System.Drawing.Size(294, 29);
+            this.textBoxDll.Size = new System.Drawing.Size(215, 22);
             this.textBoxDll.TabIndex = 1;
             // 
             // buttonLoadModel
             // 
-            this.buttonLoadModel.Location = new System.Drawing.Point(441, 34);
-            this.buttonLoadModel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonLoadModel.Location = new System.Drawing.Point(321, 23);
             this.buttonLoadModel.Name = "buttonLoadModel";
-            this.buttonLoadModel.Size = new System.Drawing.Size(103, 45);
+            this.buttonLoadModel.Size = new System.Drawing.Size(75, 30);
             this.buttonLoadModel.TabIndex = 0;
             this.buttonLoadModel.Text = "Browse..";
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // worstTimeLabel
+            // listView1
             // 
-            this.worstTimeLabel.AutoSize = true;
-            this.worstTimeLabel.Location = new System.Drawing.Point(493, 544);
-            this.worstTimeLabel.Name = "worstTimeLabel";
-            this.worstTimeLabel.Size = new System.Drawing.Size(19, 25);
-            this.worstTimeLabel.TabIndex = 15;
-            this.worstTimeLabel.Text = "-";
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(210, 169);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(429, 142);
+            this.listView1.TabIndex = 17;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // worstRuntimeInfoLabel
+            // columnHeader1
             // 
-            this.worstRuntimeInfoLabel.AutoSize = true;
-            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(348, 544);
-            this.worstRuntimeInfoLabel.Name = "worstRuntimeInfoLabel";
-            this.worstRuntimeInfoLabel.Size = new System.Drawing.Size(139, 25);
-            this.worstRuntimeInfoLabel.TabIndex = 16;
-            this.worstRuntimeInfoLabel.Text = "Worst runtime:";
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 152;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            this.columnHeader2.Width = 107;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Connection";
+            this.columnHeader3.Width = 183;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1250, 675);
+            this.ClientSize = new System.Drawing.Size(909, 450);
             this.Controls.Add(this.tabControlInputs);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "HiModels";
             this.groupBox1.ResumeLayout(false);
@@ -522,6 +524,10 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label worstTimeLabel;
         private System.Windows.Forms.Label worstRuntimeInfoLabel;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }
 

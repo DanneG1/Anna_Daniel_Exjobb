@@ -133,7 +133,7 @@ namespace ReadDllForm
                 ListViewItem listViewItem=new ListViewItem(name);
                 listViewItem.SubItems.Add(value.ToString());
                 listViewItem.SubItems.Add(connectedChannel);
-                listViewInSignals.Items.Add(listViewItem);
+                listView1.Items.Add(listViewItem);
                 
 
                 listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal()+"\t"+model.GetInSignals()[i].GetChannelName());
