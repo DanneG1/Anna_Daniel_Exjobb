@@ -13,7 +13,7 @@ namespace ReadDllForm
         private readonly int _portNumber;
         private readonly string _portName;
         private string _channelName = "-";
-        private HiCoreClient _hiCore;
+        private readonly HiCoreClient _hiCore;
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -50,11 +50,7 @@ namespace ReadDllForm
         }
         #endregion
 
-        public void PrintSignal()
-        {
-            Console.WriteLine("Name =" + _portName);
-            Console.WriteLine("Port= " + _portNumber);
-        }
+
         public string GetSignalAsString()
         {
             return _portName + "\t" + GetSignal() + Environment.NewLine;

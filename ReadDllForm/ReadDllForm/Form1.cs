@@ -20,6 +20,8 @@ namespace ReadDllForm
 {
     public partial class Form1 : Form
     {
+        private const string ConnectedString = "ConnectedString";
+        private const string NotConnectedString = "Disconnected";
         private const string Solution = "Solution";
         private const string MsBuild = "MsBuild";
         private const string TargetFolder = "TargetFolder";
@@ -81,8 +83,9 @@ namespace ReadDllForm
 
         private void HandleConnectionOpened()
         {
+            timerConnect.Stop();
             labelHiCoreConnection.ForeColor = Color.Green;
-            labelHiCoreConnection.Text = "Connected";
+            labelHiCoreConnection.Text = ConnectedString;
             buttonLoadModel.Enabled = true;
             panelModelAndSignals.Enabled = true;
 
@@ -92,9 +95,10 @@ namespace ReadDllForm
         {
 
             labelHiCoreConnection.ForeColor = Color.Red;
-            labelHiCoreConnection.Text = "Disconnected";
+            labelHiCoreConnection.Text = NotConnectedString;
             buttonLoadModel.Enabled = false;
             panelModelAndSignals.Enabled = false;
+            timerConnect.Start();
         }
 
         private void FillOutFieldsFromSettings()
@@ -336,14 +340,7 @@ namespace ReadDllForm
             {
                 componentListBox.Items.Add(model.GetName());
                 _modelsDictionary.Add(model.GetName(), model);
-                if (model.getRunning())
-                {
-                    buttonRunModel.Text = "Stop model";
-                }
-                else
-                {
-                    buttonRunModel.Text = "Run model";
-                }
+                buttonRunModel.Text = model.getRunning() ? "Stop model" : "Run model";
             }
         }
   
@@ -366,14 +363,14 @@ namespace ReadDllForm
             if (_selectedModel.getRunning())
             {
                 _selectedModel.setRunning(false);
-                buttonRunModel.Text = "Run model";
+                buttonRunModel.Text = @"Run model";
                 timerUpdateLists.Stop();
                 _selectedModel.StopRun();
             }
             else
             {
                 _selectedModel.setRunning(true);
-                buttonRunModel.Text = "Stop model";
+                buttonRunModel.Text = @"Stop model";
                 string rate = textBoxFrequency.Text;
                 if (rate.Contains("."))
                 {
@@ -390,6 +387,14 @@ namespace ReadDllForm
         private void timerUpdateLists_Tick(object sender, EventArgs e)
         {
             ShowSignals(_selectedModel);
+        }
+
+        private void timerConnect_Tick(object sender, EventArgs e)
+        {
+            if (labelHiCoreConnection.Text == NotConnectedString)
+            {
+                OpenHiCoreConnection();
+            }
         }
     }
 }

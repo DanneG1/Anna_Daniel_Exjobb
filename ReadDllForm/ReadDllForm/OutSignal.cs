@@ -11,21 +11,21 @@ namespace ReadDllForm
     class OutSignal:ISignal
     {
         private IntPtr pDll;
-        public int portNumber;
-        public string portName;
+        private readonly int _portNumber;
+        private readonly string _portName;
         private string _channelName="-";
-        private HiCoreClient _hiCore;
+        private readonly HiCoreClient _hiCore;
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate double getOutputs(int port);
         #endregion
 
-        public OutSignal(int port, string Name, string path,HiCoreClient hiCore)
+        public OutSignal(int port, string name, string path,HiCoreClient hiCore)
         {
             _hiCore = hiCore;
-            portNumber = port;
-            portName = Name;
+            _portNumber = port;
+            _portName = name;
             pDll = NativeMethods.LoadLibrary(path);
         }
 
@@ -36,7 +36,7 @@ namespace ReadDllForm
             getOutputs GetOutputs =
                 (getOutputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(getOutputs));
 
-            return GetOutputs(portNumber);
+            return GetOutputs(_portNumber);
         }
 
         public void SetSignal(double value)
@@ -49,12 +49,12 @@ namespace ReadDllForm
 
         public string GetSignalAsString()
         {
-            return portName + "\t" + GetSignal() + Environment.NewLine;
+            return _portName + "\t" + GetSignal() + Environment.NewLine;
         }
 
         public string GetSignalName()
         {
-            return portName;
+            return _portName;
         }
 
         public void SetChannelName(string channelName)
