@@ -22,6 +22,8 @@ namespace ReadDllForm
         private readonly string _name;
         private HiCoreClient _hiCore;
         private readonly string _worstTime;
+        private Boolean running = false;
+        private int sleep;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
@@ -53,6 +55,22 @@ namespace ReadDllForm
         {
             return _worstTime;
         }
+        public void setRunning(Boolean state)
+        {
+            running = state;
+        }
+        public Boolean getRunning()
+        {
+            return running;
+        }
+        public void setSleep(int sleepy)
+        {
+            sleep = sleepy;
+        }
+        public double getSleep()
+        {
+            return sleep;
+        }
 
         #endregion
 
@@ -67,8 +85,6 @@ namespace ReadDllForm
             Initialze();
             ReadXml();
             _worstTime = findWorstTime();
-
-            //Step();//kanske inte ska steppa här?
         }
 
         #region dllFunctions
@@ -171,17 +187,30 @@ namespace ReadDllForm
         }
         public string findWorstTime()
         {
-            List<TimeSpan> timer = new List<TimeSpan>();
-            for (int i = 0; i < 10; ++i)
+            List<double> timer = new List<double>();
+            for (int i = 0; i < 11; ++i)
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
                 Step();
                 sw.Stop();
                 Console.WriteLine(sw.Elapsed);
-                timer.Add(sw.Elapsed);
+                //Första tiden när första modellen laddas in är orimligt hög, sparar därför endast efter i>0
+                if (i > 0)
+                {
+                    timer.Add(sw.Elapsed.TotalMilliseconds);
+                }
             }
             return timer.Max().ToString();
+        }
+        public void run()
+        {
+            //skapa någon slags funktion som kör samtidigt som hiCore är igång på samma freq
+            while (running)
+            {
+                Step();
+                System.Threading.Thread.Sleep(sleep);
+            }
         }
         #endregion
         ~SimulinkModel()
