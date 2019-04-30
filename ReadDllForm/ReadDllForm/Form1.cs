@@ -123,11 +123,11 @@ namespace ReadDllForm
             listBoxOutSignals.Items.Clear();
             for (int i = 0; i < model.GetInSignals().Count; i++)
             {
-                listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal());
+                listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal()+"\t"+model.GetInSignals()[i].GetChannelName());
             }
             for (int i = 0; i < model.GetOutSignals().Count; i++)
             {
-                listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal());
+                listBoxOutSignals.Items.Add(model.GetOutSignals()[i].GetSignalName() + "\t\t" + model.GetOutSignals()[i].GetSignal()+ "\t" + model.GetOutSignals()[i].GetChannelName());
             }  
         }
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -246,12 +246,23 @@ namespace ReadDllForm
         private void buttonConnectSignal_Click(object sender, EventArgs e)
         {
             
+            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"));
+           // hiCoreChannels.Show();
+            var result = hiCoreChannels.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string channelName = hiCoreChannels.selectedChannel;
+                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetChannelName(channelName);
+                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].update();
+                ShowSignals(_selectedModel);
+            }
+            /*
             double value;
             if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text, out value))
             {
                 _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
                 ShowSignals(_selectedModel);
-            }
+            }*/
         }
         private void buttonLoadModel_Click(object sender, EventArgs e)
         {
@@ -271,7 +282,7 @@ namespace ReadDllForm
         }
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            SimulinkModel model = new SimulinkModel(textBoxDll.Text);
+            SimulinkModel model = new SimulinkModel(textBoxDll.Text,_hiCore);
             if (!_modelsDictionary.ContainsKey(model.GetName()))
             {
                 componentListBox.Items.Add(model.GetName());
@@ -287,9 +298,22 @@ namespace ReadDllForm
             }
             
         }
+
+
         #endregion
 
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"));
+            // hiCoreChannels.Show();
+            var result = hiCoreChannels.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string channelName = hiCoreChannels.selectedChannel;
+                _selectedModel.GetOutSignals()[listBoxOutSignals.SelectedIndex].SetChannelName(channelName);
+               
+                ShowSignals(_selectedModel);
+            }
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using HiQ.HiMacs.WCF.Client;
 
 namespace ReadDllForm
 {
@@ -12,14 +13,17 @@ namespace ReadDllForm
         private IntPtr pDll;
         public int portNumber;
         public string portName;
+        private string _channelName;
+        private HiCoreClient _hiCore;
 
         #region dllDelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         private delegate double getOutputs(int port);
         #endregion
 
-        public OutSignal(int port, string Name, string path)
+        public OutSignal(int port, string Name, string path,HiCoreClient hiCore)
         {
+            _hiCore = hiCore;
             portNumber = port;
             portName = Name;
             pDll = NativeMethods.LoadLibrary(path);
@@ -51,6 +55,22 @@ namespace ReadDllForm
         public string GetSignalName()
         {
             return portName;
+        }
+
+        public void SetChannelName(string channelName)
+        {
+            _channelName = channelName;
+        }
+
+        public void update()
+        {
+            _hiCore.SetValue("",_channelName,GetSignal());
+            //sätta
+        }
+
+        public string GetChannelName()
+        {
+            return _channelName;
         }
     }
 }

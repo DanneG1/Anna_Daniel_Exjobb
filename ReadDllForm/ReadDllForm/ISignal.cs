@@ -15,5 +15,10 @@ namespace ReadDllForm
         string GetSignalAsString();
 
         string GetSignalName();
+
+        void SetChannelName(string channelName);
+
+        void update();
+        string GetChannelName();
     }
 }

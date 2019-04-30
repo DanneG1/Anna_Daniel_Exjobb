@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using HiQ.HiMacs.WCF.Client;
 
 namespace ReadDllForm
 {
@@ -17,6 +18,7 @@ namespace ReadDllForm
         private readonly string _directoryPath;
         private readonly string _path;
         private readonly string _name;
+        private HiCoreClient _hiCore;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
@@ -47,8 +49,9 @@ namespace ReadDllForm
 
         #endregion
 
-        public SimulinkModel(string path)
+        public SimulinkModel(string path,HiCoreClient hicore)
         {
+            _hiCore = hicore;
             _pDll = NativeMethods.LoadLibrary(path);
             _path = path;
             _directoryPath = Path.GetDirectoryName(path);
@@ -70,10 +73,18 @@ namespace ReadDllForm
         }
         public void Step()
         {
+            foreach (var inSignal in inSignals)
+            {
+                inSignal.update();
+            }
             IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "step");
             step Step =
                 (step)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(step));
             Step();
+            foreach (var outSignal in outSignals)
+            {
+                outSignal.update();
+            }
         }
         private void Terminate()
         {
@@ -106,7 +117,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        InSignal inSignal = new InSignal(port, Name, _path);
+                        InSignal inSignal = new InSignal(port, Name, _path,_hiCore);
                         //inSignal.SetSignal(5);
                         inSignals.Add(inSignal);
 
@@ -126,7 +137,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        OutSignal outSignal = new OutSignal(port, Name, _path);
+                        OutSignal outSignal = new OutSignal(port, Name, _path,_hiCore);
                         outSignals.Add(outSignal);
                     }
                 }
