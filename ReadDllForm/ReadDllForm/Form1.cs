@@ -33,10 +33,7 @@ namespace ReadDllForm
         public Form1()
         {
             InitializeComponent();
-            //listViewInSignals.Columns.Add("Name",20,HorizontalAlignment.Left);
-            //listViewInSignals.Columns.Add("Value",20, HorizontalAlignment.Left);
-            //listViewInSignals.Columns.Add("HiCChannel",20, HorizontalAlignment.Left);
-            
+
             FillOutFieldsFromSettings();
             
             Load += (s, e) =>
@@ -141,10 +138,8 @@ namespace ReadDllForm
                 listViewOutSignals.Items.Add(listViewItem);
                 
             }
-            listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+           
         }
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -318,7 +318,7 @@
             this.componentListBox.Location = new System.Drawing.Point(13, 37);
             this.componentListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.componentListBox.Name = "componentListBox";
-            this.componentListBox.Size = new System.Drawing.Size(193, 196);
+            this.componentListBox.Size = new System.Drawing.Size(190, 196);
             this.componentListBox.TabIndex = 7;
             this.componentListBox.SelectedIndexChanged += new System.EventHandler(this.componentListBox_SelectedIndexChanged);
             // 
@@ -338,10 +338,10 @@
             this.columnHeader5,
             this.columnHeader6});
             this.listViewOutSignals.FullRowSelect = true;
-            this.listViewOutSignals.Location = new System.Drawing.Point(575, 31);
+            this.listViewOutSignals.Location = new System.Drawing.Point(575, 37);
             this.listViewOutSignals.MultiSelect = false;
             this.listViewOutSignals.Name = "listViewOutSignals";
-            this.listViewOutSignals.Size = new System.Drawing.Size(328, 202);
+            this.listViewOutSignals.Size = new System.Drawing.Size(320, 200);
             this.listViewOutSignals.TabIndex = 18;
             this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
             this.listViewOutSignals.View = System.Windows.Forms.View.Details;
@@ -391,7 +391,7 @@
             this.listViewInSignals.Location = new System.Drawing.Point(226, 37);
             this.listViewInSignals.MultiSelect = false;
             this.listViewInSignals.Name = "listViewInSignals";
-            this.listViewInSignals.Size = new System.Drawing.Size(321, 196);
+            this.listViewInSignals.Size = new System.Drawing.Size(320, 200);
             this.listViewInSignals.TabIndex = 17;
             this.listViewInSignals.UseCompatibleStateImageBehavior = false;
             this.listViewInSignals.View = System.Windows.Forms.View.Details;
