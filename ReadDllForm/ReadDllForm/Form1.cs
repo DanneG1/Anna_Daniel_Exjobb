@@ -36,7 +36,7 @@ namespace ReadDllForm
             //listViewInSignals.Columns.Add("Name",20,HorizontalAlignment.Left);
             //listViewInSignals.Columns.Add("Value",20, HorizontalAlignment.Left);
             //listViewInSignals.Columns.Add("HiCChannel",20, HorizontalAlignment.Left);
-
+            
             FillOutFieldsFromSettings();
             
             Load += (s, e) =>
@@ -127,27 +127,21 @@ namespace ReadDllForm
             listViewOutSignals.Items.Clear();
             for (int i = 0; i < model.GetInSignals().Count; i++)
             {
-                string name = model.GetInSignals()[i].GetSignalName();
-                double value = model.GetInSignals()[i].GetSignal();
-                string connectedChannel= model.GetInSignals()[i].GetChannelName();
-                ListViewItem listViewItem=new ListViewItem(name);
-                listViewItem.SubItems.Add(value.ToString());
-                listViewItem.SubItems.Add(connectedChannel);
+                ListViewItem listViewItem=new ListViewItem(model.GetInSignals()[i].GetSignalName());
+                listViewItem.SubItems.Add(model.GetInSignals()[i].GetSignal().ToString());
+                listViewItem.SubItems.Add(model.GetInSignals()[i].GetChannelName());
                 listViewInSignals.Items.Add(listViewItem);
-                
-
-                //listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal()+"\t"+model.GetInSignals()[i].GetChannelName());
+                listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
             for (int i = 0; i < model.GetOutSignals().Count; i++)
             {
-                string name = model.GetOutSignals()[i].GetSignalName();
-                double value = model.GetOutSignals()[i].GetSignal();
-                string connectedChannel = model.GetOutSignals()[i].GetChannelName();
-                ListViewItem listViewItem = new ListViewItem(name);
-                listViewItem.SubItems.Add(value.ToString());
-                listViewItem.SubItems.Add(connectedChannel);
+                ListViewItem listViewItem = new ListViewItem(model.GetOutSignals()[i].GetSignalName());
+                listViewItem.SubItems.Add(model.GetOutSignals()[i].GetSignal().ToString());
+                listViewItem.SubItems.Add(model.GetOutSignals()[i].GetChannelName());
                 listViewOutSignals.Items.Add(listViewItem);
-               
+                listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+                listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             }  
         }
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -326,6 +320,7 @@ namespace ReadDllForm
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].GetSignalName());
             // hiCoreChannels.Show();
             var result = hiCoreChannels.ShowDialog();

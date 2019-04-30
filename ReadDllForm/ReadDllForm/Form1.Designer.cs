@@ -47,6 +47,10 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listViewOutSignals = new System.Windows.Forms.ListView();
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listViewInSignals = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,10 +70,6 @@
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.listViewOutSignals = new System.Windows.Forms.ListView();
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -228,7 +228,7 @@
             this.tabControlInputs.Location = new System.Drawing.Point(0, 0);
             this.tabControlInputs.Name = "tabControlInputs";
             this.tabControlInputs.SelectedIndex = 0;
-            this.tabControlInputs.Size = new System.Drawing.Size(909, 450);
+            this.tabControlInputs.Size = new System.Drawing.Size(938, 450);
             this.tabControlInputs.TabIndex = 16;
             // 
             // tabPage1
@@ -241,7 +241,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(901, 421);
+            this.tabPage1.Size = new System.Drawing.Size(930, 421);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -268,10 +268,40 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(901, 421);
+            this.tabPage2.Size = new System.Drawing.Size(930, 421);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listViewOutSignals
+            // 
+            this.listViewOutSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.listViewOutSignals.FullRowSelect = true;
+            this.listViewOutSignals.Location = new System.Drawing.Point(570, 107);
+            this.listViewOutSignals.MultiSelect = false;
+            this.listViewOutSignals.Name = "listViewOutSignals";
+            this.listViewOutSignals.Size = new System.Drawing.Size(340, 204);
+            this.listViewOutSignals.TabIndex = 18;
+            this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
+            this.listViewOutSignals.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Name";
+            this.columnHeader4.Width = 100;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Value";
+            this.columnHeader5.Width = 70;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Connection";
+            this.columnHeader6.Width = 100;
             // 
             // listViewInSignals
             // 
@@ -283,7 +313,7 @@
             this.listViewInSignals.Location = new System.Drawing.Point(222, 107);
             this.listViewInSignals.MultiSelect = false;
             this.listViewInSignals.Name = "listViewInSignals";
-            this.listViewInSignals.Size = new System.Drawing.Size(341, 204);
+            this.listViewInSignals.Size = new System.Drawing.Size(340, 200);
             this.listViewInSignals.TabIndex = 17;
             this.listViewInSignals.UseCompatibleStateImageBehavior = false;
             this.listViewInSignals.View = System.Windows.Forms.View.Details;
@@ -291,17 +321,17 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 104;
+            this.columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Value";
-            this.columnHeader2.Width = 69;
+            this.columnHeader2.Width = 70;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Connection";
-            this.columnHeader3.Width = 183;
+            this.columnHeader3.Width = 100;
             // 
             // worstRuntimeInfoLabel
             // 
@@ -325,7 +355,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(735, 317);
+            this.button1.Location = new System.Drawing.Point(757, 317);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(153, 30);
             this.button1.TabIndex = 14;
@@ -401,7 +431,7 @@
             // 
             // buttonStep
             // 
-            this.buttonStep.Location = new System.Drawing.Point(818, 383);
+            this.buttonStep.Location = new System.Drawing.Point(835, 383);
             this.buttonStep.Name = "buttonStep";
             this.buttonStep.Size = new System.Drawing.Size(75, 30);
             this.buttonStep.TabIndex = 6;
@@ -445,40 +475,11 @@
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // listViewOutSignals
-            // 
-            this.listViewOutSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.listViewOutSignals.FullRowSelect = true;
-            this.listViewOutSignals.Location = new System.Drawing.Point(570, 107);
-            this.listViewOutSignals.MultiSelect = false;
-            this.listViewOutSignals.Name = "listViewOutSignals";
-            this.listViewOutSignals.Size = new System.Drawing.Size(309, 204);
-            this.listViewOutSignals.TabIndex = 18;
-            this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
-            this.listViewOutSignals.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Name";
-            this.columnHeader4.Width = 129;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Value";
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Connection";
-            this.columnHeader6.Width = 130;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(909, 450);
+            this.ClientSize = new System.Drawing.Size(938, 450);
             this.Controls.Add(this.tabControlInputs);
             this.Name = "Form1";
             this.Text = "HiModels";
