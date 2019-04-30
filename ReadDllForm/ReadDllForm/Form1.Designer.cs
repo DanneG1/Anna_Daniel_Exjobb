@@ -57,14 +57,14 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.worstRuntimeInfoLabel = new System.Windows.Forms.Label();
             this.worstTimeLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnConnectOutsignal = new System.Windows.Forms.Button();
             this.labelHiCoreConnection = new System.Windows.Forms.Label();
             this.buttonRemoveModel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.componentListBox = new System.Windows.Forms.ListBox();
-            this.buttonConnectSignal = new System.Windows.Forms.Button();
+            this.buttonConnectInSignal = new System.Windows.Forms.Button();
             this.buttonStep = new System.Windows.Forms.Button();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.labelModelLoad = new System.Windows.Forms.Label();
@@ -252,14 +252,14 @@
             this.tabPage2.Controls.Add(this.listViewInSignals);
             this.tabPage2.Controls.Add(this.worstRuntimeInfoLabel);
             this.tabPage2.Controls.Add(this.worstTimeLabel);
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.btnConnectOutsignal);
             this.tabPage2.Controls.Add(this.labelHiCoreConnection);
             this.tabPage2.Controls.Add(this.buttonRemoveModel);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.componentListBox);
-            this.tabPage2.Controls.Add(this.buttonConnectSignal);
+            this.tabPage2.Controls.Add(this.buttonConnectInSignal);
             this.tabPage2.Controls.Add(this.buttonStep);
             this.tabPage2.Controls.Add(this.buttonLoad);
             this.tabPage2.Controls.Add(this.labelModelLoad);
@@ -283,7 +283,7 @@
             this.listViewOutSignals.Location = new System.Drawing.Point(570, 107);
             this.listViewOutSignals.MultiSelect = false;
             this.listViewOutSignals.Name = "listViewOutSignals";
-            this.listViewOutSignals.Size = new System.Drawing.Size(340, 204);
+            this.listViewOutSignals.Size = new System.Drawing.Size(340, 200);
             this.listViewOutSignals.TabIndex = 18;
             this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
             this.listViewOutSignals.View = System.Windows.Forms.View.Details;
@@ -353,15 +353,15 @@
             this.worstTimeLabel.TabIndex = 15;
             this.worstTimeLabel.Text = "-";
             // 
-            // button1
+            // btnConnectOutsignal
             // 
-            this.button1.Location = new System.Drawing.Point(757, 317);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 30);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Connect to channel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnConnectOutsignal.Location = new System.Drawing.Point(757, 317);
+            this.btnConnectOutsignal.Name = "btnConnectOutsignal";
+            this.btnConnectOutsignal.Size = new System.Drawing.Size(153, 30);
+            this.btnConnectOutsignal.TabIndex = 14;
+            this.btnConnectOutsignal.Text = "Connect to channel";
+            this.btnConnectOutsignal.UseVisualStyleBackColor = true;
+            this.btnConnectOutsignal.Click += new System.EventHandler(this.btnConnectOutsignal_Click);
             // 
             // labelHiCoreConnection
             // 
@@ -393,7 +393,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(253, 83);
+            this.label3.Location = new System.Drawing.Point(219, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 17);
             this.label3.TabIndex = 10;
@@ -419,15 +419,15 @@
             this.componentListBox.TabIndex = 7;
             this.componentListBox.SelectedIndexChanged += new System.EventHandler(this.componentListBox_SelectedIndexChanged);
             // 
-            // buttonConnectSignal
+            // buttonConnectInSignal
             // 
-            this.buttonConnectSignal.Location = new System.Drawing.Point(395, 317);
-            this.buttonConnectSignal.Name = "buttonConnectSignal";
-            this.buttonConnectSignal.Size = new System.Drawing.Size(159, 30);
-            this.buttonConnectSignal.TabIndex = 7;
-            this.buttonConnectSignal.Text = "Connect to channel";
-            this.buttonConnectSignal.UseVisualStyleBackColor = true;
-            this.buttonConnectSignal.Click += new System.EventHandler(this.buttonConnectSignal_Click);
+            this.buttonConnectInSignal.Location = new System.Drawing.Point(402, 317);
+            this.buttonConnectInSignal.Name = "buttonConnectInSignal";
+            this.buttonConnectInSignal.Size = new System.Drawing.Size(159, 30);
+            this.buttonConnectInSignal.TabIndex = 7;
+            this.buttonConnectInSignal.Text = "Connect to channel";
+            this.buttonConnectInSignal.UseVisualStyleBackColor = true;
+            this.buttonConnectInSignal.Click += new System.EventHandler(this.buttonConnectInSignal_Click);
             // 
             // buttonStep
             // 
@@ -522,14 +522,14 @@
         private System.Windows.Forms.Button buttonLoadModel;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonStep;
-        private System.Windows.Forms.Button buttonConnectSignal;
+        private System.Windows.Forms.Button buttonConnectInSignal;
         private System.Windows.Forms.ListBox componentListBox;
         private System.Windows.Forms.Button buttonRemoveModel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelHiCoreConnection;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnConnectOutsignal;
         private System.Windows.Forms.Label worstTimeLabel;
         private System.Windows.Forms.Label worstRuntimeInfoLabel;
         private System.Windows.Forms.ListView listViewInSignals;

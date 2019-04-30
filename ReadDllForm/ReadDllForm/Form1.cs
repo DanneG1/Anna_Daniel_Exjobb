@@ -258,11 +258,11 @@ namespace ReadDllForm
                 }
             }
         }
-        private void buttonConnectSignal_Click(object sender, EventArgs e)
+        private void buttonConnectInSignal_Click(object sender, EventArgs e)
         {
-            
+            if (listViewInSignals.SelectedItems.Count>0)
+            {
             FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].GetSignalName());
-           // hiCoreChannels.Show();
             var result = hiCoreChannels.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -271,13 +271,41 @@ namespace ReadDllForm
                 _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].update();
                 ShowSignals(_selectedModel);
             }
-            /*
-            double value;
-            if (listBoxInputs.SelectedIndex != -1 && Double.TryParse(inputValueBox.Text, out value))
+               
+            }
+            else
             {
-                _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].SetSignal(value);
-                ShowSignals(_selectedModel);
-            }*/
+                string message = "Select a insignal to connect to a channel.";
+                string title = "Message";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, title, buttons);
+            }
+        }
+
+        private void btnConnectOutsignal_Click(object sender, EventArgs e)
+        {
+
+
+            if (listViewOutSignals.SelectedItems.Count > 0)
+            {
+                FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].GetSignalName());
+                var result = hiCoreChannels.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    string channelName = hiCoreChannels.selectedChannel;
+                    _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].SetChannelName(channelName);
+
+                    ShowSignals(_selectedModel);
+                }
+            }
+
+            else
+            {
+                string message = "Select a insignal to connect to a channel.";
+                string title = "Message";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, title, buttons);
+            }
         }
         private void buttonLoadModel_Click(object sender, EventArgs e)
         {
@@ -318,19 +346,6 @@ namespace ReadDllForm
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].GetSignalName());
-            // hiCoreChannels.Show();
-            var result = hiCoreChannels.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                string channelName = hiCoreChannels.selectedChannel;
-                _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].SetChannelName(channelName);
-               
-                ShowSignals(_selectedModel);
-            }
-        }
+       
     }
 }
