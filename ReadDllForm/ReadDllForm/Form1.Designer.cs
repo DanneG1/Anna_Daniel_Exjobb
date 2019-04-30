@@ -76,12 +76,15 @@
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonBrowseModel = new System.Windows.Forms.Button();
             this.timerUpdateLists = new System.Windows.Forms.Timer(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.labelFrequency = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panelModelAndSignals.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -235,7 +238,7 @@
             this.tabControlInputs.Location = new System.Drawing.Point(0, 0);
             this.tabControlInputs.Name = "tabControlInputs";
             this.tabControlInputs.SelectedIndex = 0;
-            this.tabControlInputs.Size = new System.Drawing.Size(938, 450);
+            this.tabControlInputs.Size = new System.Drawing.Size(938, 584);
             this.tabControlInputs.TabIndex = 16;
             // 
             // tabPage1
@@ -255,13 +258,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.buttonRunModel);
-            this.tabPage2.Controls.Add(this.textBoxFrequency);
             this.tabPage2.Controls.Add(this.panelModelAndSignals);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.worstRuntimeInfoLabel);
-            this.tabPage2.Controls.Add(this.worstTimeLabel);
-            this.tabPage2.Controls.Add(this.labelHiCoreConnection);
             this.tabPage2.Controls.Add(this.buttonStep);
             this.tabPage2.Controls.Add(this.buttonLoadModel);
             this.tabPage2.Controls.Add(this.labelModelLoad);
@@ -270,14 +269,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(930, 421);
+            this.tabPage2.Size = new System.Drawing.Size(930, 555);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // buttonRunModel
             // 
-            this.buttonRunModel.Location = new System.Drawing.Point(672, 383);
+            this.buttonRunModel.Location = new System.Drawing.Point(675, 505);
             this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonRunModel.Name = "buttonRunModel";
             this.buttonRunModel.Size = new System.Drawing.Size(126, 30);
@@ -288,11 +287,12 @@
             // 
             // textBoxFrequency
             // 
-            this.textBoxFrequency.Location = new System.Drawing.Point(587, 383);
+            this.textBoxFrequency.Location = new System.Drawing.Point(137, 105);
             this.textBoxFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(74, 22);
             this.textBoxFrequency.TabIndex = 21;
+            this.textBoxFrequency.Text = "1";
             // 
             // panelModelAndSignals
             // 
@@ -306,7 +306,7 @@
             this.panelModelAndSignals.Controls.Add(this.buttonConnectInSignal);
             this.panelModelAndSignals.Controls.Add(this.label4);
             this.panelModelAndSignals.Enabled = false;
-            this.panelModelAndSignals.Location = new System.Drawing.Point(12, 74);
+            this.panelModelAndSignals.Location = new System.Drawing.Point(12, 165);
             this.panelModelAndSignals.Name = "panelModelAndSignals";
             this.panelModelAndSignals.Size = new System.Drawing.Size(912, 276);
             this.panelModelAndSignals.TabIndex = 20;
@@ -315,7 +315,7 @@
             // 
             this.componentListBox.FormattingEnabled = true;
             this.componentListBox.ItemHeight = 16;
-            this.componentListBox.Location = new System.Drawing.Point(9, 31);
+            this.componentListBox.Location = new System.Drawing.Point(13, 37);
             this.componentListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.componentListBox.Name = "componentListBox";
             this.componentListBox.Size = new System.Drawing.Size(193, 196);
@@ -325,7 +325,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 7);
+            this.label2.Location = new System.Drawing.Point(10, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 17);
             this.label2.TabIndex = 9;
@@ -341,7 +341,7 @@
             this.listViewOutSignals.Location = new System.Drawing.Point(575, 31);
             this.listViewOutSignals.MultiSelect = false;
             this.listViewOutSignals.Name = "listViewOutSignals";
-            this.listViewOutSignals.Size = new System.Drawing.Size(328, 196);
+            this.listViewOutSignals.Size = new System.Drawing.Size(328, 202);
             this.listViewOutSignals.TabIndex = 18;
             this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
             this.listViewOutSignals.View = System.Windows.Forms.View.Details;
@@ -363,7 +363,7 @@
             // 
             // buttonRemoveModel
             // 
-            this.buttonRemoveModel.Location = new System.Drawing.Point(9, 239);
+            this.buttonRemoveModel.Location = new System.Drawing.Point(13, 239);
             this.buttonRemoveModel.Name = "buttonRemoveModel";
             this.buttonRemoveModel.Size = new System.Drawing.Size(124, 30);
             this.buttonRemoveModel.TabIndex = 12;
@@ -388,7 +388,7 @@
             this.columnHeader2,
             this.columnHeader3});
             this.listViewInSignals.FullRowSelect = true;
-            this.listViewInSignals.Location = new System.Drawing.Point(226, 31);
+            this.listViewInSignals.Location = new System.Drawing.Point(226, 37);
             this.listViewInSignals.MultiSelect = false;
             this.listViewInSignals.Name = "listViewInSignals";
             this.listViewInSignals.Size = new System.Drawing.Size(321, 196);
@@ -442,7 +442,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(567, 20);
+            this.label5.Location = new System.Drawing.Point(6, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 17);
             this.label5.TabIndex = 19;
@@ -451,7 +451,7 @@
             // worstRuntimeInfoLabel
             // 
             this.worstRuntimeInfoLabel.AutoSize = true;
-            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(253, 363);
+            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(30, 69);
             this.worstRuntimeInfoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.worstRuntimeInfoLabel.Name = "worstRuntimeInfoLabel";
             this.worstRuntimeInfoLabel.Size = new System.Drawing.Size(100, 17);
@@ -461,7 +461,7 @@
             // worstTimeLabel
             // 
             this.worstTimeLabel.AutoSize = true;
-            this.worstTimeLabel.Location = new System.Drawing.Point(359, 363);
+            this.worstTimeLabel.Location = new System.Drawing.Point(134, 69);
             this.worstTimeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.worstTimeLabel.Name = "worstTimeLabel";
             this.worstTimeLabel.Size = new System.Drawing.Size(13, 17);
@@ -471,7 +471,7 @@
             // labelHiCoreConnection
             // 
             this.labelHiCoreConnection.AutoSize = true;
-            this.labelHiCoreConnection.Location = new System.Drawing.Point(701, 20);
+            this.labelHiCoreConnection.Location = new System.Drawing.Point(134, 29);
             this.labelHiCoreConnection.Name = "labelHiCoreConnection";
             this.labelHiCoreConnection.Size = new System.Drawing.Size(13, 17);
             this.labelHiCoreConnection.TabIndex = 13;
@@ -479,7 +479,7 @@
             // 
             // buttonStep
             // 
-            this.buttonStep.Location = new System.Drawing.Point(835, 383);
+            this.buttonStep.Location = new System.Drawing.Point(838, 505);
             this.buttonStep.Name = "buttonStep";
             this.buttonStep.Size = new System.Drawing.Size(75, 30);
             this.buttonStep.TabIndex = 6;
@@ -528,11 +528,35 @@
             // 
             this.timerUpdateLists.Tick += new System.EventHandler(this.timerUpdateLists_Tick);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.labelFrequency);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.labelHiCoreConnection);
+            this.groupBox3.Controls.Add(this.textBoxFrequency);
+            this.groupBox3.Controls.Add(this.worstTimeLabel);
+            this.groupBox3.Controls.Add(this.worstRuntimeInfoLabel);
+            this.groupBox3.Location = new System.Drawing.Point(590, 16);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(308, 132);
+            this.groupBox3.TabIndex = 23;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Information";
+            // 
+            // labelFrequency
+            // 
+            this.labelFrequency.AutoSize = true;
+            this.labelFrequency.Location = new System.Drawing.Point(16, 105);
+            this.labelFrequency.Name = "labelFrequency";
+            this.labelFrequency.Size = new System.Drawing.Size(114, 17);
+            this.labelFrequency.TabIndex = 22;
+            this.labelFrequency.Text = "Update rate(Hz):";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 450);
+            this.ClientSize = new System.Drawing.Size(938, 584);
             this.Controls.Add(this.tabControlInputs);
             this.Name = "Form1";
             this.Text = "HiModels";
@@ -547,6 +571,8 @@
             this.tabPage2.PerformLayout();
             this.panelModelAndSignals.ResumeLayout(false);
             this.panelModelAndSignals.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -600,6 +626,8 @@
         private System.Windows.Forms.Button buttonRunModel;
         private System.Windows.Forms.TextBox textBoxFrequency;
         private System.Windows.Forms.Timer timerUpdateLists;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label labelFrequency;
     }
 }
 

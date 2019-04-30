@@ -376,7 +376,14 @@ namespace ReadDllForm
             {
                 _selectedModel.setRunning(true);
                 buttonRunModel.Text = "Stop model";
-                _selectedModel.setSleep(Convert.ToInt32(textBoxFrequency.Text));
+                string rate = textBoxFrequency.Text;
+                if (rate.Contains("."))
+                {
+                    rate = rate.Replace(".", ",");
+                }
+                double test = double.TryParse(rate, out double scanRate) ? scanRate : 1;
+                Console.WriteLine(test);
+                _selectedModel.setSleep(test);
                 _selectedModel.Run();
                 timerUpdateLists.Start();
             }

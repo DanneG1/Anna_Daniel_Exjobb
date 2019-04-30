@@ -24,7 +24,7 @@ namespace ReadDllForm
         private HiCoreClient _hiCore;
         private readonly string _worstTime;
         private Boolean running = false;
-        private int sleep;
+        private double sleep;
         public Thread threadRun;
 
         private List<ISignal> inSignals = new List<ISignal>();
@@ -65,7 +65,7 @@ namespace ReadDllForm
         {
             return running;
         }
-        public void setSleep(int sleepy)
+        public void setSleep(double sleepy)
         {
             sleep = sleepy;
         }
@@ -231,7 +231,7 @@ namespace ReadDllForm
             while (running)
             {
                 Step();
-                Thread.Sleep(sleep);
+                Thread.Sleep(Convert.ToInt32(1000/sleep));
             }
         }
 
