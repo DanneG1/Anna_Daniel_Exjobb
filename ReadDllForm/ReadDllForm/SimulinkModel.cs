@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using HiQ.HiMacs.WCF.Client;
 using System.Diagnostics;
+using System.Threading;
 
 
 namespace ReadDllForm
@@ -27,6 +28,7 @@ namespace ReadDllForm
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
+        public event EventHandler<EventArgs> stepped;
 
         #region Dlldelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -206,10 +208,29 @@ namespace ReadDllForm
         public void run()
         {
             //skapa någon slags funktion som kör samtidigt som hiCore är igång på samma freq
+            Thread t = new Thread(RunFunc)
+            {
+                IsBackground = true
+            };
+            try
+            {
+                t.Start();
+            }
+            catch(Exception e){}
+            
+        }
+        public virtual void onStepped()
+        {
+            stepped?.Invoke(this, new EventArgs());
+        }
+
+        public void RunFunc()
+        {
             while (running)
             {
                 Step();
-                System.Threading.Thread.Sleep(sleep);
+                onStepped();
+                Thread.Sleep(sleep);
             }
         }
         #endregion
