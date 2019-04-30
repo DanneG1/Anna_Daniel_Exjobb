@@ -47,6 +47,7 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.labelHiCoreConnection = new System.Windows.Forms.Label();
             this.buttonRemoveModel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -61,7 +62,10 @@
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
             this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.listViewInSignals = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -240,6 +244,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listViewInSignals);
             this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.labelHiCoreConnection);
             this.tabPage2.Controls.Add(this.buttonRemoveModel);
@@ -262,6 +267,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(735, 317);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(153, 30);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Connect to channel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // labelHiCoreConnection
             // 
@@ -397,15 +412,32 @@
             this.buttonLoadModel.UseVisualStyleBackColor = true;
             this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
             // 
-            // button1
+            // listViewInSignals
             // 
-            this.button1.Location = new System.Drawing.Point(735, 317);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 30);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Connect to channel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.listViewInSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listViewInSignals.FullRowSelect = true;
+            this.listViewInSignals.GridLines = true;
+            this.listViewInSignals.Location = new System.Drawing.Point(144, 227);
+            this.listViewInSignals.Name = "listViewInSignals";
+            this.listViewInSignals.Size = new System.Drawing.Size(410, 178);
+            this.listViewInSignals.TabIndex = 15;
+            this.listViewInSignals.UseCompatibleStateImageBehavior = false;
+            this.listViewInSignals.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Value";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Connected to";
             // 
             // Form1
             // 
@@ -464,6 +496,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelHiCoreConnection;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ListView listViewInSignals;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
     }
 }
 

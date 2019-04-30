@@ -33,6 +33,10 @@ namespace ReadDllForm
         public Form1()
         {
             InitializeComponent();
+            //listViewInSignals.Columns.Add("Name",20,HorizontalAlignment.Left);
+            //listViewInSignals.Columns.Add("Value",20, HorizontalAlignment.Left);
+            //listViewInSignals.Columns.Add("HiCChannel",20, HorizontalAlignment.Left);
+
             FillOutFieldsFromSettings();
             
             Load += (s, e) =>
@@ -123,6 +127,15 @@ namespace ReadDllForm
             listBoxOutSignals.Items.Clear();
             for (int i = 0; i < model.GetInSignals().Count; i++)
             {
+                string name = model.GetInSignals()[i].GetSignalName();
+                double value = model.GetInSignals()[i].GetSignal();
+                string connectedChannel= model.GetInSignals()[i].GetChannelName();
+                ListViewItem listViewItem=new ListViewItem(name);
+                listViewItem.SubItems.Add(value.ToString());
+                listViewItem.SubItems.Add(connectedChannel);
+                listViewInSignals.Items.Add(listViewItem);
+                
+
                 listBoxInputs.Items.Add(model.GetInSignals()[i].GetSignalName()+"\t\t"+ model.GetInSignals()[i].GetSignal()+"\t"+model.GetInSignals()[i].GetChannelName());
             }
             for (int i = 0; i < model.GetOutSignals().Count; i++)
