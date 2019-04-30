@@ -13,7 +13,7 @@ namespace ReadDllForm
         private IntPtr pDll;
         public int portNumber;
         public string portName;
-        private string _channelName;
+        private string _channelName="-";
         private HiCoreClient _hiCore;
 
         #region dllDelegates
@@ -64,8 +64,10 @@ namespace ReadDllForm
 
         public void update()
         {
-            _hiCore.SetValue("",_channelName,GetSignal());
-            //sätta
+            if (_channelName != "-")
+            {
+                _hiCore.SetValue("", _channelName, GetSignal());
+            }
         }
 
         public string GetChannelName()
