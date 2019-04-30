@@ -84,20 +84,20 @@ namespace ReadDllForm
 
         private void HandleConnectionOpened()
         {
+            labelHiCoreConnection.ForeColor = Color.Green;
             labelHiCoreConnection.Text = "Connected";
+            buttonLoadModel.Enabled = true;
+            panelModelAndSignals.Enabled = true;
 
-            List<string> name = _hiCore.GetChannelNames("").ToList();
-            foreach(var n in name)
-            {
-                Console.WriteLine(n);
-                Console.WriteLine(_hiCore.GetValue("", n));
-                //sätta värde _hicore.SetValue();
-            }
         }
 
         private void HandleConnectionClosed()
         {
+
+            labelHiCoreConnection.ForeColor = Color.Red;
             labelHiCoreConnection.Text = "Disconnected";
+            buttonLoadModel.Enabled = false;
+            panelModelAndSignals.Enabled = false;
         }
 
         private void FillOutFieldsFromSettings()
@@ -257,6 +257,14 @@ namespace ReadDllForm
                     listViewOutSignals.Items.Clear();
                 }
             }
+            else
+            {
+                string message = "Select a model to remove.";
+                string title = "Message";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, title, buttons);
+
+            }
         }
         private void buttonConnectInSignal_Click(object sender, EventArgs e)
         {
@@ -307,7 +315,7 @@ namespace ReadDllForm
                 MessageBox.Show(message, title, buttons);
             }
         }
-        private void buttonLoadModel_Click(object sender, EventArgs e)
+        private void buttonBrowseModel_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDll = new OpenFileDialog();
             if (Settings.Default[TargetFolder].ToString() != "")
