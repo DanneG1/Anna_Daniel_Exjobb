@@ -47,34 +47,37 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panelModelAndSignals = new System.Windows.Forms.Panel();
+            this.componentListBox = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.listViewOutSignals = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonRemoveModel = new System.Windows.Forms.Button();
+            this.btnConnectOutsignal = new System.Windows.Forms.Button();
             this.listViewInSignals = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonConnectInSignal = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.worstRuntimeInfoLabel = new System.Windows.Forms.Label();
             this.worstTimeLabel = new System.Windows.Forms.Label();
-            this.btnConnectOutsignal = new System.Windows.Forms.Button();
             this.labelHiCoreConnection = new System.Windows.Forms.Label();
-            this.buttonRemoveModel = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.componentListBox = new System.Windows.Forms.ListBox();
-            this.buttonConnectInSignal = new System.Windows.Forms.Button();
             this.buttonStep = new System.Windows.Forms.Button();
-            this.buttonLoad = new System.Windows.Forms.Button();
+            this.buttonLoadModel = new System.Windows.Forms.Button();
             this.labelModelLoad = new System.Windows.Forms.Label();
             this.textBoxDll = new System.Windows.Forms.TextBox();
-            this.buttonLoadModel = new System.Windows.Forms.Button();
+            this.buttonBrowseModel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panelModelAndSignals.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -248,23 +251,16 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listViewOutSignals);
-            this.tabPage2.Controls.Add(this.listViewInSignals);
+            this.tabPage2.Controls.Add(this.panelModelAndSignals);
+            this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.worstRuntimeInfoLabel);
             this.tabPage2.Controls.Add(this.worstTimeLabel);
-            this.tabPage2.Controls.Add(this.btnConnectOutsignal);
             this.tabPage2.Controls.Add(this.labelHiCoreConnection);
-            this.tabPage2.Controls.Add(this.buttonRemoveModel);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.componentListBox);
-            this.tabPage2.Controls.Add(this.buttonConnectInSignal);
             this.tabPage2.Controls.Add(this.buttonStep);
-            this.tabPage2.Controls.Add(this.buttonLoad);
+            this.tabPage2.Controls.Add(this.buttonLoadModel);
             this.tabPage2.Controls.Add(this.labelModelLoad);
             this.tabPage2.Controls.Add(this.textBoxDll);
-            this.tabPage2.Controls.Add(this.buttonLoadModel);
+            this.tabPage2.Controls.Add(this.buttonBrowseModel);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -273,6 +269,43 @@
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // panelModelAndSignals
+            // 
+            this.panelModelAndSignals.Controls.Add(this.componentListBox);
+            this.panelModelAndSignals.Controls.Add(this.label2);
+            this.panelModelAndSignals.Controls.Add(this.listViewOutSignals);
+            this.panelModelAndSignals.Controls.Add(this.buttonRemoveModel);
+            this.panelModelAndSignals.Controls.Add(this.btnConnectOutsignal);
+            this.panelModelAndSignals.Controls.Add(this.listViewInSignals);
+            this.panelModelAndSignals.Controls.Add(this.label3);
+            this.panelModelAndSignals.Controls.Add(this.buttonConnectInSignal);
+            this.panelModelAndSignals.Controls.Add(this.label4);
+            this.panelModelAndSignals.Enabled = false;
+            this.panelModelAndSignals.Location = new System.Drawing.Point(12, 74);
+            this.panelModelAndSignals.Name = "panelModelAndSignals";
+            this.panelModelAndSignals.Size = new System.Drawing.Size(912, 276);
+            this.panelModelAndSignals.TabIndex = 20;
+            // 
+            // componentListBox
+            // 
+            this.componentListBox.FormattingEnabled = true;
+            this.componentListBox.ItemHeight = 16;
+            this.componentListBox.Location = new System.Drawing.Point(9, 31);
+            this.componentListBox.Margin = new System.Windows.Forms.Padding(2);
+            this.componentListBox.Name = "componentListBox";
+            this.componentListBox.Size = new System.Drawing.Size(193, 196);
+            this.componentListBox.TabIndex = 7;
+            this.componentListBox.SelectedIndexChanged += new System.EventHandler(this.componentListBox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 7);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Models:";
+            // 
             // listViewOutSignals
             // 
             this.listViewOutSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -280,10 +313,10 @@
             this.columnHeader5,
             this.columnHeader6});
             this.listViewOutSignals.FullRowSelect = true;
-            this.listViewOutSignals.Location = new System.Drawing.Point(570, 107);
+            this.listViewOutSignals.Location = new System.Drawing.Point(575, 31);
             this.listViewOutSignals.MultiSelect = false;
             this.listViewOutSignals.Name = "listViewOutSignals";
-            this.listViewOutSignals.Size = new System.Drawing.Size(340, 200);
+            this.listViewOutSignals.Size = new System.Drawing.Size(328, 196);
             this.listViewOutSignals.TabIndex = 18;
             this.listViewOutSignals.UseCompatibleStateImageBehavior = false;
             this.listViewOutSignals.View = System.Windows.Forms.View.Details;
@@ -303,6 +336,26 @@
             this.columnHeader6.Text = "Connection";
             this.columnHeader6.Width = 100;
             // 
+            // buttonRemoveModel
+            // 
+            this.buttonRemoveModel.Location = new System.Drawing.Point(9, 239);
+            this.buttonRemoveModel.Name = "buttonRemoveModel";
+            this.buttonRemoveModel.Size = new System.Drawing.Size(124, 30);
+            this.buttonRemoveModel.TabIndex = 12;
+            this.buttonRemoveModel.Text = "Remove model";
+            this.buttonRemoveModel.UseVisualStyleBackColor = true;
+            this.buttonRemoveModel.Click += new System.EventHandler(this.buttonRemoveModel_Click);
+            // 
+            // btnConnectOutsignal
+            // 
+            this.btnConnectOutsignal.Location = new System.Drawing.Point(750, 239);
+            this.btnConnectOutsignal.Name = "btnConnectOutsignal";
+            this.btnConnectOutsignal.Size = new System.Drawing.Size(153, 30);
+            this.btnConnectOutsignal.TabIndex = 14;
+            this.btnConnectOutsignal.Text = "Connect to channel";
+            this.btnConnectOutsignal.UseVisualStyleBackColor = true;
+            this.btnConnectOutsignal.Click += new System.EventHandler(this.btnConnectOutsignal_Click);
+            // 
             // listViewInSignals
             // 
             this.listViewInSignals.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -310,10 +363,10 @@
             this.columnHeader2,
             this.columnHeader3});
             this.listViewInSignals.FullRowSelect = true;
-            this.listViewInSignals.Location = new System.Drawing.Point(222, 107);
+            this.listViewInSignals.Location = new System.Drawing.Point(226, 31);
             this.listViewInSignals.MultiSelect = false;
             this.listViewInSignals.Name = "listViewInSignals";
-            this.listViewInSignals.Size = new System.Drawing.Size(340, 200);
+            this.listViewInSignals.Size = new System.Drawing.Size(321, 196);
             this.listViewInSignals.TabIndex = 17;
             this.listViewInSignals.UseCompatibleStateImageBehavior = false;
             this.listViewInSignals.View = System.Windows.Forms.View.Details;
@@ -332,6 +385,43 @@
             // 
             this.columnHeader3.Text = "Connection";
             this.columnHeader3.Width = 100;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(223, 7);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 17);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "In signals:";
+            // 
+            // buttonConnectInSignal
+            // 
+            this.buttonConnectInSignal.Location = new System.Drawing.Point(388, 239);
+            this.buttonConnectInSignal.Name = "buttonConnectInSignal";
+            this.buttonConnectInSignal.Size = new System.Drawing.Size(159, 30);
+            this.buttonConnectInSignal.TabIndex = 7;
+            this.buttonConnectInSignal.Text = "Connect to channel";
+            this.buttonConnectInSignal.UseVisualStyleBackColor = true;
+            this.buttonConnectInSignal.Click += new System.EventHandler(this.buttonConnectInSignal_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(572, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 17);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Out signals:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(567, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(128, 17);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "HiCore connection:";
             // 
             // worstRuntimeInfoLabel
             // 
@@ -353,81 +443,14 @@
             this.worstTimeLabel.TabIndex = 15;
             this.worstTimeLabel.Text = "-";
             // 
-            // btnConnectOutsignal
-            // 
-            this.btnConnectOutsignal.Location = new System.Drawing.Point(757, 317);
-            this.btnConnectOutsignal.Name = "btnConnectOutsignal";
-            this.btnConnectOutsignal.Size = new System.Drawing.Size(153, 30);
-            this.btnConnectOutsignal.TabIndex = 14;
-            this.btnConnectOutsignal.Text = "Connect to channel";
-            this.btnConnectOutsignal.UseVisualStyleBackColor = true;
-            this.btnConnectOutsignal.Click += new System.EventHandler(this.btnConnectOutsignal_Click);
-            // 
             // labelHiCoreConnection
             // 
             this.labelHiCoreConnection.AutoSize = true;
-            this.labelHiCoreConnection.Location = new System.Drawing.Point(610, 27);
+            this.labelHiCoreConnection.Location = new System.Drawing.Point(701, 20);
             this.labelHiCoreConnection.Name = "labelHiCoreConnection";
-            this.labelHiCoreConnection.Size = new System.Drawing.Size(0, 17);
+            this.labelHiCoreConnection.Size = new System.Drawing.Size(13, 17);
             this.labelHiCoreConnection.TabIndex = 13;
-            // 
-            // buttonRemoveModel
-            // 
-            this.buttonRemoveModel.Location = new System.Drawing.Point(14, 317);
-            this.buttonRemoveModel.Name = "buttonRemoveModel";
-            this.buttonRemoveModel.Size = new System.Drawing.Size(124, 30);
-            this.buttonRemoveModel.TabIndex = 12;
-            this.buttonRemoveModel.Text = "Remove model";
-            this.buttonRemoveModel.UseVisualStyleBackColor = true;
-            this.buttonRemoveModel.Click += new System.EventHandler(this.buttonRemoveModel_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(579, 83);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Out signals:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(219, 83);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 17);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "In signals:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 85);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Models:";
-            // 
-            // componentListBox
-            // 
-            this.componentListBox.FormattingEnabled = true;
-            this.componentListBox.ItemHeight = 16;
-            this.componentListBox.Location = new System.Drawing.Point(11, 107);
-            this.componentListBox.Margin = new System.Windows.Forms.Padding(2);
-            this.componentListBox.Name = "componentListBox";
-            this.componentListBox.Size = new System.Drawing.Size(193, 196);
-            this.componentListBox.TabIndex = 7;
-            this.componentListBox.SelectedIndexChanged += new System.EventHandler(this.componentListBox_SelectedIndexChanged);
-            // 
-            // buttonConnectInSignal
-            // 
-            this.buttonConnectInSignal.Location = new System.Drawing.Point(402, 317);
-            this.buttonConnectInSignal.Name = "buttonConnectInSignal";
-            this.buttonConnectInSignal.Size = new System.Drawing.Size(159, 30);
-            this.buttonConnectInSignal.TabIndex = 7;
-            this.buttonConnectInSignal.Text = "Connect to channel";
-            this.buttonConnectInSignal.UseVisualStyleBackColor = true;
-            this.buttonConnectInSignal.Click += new System.EventHandler(this.buttonConnectInSignal_Click);
+            this.labelHiCoreConnection.Text = "-";
             // 
             // buttonStep
             // 
@@ -439,20 +462,21 @@
             this.buttonStep.UseVisualStyleBackColor = true;
             this.buttonStep.Click += new System.EventHandler(this.buttonStep_Click);
             // 
-            // buttonLoad
+            // buttonLoadModel
             // 
-            this.buttonLoad.Location = new System.Drawing.Point(402, 23);
-            this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(97, 30);
-            this.buttonLoad.TabIndex = 3;
-            this.buttonLoad.Text = "Load model";
-            this.buttonLoad.UseVisualStyleBackColor = true;
-            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
+            this.buttonLoadModel.Enabled = false;
+            this.buttonLoadModel.Location = new System.Drawing.Point(403, 16);
+            this.buttonLoadModel.Name = "buttonLoadModel";
+            this.buttonLoadModel.Size = new System.Drawing.Size(97, 30);
+            this.buttonLoadModel.TabIndex = 3;
+            this.buttonLoadModel.Text = "Load model";
+            this.buttonLoadModel.UseVisualStyleBackColor = true;
+            this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
             // labelModelLoad
             // 
             this.labelModelLoad.AutoSize = true;
-            this.labelModelLoad.Location = new System.Drawing.Point(8, 30);
+            this.labelModelLoad.Location = new System.Drawing.Point(9, 23);
             this.labelModelLoad.Name = "labelModelLoad";
             this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
             this.labelModelLoad.TabIndex = 2;
@@ -460,20 +484,20 @@
             // 
             // textBoxDll
             // 
-            this.textBoxDll.Location = new System.Drawing.Point(100, 27);
+            this.textBoxDll.Location = new System.Drawing.Point(101, 20);
             this.textBoxDll.Name = "textBoxDll";
             this.textBoxDll.Size = new System.Drawing.Size(215, 22);
             this.textBoxDll.TabIndex = 1;
             // 
-            // buttonLoadModel
+            // buttonBrowseModel
             // 
-            this.buttonLoadModel.Location = new System.Drawing.Point(321, 23);
-            this.buttonLoadModel.Name = "buttonLoadModel";
-            this.buttonLoadModel.Size = new System.Drawing.Size(75, 30);
-            this.buttonLoadModel.TabIndex = 0;
-            this.buttonLoadModel.Text = "Browse..";
-            this.buttonLoadModel.UseVisualStyleBackColor = true;
-            this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoadModel_Click);
+            this.buttonBrowseModel.Location = new System.Drawing.Point(322, 16);
+            this.buttonBrowseModel.Name = "buttonBrowseModel";
+            this.buttonBrowseModel.Size = new System.Drawing.Size(75, 30);
+            this.buttonBrowseModel.TabIndex = 0;
+            this.buttonBrowseModel.Text = "Browse..";
+            this.buttonBrowseModel.UseVisualStyleBackColor = true;
+            this.buttonBrowseModel.Click += new System.EventHandler(this.buttonBrowseModel_Click);
             // 
             // Form1
             // 
@@ -492,6 +516,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panelModelAndSignals.ResumeLayout(false);
+            this.panelModelAndSignals.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -519,8 +545,8 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label labelModelLoad;
         private System.Windows.Forms.TextBox textBoxDll;
+        private System.Windows.Forms.Button buttonBrowseModel;
         private System.Windows.Forms.Button buttonLoadModel;
-        private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonStep;
         private System.Windows.Forms.Button buttonConnectInSignal;
         private System.Windows.Forms.ListBox componentListBox;
@@ -540,6 +566,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panelModelAndSignals;
     }
 }
 
