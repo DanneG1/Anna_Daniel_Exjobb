@@ -137,6 +137,7 @@ namespace ReadDllForm
                 string name = componentListBox.SelectedItem.ToString();
                 _selectedModel = _modelsDictionary[name];
                 ShowSignals(_selectedModel);
+                worstTimeLabel.Text = _selectedModel.getWorstTime();
             }
         }
 
@@ -286,9 +287,10 @@ namespace ReadDllForm
             if (!_modelsDictionary.ContainsKey(model.GetName()))
             {
                 componentListBox.Items.Add(model.GetName());
-                _modelsDictionary.Add(model.GetName(), model);
+                _modelsDictionary.Add(model.GetName(), model);                
             }
         }
+
         private void buttonStep_Click(object sender, EventArgs e)
         {
             if (componentListBox.SelectedIndex != -1)

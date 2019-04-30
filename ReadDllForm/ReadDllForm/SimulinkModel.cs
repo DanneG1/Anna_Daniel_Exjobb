@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using HiQ.HiMacs.WCF.Client;
+using System.Diagnostics;
+
 
 namespace ReadDllForm
 {
@@ -19,6 +21,7 @@ namespace ReadDllForm
         private readonly string _path;
         private readonly string _name;
         private HiCoreClient _hiCore;
+        private readonly string _worstTime;
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
@@ -46,6 +49,10 @@ namespace ReadDllForm
         {
             return _name;
         }
+        public string getWorstTime()
+        {
+            return _worstTime;
+        }
 
         #endregion
 
@@ -59,8 +66,10 @@ namespace ReadDllForm
 
             Initialze();
             ReadXml();
+            _worstTime = findWorstTime();
+
             //Step();//kanske inte ska steppa här?
-        }       
+        }
 
         #region dllFunctions
         private void Initialze()
@@ -94,6 +103,7 @@ namespace ReadDllForm
             Terminate();
         }
         #endregion
+        #region modelFunctions
         private void ReadXml()
         {
             XmlTextReader reader = new XmlTextReader(_directoryPath + "\\modelXML.xml");
@@ -159,6 +169,21 @@ namespace ReadDllForm
             }
             return signals;
         }
+        public string findWorstTime()
+        {
+            List<TimeSpan> timer = new List<TimeSpan>();
+            for (int i = 0; i < 10; ++i)
+            {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
+                Step();
+                sw.Stop();
+                Console.WriteLine(sw.Elapsed);
+                timer.Add(sw.Elapsed);
+            }
+            return timer.Max().ToString();
+        }
+        #endregion
         ~SimulinkModel()
         {
            Terminate();
