@@ -72,7 +72,10 @@ namespace ReadDllForm
 
         public void update()
         {
-            SetSignal(_hiCore.GetValue("", _channelName));
+            if (_channelName != "-")
+            {
+                SetSignal(_hiCore.GetValue("", _channelName));
+            }
         }
 
         public string GetChannelName()
