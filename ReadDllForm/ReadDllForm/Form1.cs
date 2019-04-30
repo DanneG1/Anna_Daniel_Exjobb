@@ -131,8 +131,7 @@ namespace ReadDllForm
                 listViewItem.SubItems.Add(model.GetInSignals()[i].GetSignal().ToString());
                 listViewItem.SubItems.Add(model.GetInSignals()[i].GetChannelName());
                 listViewInSignals.Items.Add(listViewItem);
-                listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+               
             }
             for (int i = 0; i < model.GetOutSignals().Count; i++)
             {
@@ -140,9 +139,12 @@ namespace ReadDllForm
                 listViewItem.SubItems.Add(model.GetOutSignals()[i].GetSignal().ToString());
                 listViewItem.SubItems.Add(model.GetOutSignals()[i].GetChannelName());
                 listViewOutSignals.Items.Add(listViewItem);
-                listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-                listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            }  
+                
+            }
+            listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listViewInSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            listViewOutSignals.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -151,7 +153,8 @@ namespace ReadDllForm
                 string name = componentListBox.SelectedItem.ToString();
                 _selectedModel = _modelsDictionary[name];
                 ShowSignals(_selectedModel);
-                worstTimeLabel.Text = _selectedModel.getWorstTime();
+                string recommendedMaxF = Convert.ToString(Convert.ToInt32(1 / Convert.ToDouble(_selectedModel.getWorstTime()) * 1000));
+                worstTimeLabel.Text = recommendedMaxF;
             }
         }
 
@@ -381,9 +384,9 @@ namespace ReadDllForm
                 {
                     rate = rate.Replace(".", ",");
                 }
-                double test = double.TryParse(rate, out double scanRate) ? scanRate : 1;
-                Console.WriteLine(test);
-                _selectedModel.setSleep(test);
+                double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
+                textBoxFrequency.Text = scanrate.ToString();
+                _selectedModel.setSleep(scanrate);
                 _selectedModel.Run();
                 timerUpdateLists.Start();
             }

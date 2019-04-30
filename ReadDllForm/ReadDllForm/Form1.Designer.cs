@@ -287,7 +287,7 @@
             // 
             // textBoxFrequency
             // 
-            this.textBoxFrequency.Location = new System.Drawing.Point(137, 105);
+            this.textBoxFrequency.Location = new System.Drawing.Point(201, 102);
             this.textBoxFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(74, 22);
@@ -442,7 +442,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 29);
+            this.label5.Location = new System.Drawing.Point(43, 29);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 17);
             this.label5.TabIndex = 19;
@@ -451,17 +451,17 @@
             // worstRuntimeInfoLabel
             // 
             this.worstRuntimeInfoLabel.AutoSize = true;
-            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(30, 69);
+            this.worstRuntimeInfoLabel.Location = new System.Drawing.Point(6, 69);
             this.worstRuntimeInfoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.worstRuntimeInfoLabel.Name = "worstRuntimeInfoLabel";
-            this.worstRuntimeInfoLabel.Size = new System.Drawing.Size(100, 17);
+            this.worstRuntimeInfoLabel.Size = new System.Drawing.Size(165, 17);
             this.worstRuntimeInfoLabel.TabIndex = 16;
-            this.worstRuntimeInfoLabel.Text = "Worst runtime:";
+            this.worstRuntimeInfoLabel.Text = "Recommended max rate:";
             // 
             // worstTimeLabel
             // 
             this.worstTimeLabel.AutoSize = true;
-            this.worstTimeLabel.Location = new System.Drawing.Point(134, 69);
+            this.worstTimeLabel.Location = new System.Drawing.Point(198, 69);
             this.worstTimeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.worstTimeLabel.Name = "worstTimeLabel";
             this.worstTimeLabel.Size = new System.Drawing.Size(13, 17);
@@ -471,7 +471,7 @@
             // labelHiCoreConnection
             // 
             this.labelHiCoreConnection.AutoSize = true;
-            this.labelHiCoreConnection.Location = new System.Drawing.Point(134, 29);
+            this.labelHiCoreConnection.Location = new System.Drawing.Point(198, 29);
             this.labelHiCoreConnection.Name = "labelHiCoreConnection";
             this.labelHiCoreConnection.Size = new System.Drawing.Size(13, 17);
             this.labelHiCoreConnection.TabIndex = 13;
@@ -546,7 +546,7 @@
             // labelFrequency
             // 
             this.labelFrequency.AutoSize = true;
-            this.labelFrequency.Location = new System.Drawing.Point(16, 105);
+            this.labelFrequency.Location = new System.Drawing.Point(57, 102);
             this.labelFrequency.Name = "labelFrequency";
             this.labelFrequency.Size = new System.Drawing.Size(114, 17);
             this.labelFrequency.TabIndex = 22;
