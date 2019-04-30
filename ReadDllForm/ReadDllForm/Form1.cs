@@ -246,7 +246,7 @@ namespace ReadDllForm
         private void buttonConnectSignal_Click(object sender, EventArgs e)
         {
             
-            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"));
+            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetInSignals()[listBoxInputs.SelectedIndex].GetSignalName());
            // hiCoreChannels.Show();
             var result = hiCoreChannels.ShowDialog();
             if (result == DialogResult.OK)
@@ -304,7 +304,7 @@ namespace ReadDllForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"));
+            FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetOutSignals()[listBoxOutSignals.SelectedIndex].GetSignalName());
             // hiCoreChannels.Show();
             var result = hiCoreChannels.ShowDialog();
             if (result == DialogResult.OK)

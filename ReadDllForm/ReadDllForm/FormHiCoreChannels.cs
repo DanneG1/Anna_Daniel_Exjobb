@@ -14,9 +14,10 @@ namespace ReadDllForm
     {
         public string selectedChannel { get; set; }
 
-        public FormHiCoreChannels(List<string>channels)
+        public FormHiCoreChannels(List<string>channels, string signalName)
         {
             InitializeComponent();
+            labelSignalName.Text=signalName;
             foreach (var channel in channels)
             {
                 listBoxHiCoreChannels.Items.Add(channel);
