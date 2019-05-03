@@ -133,10 +133,10 @@ namespace ReadDllForm
                     if (reader.Name == "InSignal")
                     {
                         reader.Read();
-                        string Name = "";
+                        string name = "";
                         if (reader.Name == "Name")
                         {
-                            Name = reader.ReadString();
+                            name = reader.ReadString();
                         }
 
                         reader.Read();
@@ -145,7 +145,7 @@ namespace ReadDllForm
                         {
                             port = Convert.ToInt32(reader.ReadString());
                         }
-                        InSignal inSignal = new InSignal(port, Name, _path,_hiCore);
+                        InSignal inSignal = new InSignal(port, name, _path,_hiCore);
                         //inSignal.SetSignal(5);
                         inSignals.Add(inSignal);
 
