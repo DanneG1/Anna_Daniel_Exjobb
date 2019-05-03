@@ -20,7 +20,7 @@ namespace ReadDllForm
 {
     public partial class Form1 : Form
     {
-        private const string ConnectedString = "ConnectedString";
+        private const string ConnectedString = "Connected";
         private const string NotConnectedString = "Disconnected";
         private const string Solution = "Solution";
         private const string MsBuild = "MsBuild";
