@@ -1,8 +1,8 @@
 #include "stdafx.h"
-#include "C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.h"
-#include "C:\Users\Danne\Documents\MATLAB\trippleinput_different_datatypes_ert_rtw\trippleinput_different_datatypes.cpp"
+#include "C:\Users\Danne\Documents\MATLAB\input_times_5_ert_rtw\input_times_5.h"
+#include "C:\Users\Danne\Documents\MATLAB\input_times_5_ert_rtw\input_times_5.cpp"
 
-  trippleinput_different_datatypesModelClass rObj;
+  input_times_5ModelClass rObj;
 
 
 //extern "C" __declspec(dllexport) !functionType !functionName( !parameters )
@@ -16,13 +16,7 @@ extern "C" __declspec(dllexport) void setInputs(int port,double value)
 {
 	switch(port){
 case 0:
-rObj.trippleinput_different_dataty_U.Input1_signal = value;
-break;
-case 1:
-rObj.trippleinput_different_dataty_U.input2_signal = value;
-break;
-case 2:
-rObj.trippleinput_different_dataty_U.Input3_signal = value;
+rObj.input_times_5_U.Input1 = value;
 break;
 	}
 }
@@ -31,11 +25,7 @@ extern "C" __declspec(dllexport) double getOutputs(int port)
 {
 	switch(port){
 case 0:
- return rObj.trippleinput_different_dataty_Y.Addition_output ;
-case 1:
- return rObj.trippleinput_different_dataty_Y.Input2_copyOutport ;
-case 2:
- return rObj.trippleinput_different_dataty_Y.Multiply_Output ;
+ return rObj.input_times_5_Y.Out1 ;
 	default:
 		return -1;
 	}
@@ -45,11 +35,7 @@ extern "C" __declspec(dllexport) double getInputs(int port)
 {
 	switch(port){
 case 0:
- return rObj.trippleinput_different_dataty_U.Input1_signal ;
-case 1:
- return rObj.trippleinput_different_dataty_U.input2_signal ;
-case 2:
- return rObj.trippleinput_different_dataty_U.Input3_signal ;
+ return rObj.input_times_5_U.Input1 ;
 	default:
 		return -1;
 	}

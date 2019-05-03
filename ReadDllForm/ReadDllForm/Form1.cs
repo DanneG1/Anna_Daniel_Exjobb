@@ -352,27 +352,30 @@ namespace ReadDllForm
 
         private void buttonRunModel_Click(object sender, EventArgs e)
         {
-            if (_selectedModel.getRunning())
+            foreach (var model in _modelsDictionary.Values)
             {
-                _selectedModel.setRunning(false);
-                buttonRunModel.Text = @"Run model";
-                timerUpdateLists.Stop();
-                _selectedModel.StopRun();
-            }
-            else
-            {
-                _selectedModel.setRunning(true);
-                buttonRunModel.Text = @"Stop model";
-                string rate = textBoxFrequency.Text;
-                if (rate.Contains("."))
+                if (model.getRunning())
                 {
-                    rate = rate.Replace(".", ",");
+                    model.setRunning(false);
+                    buttonRunModel.Text = @"Run model";
+                    timerUpdateLists.Stop();
+                    model.StopRun();
                 }
-                double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
-                textBoxFrequency.Text = scanrate.ToString();
-                _selectedModel.setSleep(scanrate);
-                _selectedModel.Run();
-                timerUpdateLists.Start();
+                else
+                {
+                    model.setRunning(true);
+                    buttonRunModel.Text = @"Stop model";
+                    string rate = textBoxFrequency.Text;
+                    if (rate.Contains("."))
+                    {
+                        rate = rate.Replace(".", ",");
+                    }
+                    double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
+                    textBoxFrequency.Text = scanrate.ToString();
+                    model.setSleep(scanrate);
+                    model.Run();
+                    timerUpdateLists.Start();
+                }
             }
         }
 
