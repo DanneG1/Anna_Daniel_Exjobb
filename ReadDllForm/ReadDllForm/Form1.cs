@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ReadDllForm.Properties;
-using HiQ.HiMacs.HiServices;
-using HiQ.HiMacs.WCF;
 using HiQ.HiMacs.WCF.Client;
 
 
