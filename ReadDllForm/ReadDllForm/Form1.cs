@@ -377,14 +377,14 @@ namespace ReadDllForm
                     model.setSleep(scanrate);
                     model.Run();
                     timerUpdateLists.Start();
-
-                    //ny info
-                    ModelPerformance mp = new ModelPerformance();
-                    mp.setModelDict(_modelsDictionary);
-                    mp.Show();           
-                    
                 }
             }
+            if(buttonRunModel.Text==@"Stop model")
+            {
+                ModelPerformance mp = new ModelPerformance(_modelsDictionary);
+                mp.Show();
+            }
+            
         }
 
         private void timerUpdateLists_Tick(object sender, EventArgs e)
