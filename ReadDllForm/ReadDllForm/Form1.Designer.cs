@@ -48,6 +48,9 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panelSaveModel = new System.Windows.Forms.Panel();
+            this.textBoxProjectName = new System.Windows.Forms.TextBox();
+            this.labelProjectNAme = new System.Windows.Forms.Label();
             this.btnSaveProject = new System.Windows.Forms.Button();
             this.checkBoxProject = new System.Windows.Forms.CheckBox();
             this.checkBoxModel = new System.Windows.Forms.CheckBox();
@@ -87,19 +90,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timerUpdateLists = new System.Windows.Forms.Timer(this.components);
             this.timerConnect = new System.Windows.Forms.Timer(this.components);
-            this.textBoxProjectName = new System.Windows.Forms.TextBox();
-            this.labelProjectNAme = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panelSaveModel.SuspendLayout();
             this.panelLoadProject.SuspendLayout();
             this.panelLoadModel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panelModelAndSignals.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -273,7 +273,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.panel1);
+            this.tabPage2.Controls.Add(this.panelSaveModel);
             this.tabPage2.Controls.Add(this.checkBoxProject);
             this.tabPage2.Controls.Add(this.checkBoxModel);
             this.tabPage2.Controls.Add(this.panelLoadProject);
@@ -288,6 +288,32 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panelSaveModel
+            // 
+            this.panelSaveModel.Controls.Add(this.textBoxProjectName);
+            this.panelSaveModel.Controls.Add(this.labelProjectNAme);
+            this.panelSaveModel.Controls.Add(this.btnSaveProject);
+            this.panelSaveModel.Location = new System.Drawing.Point(12, 482);
+            this.panelSaveModel.Name = "panelSaveModel";
+            this.panelSaveModel.Size = new System.Drawing.Size(447, 56);
+            this.panelSaveModel.TabIndex = 31;
+            // 
+            // textBoxProjectName
+            // 
+            this.textBoxProjectName.Location = new System.Drawing.Point(104, 18);
+            this.textBoxProjectName.Name = "textBoxProjectName";
+            this.textBoxProjectName.Size = new System.Drawing.Size(143, 22);
+            this.textBoxProjectName.TabIndex = 29;
+            // 
+            // labelProjectNAme
+            // 
+            this.labelProjectNAme.AutoSize = true;
+            this.labelProjectNAme.Location = new System.Drawing.Point(6, 21);
+            this.labelProjectNAme.Name = "labelProjectNAme";
+            this.labelProjectNAme.Size = new System.Drawing.Size(95, 17);
+            this.labelProjectNAme.TabIndex = 30;
+            this.labelProjectNAme.Text = "Project name:";
             // 
             // btnSaveProject
             // 
@@ -655,32 +681,6 @@
             // 
             this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
-            // textBoxProjectName
-            // 
-            this.textBoxProjectName.Location = new System.Drawing.Point(104, 18);
-            this.textBoxProjectName.Name = "textBoxProjectName";
-            this.textBoxProjectName.Size = new System.Drawing.Size(143, 22);
-            this.textBoxProjectName.TabIndex = 29;
-            // 
-            // labelProjectNAme
-            // 
-            this.labelProjectNAme.AutoSize = true;
-            this.labelProjectNAme.Location = new System.Drawing.Point(6, 21);
-            this.labelProjectNAme.Name = "labelProjectNAme";
-            this.labelProjectNAme.Size = new System.Drawing.Size(95, 17);
-            this.labelProjectNAme.TabIndex = 30;
-            this.labelProjectNAme.Text = "Project name:";
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.textBoxProjectName);
-            this.panel1.Controls.Add(this.labelProjectNAme);
-            this.panel1.Controls.Add(this.btnSaveProject);
-            this.panel1.Location = new System.Drawing.Point(12, 482);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(447, 56);
-            this.panel1.TabIndex = 31;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -699,6 +699,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panelSaveModel.ResumeLayout(false);
+            this.panelSaveModel.PerformLayout();
             this.panelLoadProject.ResumeLayout(false);
             this.panelLoadProject.PerformLayout();
             this.panelLoadModel.ResumeLayout(false);
@@ -707,8 +709,6 @@
             this.groupBox3.PerformLayout();
             this.panelModelAndSignals.ResumeLayout(false);
             this.panelModelAndSignals.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -773,7 +773,7 @@
         private System.Windows.Forms.Button btnLoadProject;
         private System.Windows.Forms.Panel panelLoadModel;
         private System.Windows.Forms.Button btnSaveProject;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelSaveModel;
         private System.Windows.Forms.TextBox textBoxProjectName;
         private System.Windows.Forms.Label labelProjectNAme;
     }

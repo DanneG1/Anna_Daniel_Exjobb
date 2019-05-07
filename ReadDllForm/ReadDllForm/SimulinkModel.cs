@@ -50,6 +50,14 @@ namespace ReadDllForm
             return _outSignals;
         }
 
+        public List<ISignal> GetAllSignals()
+        {
+            List<ISignal> allSignals = new List<ISignal>();
+            allSignals.AddRange(_inSignals);
+            allSignals.AddRange(_outSignals);
+            return allSignals;
+        }
+
         public string GetName()
         {
             return _name;

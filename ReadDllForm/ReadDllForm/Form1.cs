@@ -359,6 +359,7 @@ namespace ReadDllForm
                 if (model.getRunning())
                 {
                     model.setRunning(false);
+                    panelSaveModel.Enabled = true;
                     buttonRunModel.Text = @"Run model";
                     timerUpdateLists.Stop();
                     model.StopRun();
@@ -366,6 +367,7 @@ namespace ReadDllForm
                 else
                 {
                     model.setRunning(true);
+                    panelSaveModel.Enabled = false;
                     buttonRunModel.Text = @"Stop model";
                     string rate = textBoxFrequency.Text;
                     if (rate.Contains("."))
@@ -435,6 +437,7 @@ namespace ReadDllForm
 
         private void btnLoadProject_Click(object sender, EventArgs e)
         {
+            int channelsNotFound = 0;
            _modelsDictionary.Clear();
             componentListBox.Items.Clear();
             listViewInSignals.Items.Clear();
@@ -447,9 +450,24 @@ namespace ReadDllForm
             {
                 _modelsDictionary.Add(model.GetName(),model);
                 componentListBox.Items.Add(model.GetName());
+                List<string> names=_hiCore.GetChannelNames("HiModels");
+                foreach (var signal in model.GetAllSignals())
+                {
+                    if (signal.GetChannelName()!="-"&&!names.Contains(signal.GetChannelName()))
+                    {
+                        signal.SetChannelName("-");
+                        channelsNotFound += 1;
+                    }
 
+                }
+                if (channelsNotFound > 0)
+                {
+                    string message = $@"{channelsNotFound}{" signals had a connection to a channel that wasn't found in HiCore channels."}";
+                    string title = "Message";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, title, buttons);
+                }
             }
-
         }
 
         private void btnBrowseProject_Click(object sender, EventArgs e)
