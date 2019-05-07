@@ -15,7 +15,7 @@ using System.Threading;
 namespace ReadDllForm
 {
 
-    class SimulinkModel
+    public class SimulinkModel
     {
         private readonly IntPtr _pDll;
         private readonly string _directoryPath;
@@ -29,6 +29,7 @@ namespace ReadDllForm
 
         private List<ISignal> inSignals = new List<ISignal>();
         private List<ISignal> outSignals = new List<ISignal>();
+        public List<double> timeSample = new List<double>();
 
         #region Dlldelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -223,6 +224,9 @@ namespace ReadDllForm
         public void StopRun()
         {
             threadRun.Abort();
+
+            //timer
+            timeSample.Clear();
         }
 
 
@@ -230,7 +234,11 @@ namespace ReadDllForm
         {
             while (running)
             {
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 Step();
+                sw.Stop();
+                timeSample.Add(sw.Elapsed.TotalMilliseconds);
                 Thread.Sleep(Convert.ToInt32(1000/sleep));
             }
         }

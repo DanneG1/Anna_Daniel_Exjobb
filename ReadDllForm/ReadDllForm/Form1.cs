@@ -375,6 +375,12 @@ namespace ReadDllForm
                     model.setSleep(scanrate);
                     model.Run();
                     timerUpdateLists.Start();
+
+                    //ny info
+                    ModelPerformance mp = new ModelPerformance();
+                    mp.setModelDict(_modelsDictionary);
+                    mp.Show();           
+                    
                 }
             }
         }
@@ -390,6 +396,11 @@ namespace ReadDllForm
             {
                 OpenHiCoreConnection();
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
