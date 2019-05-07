@@ -27,8 +27,8 @@ namespace ReadDllForm
         private double sleep;
         public Thread threadRun;
 
-        private List<ISignal> inSignals = new List<ISignal>();
-        private List<ISignal> outSignals = new List<ISignal>();
+        private List<ISignal> _inSignals = new List<ISignal>();
+        private List<ISignal> _outSignals = new List<ISignal>();
         public List<double> timeSample = new List<double>();
 
         #region Dlldelegates
@@ -43,11 +43,11 @@ namespace ReadDllForm
         #region Getters and setters
         public List<ISignal> GetInSignals()
         {
-            return inSignals;
+            return _inSignals;
         }
         public List<ISignal> GetOutSignals()
         {
-            return outSignals;
+            return _outSignals;
         }
 
         public string GetName()
@@ -75,8 +75,25 @@ namespace ReadDllForm
             return sleep;
         }
 
+        public string GetPath()
+        {
+            return _path;
+        }
+
         #endregion
 
+        public SimulinkModel( string path, HiCoreClient hicore,List<ISignal>inSignals,List<ISignal>outSignals)
+        {
+            _hiCore = hicore;
+            _pDll = NativeMethods.LoadLibrary(path);
+            _path = path;
+            _directoryPath = Path.GetDirectoryName(path);
+            _name = new DirectoryInfo(_directoryPath).Name;
+
+            Initialze();
+            _inSignals = inSignals;
+            _outSignals = outSignals;
+        }
         public SimulinkModel(string path,HiCoreClient hicore)
         {
             _hiCore = hicore;
@@ -88,6 +105,11 @@ namespace ReadDllForm
             Initialze();
             ReadXml();
             _worstTime = findWorstTime();
+        }
+        public void LoadSignalLists(List<ISignal> inSignals, List<ISignal> outSignals)
+        {
+           _inSignals = inSignals;
+            _outSignals=outSignals;
         }
 
         #region dllFunctions
@@ -101,7 +123,7 @@ namespace ReadDllForm
         }
         public void Step()
         {
-            foreach (var inSignal in inSignals)
+            foreach (var inSignal in _inSignals)
             {
                 inSignal.update();
             }
@@ -109,7 +131,7 @@ namespace ReadDllForm
             step Step =
                 (step)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(step));
             Step();
-            foreach (var outSignal in outSignals)
+            foreach (var outSignal in _outSignals)
             {
                 outSignal.update();
             }
@@ -148,7 +170,7 @@ namespace ReadDllForm
                         }
                         InSignal inSignal = new InSignal(port, name, _path,_hiCore);
                         //inSignal.SetSignal(5);
-                        inSignals.Add(inSignal);
+                        _inSignals.Add(inSignal);
 
 
                     }
@@ -167,7 +189,7 @@ namespace ReadDllForm
                             port = Convert.ToInt32(reader.ReadString());
                         }
                         OutSignal outSignal = new OutSignal(port, Name, _path,_hiCore);
-                        outSignals.Add(outSignal);
+                        _outSignals.Add(outSignal);
                     }
                 }
             }
@@ -176,13 +198,13 @@ namespace ReadDllForm
         {
             string signals="";
             signals += "In signals: " + Environment.NewLine;
-            foreach (var signal in inSignals)
+            foreach (var signal in _inSignals)
             {
                 signals+= signal.GetSignalAsString();
                 signals += "\n";
             }
             signals += Environment.NewLine+ "Out signals: " + Environment.NewLine;
-            foreach (var signal in outSignals)
+            foreach (var signal in _outSignals)
             {
                 signals += signal.GetSignalAsString();
             }

@@ -79,6 +79,7 @@ namespace ReadDllForm
             labelHiCoreConnection.ForeColor = Color.Green;
             labelHiCoreConnection.Text = ConnectedString;
             buttonLoadModel.Enabled = true;
+            btnLoadProject.Enabled = true;
             panelModelAndSignals.Enabled = true;
 
         }
@@ -89,6 +90,7 @@ namespace ReadDllForm
             labelHiCoreConnection.ForeColor = Color.Red;
             labelHiCoreConnection.Text = NotConnectedString;
             buttonLoadModel.Enabled = false;
+            btnLoadProject.Enabled = false;
             panelModelAndSignals.Enabled = false;
             timerConnect.Start();
         }
@@ -401,6 +403,61 @@ namespace ReadDllForm
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBoxModel_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxProject.Checked=!checkBoxModel.Checked;
+            panelLoadProject.Enabled = !checkBoxModel.Checked;
+        }
+
+        private void checkBoxProject_CheckedChanged(object sender, EventArgs e)
+        {
+            checkBoxModel.Checked = !checkBoxProject.Checked;
+            panelLoadModel.Enabled = !checkBoxProject.Checked;
+        }
+
+        private void btnSaveProject_Click(object sender, EventArgs e)
+        {
+            List<SimulinkModel> models=new List<SimulinkModel>();
+            foreach (var model in _modelsDictionary)
+            {
+                models.Add(model.Value);
+            }
+            XmlHelper xmlHelper=new XmlHelper();
+            xmlHelper.SaveProject(models,"projektnamn");
+        }
+
+        private void btnLoadProject_Click(object sender, EventArgs e)
+        {
+           
+            XmlHelper xmlHelper=new XmlHelper();
+
+            List<SimulinkModel> models = xmlHelper.LoadProject(textBoxProjectXml.Text, _hiCore);
+            foreach (var model in models)
+            {
+                _modelsDictionary.Add(model.GetName(),model);
+                componentListBox.Items.Add(model.GetName());
+
+            }
+
+        }
+
+        private void btnBrowseProject_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openXml = new OpenFileDialog();
+            if (Settings.Default[TargetFolder].ToString() != "")
+            {
+               //openDll.InitialDirectory = Settings.Default[TargetFolder].ToString();
+            }
+
+            openXml.Filter = @"xml files(*.xml)|*.xml";
+            if (openXml.ShowDialog() == DialogResult.OK)
+            {
+                string xmlFileName = openXml.FileName;
+                textBoxProjectXml.Text = xmlFileName;
+                textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
+            }
         }
     }
 }

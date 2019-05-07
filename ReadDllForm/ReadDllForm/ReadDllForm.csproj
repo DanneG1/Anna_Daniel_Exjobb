@@ -77,6 +77,7 @@
     <Compile Include="InSignal.cs" />
     <Compile Include="ISignal.cs" />
     <Compile Include="SimulinkModel.cs" />
+    <Compile Include="XmlHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

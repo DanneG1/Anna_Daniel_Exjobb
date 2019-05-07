@@ -18,6 +18,7 @@ namespace ReadDllForm
 
         void SetChannelName(string channelName);
 
+        int GetPortNumber();
         void update();
         string GetChannelName();
     }

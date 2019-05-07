@@ -23,14 +23,23 @@ namespace ReadDllForm
         private delegate double GetInputs(int port);
         #endregion
 
-        public InSignal(int port,string Name, string path,HiCoreClient hiCore)
+        public InSignal(int port,string name, string path,HiCoreClient hiCore)
         {
             _hiCore = hiCore;
             _portNumber = port;
-            _portName = Name;
+            _portName = name;
             _pDll = NativeMethods.LoadLibrary(path);
 
-        } 
+        }
+        public InSignal(int port, string name, string path, HiCoreClient hiCore,string channelName)
+        {
+            _hiCore = hiCore;
+            _portNumber = port;
+            _portName = name;
+            _pDll = NativeMethods.LoadLibrary(path);
+            _channelName = channelName;
+
+        }
 
         #region DllFunctions
         public void SetSignal(double value)
@@ -64,6 +73,11 @@ namespace ReadDllForm
         public void SetChannelName(string channelName)
         {
             _channelName = channelName;
+        }
+
+        public int GetPortNumber()
+        {
+            return _portNumber;
         }
 
         public void update()
