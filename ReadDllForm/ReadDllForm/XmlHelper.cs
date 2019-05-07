@@ -31,9 +31,7 @@ namespace ReadDllForm
 
         private static void WriteModel(XmlTextWriter xWriter, SimulinkModel model)
         {
-            xWriter.WriteStartElement("ModelName");
-            xWriter.WriteString(model.GetName());
-            xWriter.WriteEndElement();
+           
             xWriter.WriteStartElement("Path");
             xWriter.WriteString(model.GetPath());
             xWriter.WriteEndElement();
@@ -84,10 +82,7 @@ namespace ReadDllForm
                         inSignals=new List<ISignal>();
                         outSignals=new List<ISignal>();
                     }
-                        if (reader.Name == "ModelName")
-                        {
-                            modelName = reader.ReadString();//kan ta bort modelname
-                        }
+                       
                     if (reader.Name == "Path")
                         {
                             path = reader.ReadString();
@@ -145,10 +140,7 @@ namespace ReadDllForm
                             }
 
                         }
-                   
-
                 }
-
 
             }
 

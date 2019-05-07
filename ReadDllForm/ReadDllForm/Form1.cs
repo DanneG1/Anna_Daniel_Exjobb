@@ -146,8 +146,8 @@ namespace ReadDllForm
                 string name = componentListBox.SelectedItem.ToString();
                 _selectedModel = _modelsDictionary[name];
                 ShowSignals(_selectedModel);
-                string recommendedMaxF = Convert.ToString(Convert.ToInt32(1 / Convert.ToDouble(_selectedModel.getWorstTime()) * 1000));
-                worstTimeLabel.Text = recommendedMaxF;
+               // string recommendedMaxF = Convert.ToString(Convert.ToInt32(1 / Convert.ToDouble(_selectedModel.getWorstTime()) * 1000));
+                //worstTimeLabel.Text = recommendedMaxF;
             }
         }
 
