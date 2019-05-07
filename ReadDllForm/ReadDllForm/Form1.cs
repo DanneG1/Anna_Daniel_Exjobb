@@ -419,18 +419,27 @@ namespace ReadDllForm
 
         private void btnSaveProject_Click(object sender, EventArgs e)
         {
-            List<SimulinkModel> models=new List<SimulinkModel>();
-            foreach (var model in _modelsDictionary)
+            if (textBoxProjectName.Text != "")
             {
-                models.Add(model.Value);
+                List<SimulinkModel> models = new List<SimulinkModel>();
+                foreach (var model in _modelsDictionary)
+                {
+                    models.Add(model.Value);
+                }
+                XmlHelper xmlHelper = new XmlHelper();
+                xmlHelper.SaveProject(models, textBoxProjectName.Text);
+                textBoxProjectName.Text = "";
             }
-            XmlHelper xmlHelper=new XmlHelper();
-            xmlHelper.SaveProject(models,"projektnamn");
+            
         }
 
         private void btnLoadProject_Click(object sender, EventArgs e)
         {
-           
+           _modelsDictionary.Clear();
+            componentListBox.Items.Clear();
+            listViewInSignals.Items.Clear();
+            listViewOutSignals.Items.Clear();
+            
             XmlHelper xmlHelper=new XmlHelper();
 
             List<SimulinkModel> models = xmlHelper.LoadProject(textBoxProjectXml.Text, _hiCore);

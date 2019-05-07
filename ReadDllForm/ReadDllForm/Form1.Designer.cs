@@ -48,6 +48,19 @@
             this.tabControlInputs = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnSaveProject = new System.Windows.Forms.Button();
+            this.checkBoxProject = new System.Windows.Forms.CheckBox();
+            this.checkBoxModel = new System.Windows.Forms.CheckBox();
+            this.panelLoadProject = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnBrowseProject = new System.Windows.Forms.Button();
+            this.textBoxProjectXml = new System.Windows.Forms.TextBox();
+            this.btnLoadProject = new System.Windows.Forms.Button();
+            this.panelLoadModel = new System.Windows.Forms.Panel();
+            this.labelModelLoad = new System.Windows.Forms.Label();
+            this.buttonBrowseModel = new System.Windows.Forms.Button();
+            this.textBoxDll = new System.Windows.Forms.TextBox();
+            this.buttonLoadModel = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelFrequency = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -72,31 +85,21 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonConnectInSignal = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.buttonStep = new System.Windows.Forms.Button();
-            this.buttonLoadModel = new System.Windows.Forms.Button();
-            this.labelModelLoad = new System.Windows.Forms.Label();
-            this.textBoxDll = new System.Windows.Forms.TextBox();
-            this.buttonBrowseModel = new System.Windows.Forms.Button();
             this.timerUpdateLists = new System.Windows.Forms.Timer(this.components);
             this.timerConnect = new System.Windows.Forms.Timer(this.components);
-            this.panelLoadModel = new System.Windows.Forms.Panel();
-            this.panelLoadProject = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnBrowseProject = new System.Windows.Forms.Button();
-            this.textBoxProjectXml = new System.Windows.Forms.TextBox();
-            this.btnLoadProject = new System.Windows.Forms.Button();
-            this.checkBoxModel = new System.Windows.Forms.CheckBox();
-            this.checkBoxProject = new System.Windows.Forms.CheckBox();
-            this.btnSaveProject = new System.Windows.Forms.Button();
+            this.textBoxProjectName = new System.Windows.Forms.TextBox();
+            this.labelProjectNAme = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.panelLoadProject.SuspendLayout();
+            this.panelLoadModel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panelModelAndSignals.SuspendLayout();
-            this.panelLoadModel.SuspendLayout();
-            this.panelLoadProject.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -262,7 +265,7 @@
             this.tabPage1.Controls.Add(this.btnGenerateDll);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(930, 555);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
@@ -270,7 +273,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btnSaveProject);
+            this.tabPage2.Controls.Add(this.panel1);
             this.tabPage2.Controls.Add(this.checkBoxProject);
             this.tabPage2.Controls.Add(this.checkBoxModel);
             this.tabPage2.Controls.Add(this.panelLoadProject);
@@ -278,14 +281,144 @@
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.buttonRunModel);
             this.tabPage2.Controls.Add(this.panelModelAndSignals);
-            this.tabPage2.Controls.Add(this.buttonStep);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(930, 555);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveProject
+            // 
+            this.btnSaveProject.Location = new System.Drawing.Point(253, 14);
+            this.btnSaveProject.Name = "btnSaveProject";
+            this.btnSaveProject.Size = new System.Drawing.Size(180, 30);
+            this.btnSaveProject.TabIndex = 28;
+            this.btnSaveProject.Text = "Save Project";
+            this.btnSaveProject.UseVisualStyleBackColor = true;
+            this.btnSaveProject.Click += new System.EventHandler(this.btnSaveProject_Click);
+            // 
+            // checkBoxProject
+            // 
+            this.checkBoxProject.AutoSize = true;
+            this.checkBoxProject.Location = new System.Drawing.Point(135, 6);
+            this.checkBoxProject.Name = "checkBoxProject";
+            this.checkBoxProject.Size = new System.Drawing.Size(110, 21);
+            this.checkBoxProject.TabIndex = 27;
+            this.checkBoxProject.Text = "Load Project";
+            this.checkBoxProject.UseVisualStyleBackColor = true;
+            this.checkBoxProject.CheckedChanged += new System.EventHandler(this.checkBoxProject_CheckedChanged);
+            // 
+            // checkBoxModel
+            // 
+            this.checkBoxModel.AutoSize = true;
+            this.checkBoxModel.Checked = true;
+            this.checkBoxModel.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxModel.Location = new System.Drawing.Point(12, 6);
+            this.checkBoxModel.Name = "checkBoxModel";
+            this.checkBoxModel.Size = new System.Drawing.Size(104, 21);
+            this.checkBoxModel.TabIndex = 26;
+            this.checkBoxModel.Text = "Load Model";
+            this.checkBoxModel.UseVisualStyleBackColor = true;
+            this.checkBoxModel.CheckedChanged += new System.EventHandler(this.checkBoxModel_CheckedChanged);
+            // 
+            // panelLoadProject
+            // 
+            this.panelLoadProject.Controls.Add(this.label6);
+            this.panelLoadProject.Controls.Add(this.btnBrowseProject);
+            this.panelLoadProject.Controls.Add(this.textBoxProjectXml);
+            this.panelLoadProject.Controls.Add(this.btnLoadProject);
+            this.panelLoadProject.Enabled = false;
+            this.panelLoadProject.Location = new System.Drawing.Point(12, 105);
+            this.panelLoadProject.Name = "panelLoadProject";
+            this.panelLoadProject.Size = new System.Drawing.Size(508, 54);
+            this.panelLoadProject.TabIndex = 25;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(98, 17);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Project (.xml) :";
+            // 
+            // btnBrowseProject
+            // 
+            this.btnBrowseProject.Location = new System.Drawing.Point(319, 14);
+            this.btnBrowseProject.Name = "btnBrowseProject";
+            this.btnBrowseProject.Size = new System.Drawing.Size(75, 30);
+            this.btnBrowseProject.TabIndex = 0;
+            this.btnBrowseProject.Text = "Browse..";
+            this.btnBrowseProject.UseVisualStyleBackColor = true;
+            this.btnBrowseProject.Click += new System.EventHandler(this.btnBrowseProject_Click);
+            // 
+            // textBoxProjectXml
+            // 
+            this.textBoxProjectXml.Location = new System.Drawing.Point(110, 18);
+            this.textBoxProjectXml.Name = "textBoxProjectXml";
+            this.textBoxProjectXml.Size = new System.Drawing.Size(203, 22);
+            this.textBoxProjectXml.TabIndex = 1;
+            // 
+            // btnLoadProject
+            // 
+            this.btnLoadProject.Enabled = false;
+            this.btnLoadProject.Location = new System.Drawing.Point(400, 14);
+            this.btnLoadProject.Name = "btnLoadProject";
+            this.btnLoadProject.Size = new System.Drawing.Size(97, 30);
+            this.btnLoadProject.TabIndex = 3;
+            this.btnLoadProject.Text = "Load project";
+            this.btnLoadProject.UseVisualStyleBackColor = true;
+            this.btnLoadProject.Click += new System.EventHandler(this.btnLoadProject_Click);
+            // 
+            // panelLoadModel
+            // 
+            this.panelLoadModel.Controls.Add(this.labelModelLoad);
+            this.panelLoadModel.Controls.Add(this.buttonBrowseModel);
+            this.panelLoadModel.Controls.Add(this.textBoxDll);
+            this.panelLoadModel.Controls.Add(this.buttonLoadModel);
+            this.panelLoadModel.Location = new System.Drawing.Point(12, 33);
+            this.panelLoadModel.Name = "panelLoadModel";
+            this.panelLoadModel.Size = new System.Drawing.Size(508, 54);
+            this.panelLoadModel.TabIndex = 24;
+            // 
+            // labelModelLoad
+            // 
+            this.labelModelLoad.AutoSize = true;
+            this.labelModelLoad.Location = new System.Drawing.Point(6, 21);
+            this.labelModelLoad.Name = "labelModelLoad";
+            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
+            this.labelModelLoad.TabIndex = 2;
+            this.labelModelLoad.Text = "Model (.dll) :";
+            // 
+            // buttonBrowseModel
+            // 
+            this.buttonBrowseModel.Location = new System.Drawing.Point(319, 14);
+            this.buttonBrowseModel.Name = "buttonBrowseModel";
+            this.buttonBrowseModel.Size = new System.Drawing.Size(75, 30);
+            this.buttonBrowseModel.TabIndex = 0;
+            this.buttonBrowseModel.Text = "Browse..";
+            this.buttonBrowseModel.UseVisualStyleBackColor = true;
+            this.buttonBrowseModel.Click += new System.EventHandler(this.buttonBrowseModel_Click);
+            // 
+            // textBoxDll
+            // 
+            this.textBoxDll.Location = new System.Drawing.Point(110, 18);
+            this.textBoxDll.Name = "textBoxDll";
+            this.textBoxDll.Size = new System.Drawing.Size(203, 22);
+            this.textBoxDll.TabIndex = 1;
+            // 
+            // buttonLoadModel
+            // 
+            this.buttonLoadModel.Enabled = false;
+            this.buttonLoadModel.Location = new System.Drawing.Point(400, 14);
+            this.buttonLoadModel.Name = "buttonLoadModel";
+            this.buttonLoadModel.Size = new System.Drawing.Size(97, 30);
+            this.buttonLoadModel.TabIndex = 3;
+            this.buttonLoadModel.Text = "Load model";
+            this.buttonLoadModel.UseVisualStyleBackColor = true;
+            this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
             // groupBox3
             // 
@@ -332,7 +465,7 @@
             // textBoxFrequency
             // 
             this.textBoxFrequency.Location = new System.Drawing.Point(201, 102);
-            this.textBoxFrequency.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxFrequency.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFrequency.Name = "textBoxFrequency";
             this.textBoxFrequency.Size = new System.Drawing.Size(74, 22);
             this.textBoxFrequency.TabIndex = 21;
@@ -360,8 +493,8 @@
             // 
             // buttonRunModel
             // 
-            this.buttonRunModel.Location = new System.Drawing.Point(675, 505);
-            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRunModel.Location = new System.Drawing.Point(788, 508);
+            this.buttonRunModel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRunModel.Name = "buttonRunModel";
             this.buttonRunModel.Size = new System.Drawing.Size(126, 30);
             this.buttonRunModel.TabIndex = 22;
@@ -391,7 +524,7 @@
             this.componentListBox.FormattingEnabled = true;
             this.componentListBox.ItemHeight = 16;
             this.componentListBox.Location = new System.Drawing.Point(13, 37);
-            this.componentListBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.componentListBox.Margin = new System.Windows.Forms.Padding(2);
             this.componentListBox.Name = "componentListBox";
             this.componentListBox.Size = new System.Drawing.Size(190, 196);
             this.componentListBox.TabIndex = 7;
@@ -514,53 +647,6 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Out signals:";
             // 
-            // buttonStep
-            // 
-            this.buttonStep.Location = new System.Drawing.Point(838, 505);
-            this.buttonStep.Name = "buttonStep";
-            this.buttonStep.Size = new System.Drawing.Size(75, 30);
-            this.buttonStep.TabIndex = 6;
-            this.buttonStep.Text = "Step";
-            this.buttonStep.UseVisualStyleBackColor = true;
-            this.buttonStep.Click += new System.EventHandler(this.buttonStep_Click);
-            // 
-            // buttonLoadModel
-            // 
-            this.buttonLoadModel.Enabled = false;
-            this.buttonLoadModel.Location = new System.Drawing.Point(400, 14);
-            this.buttonLoadModel.Name = "buttonLoadModel";
-            this.buttonLoadModel.Size = new System.Drawing.Size(97, 30);
-            this.buttonLoadModel.TabIndex = 3;
-            this.buttonLoadModel.Text = "Load model";
-            this.buttonLoadModel.UseVisualStyleBackColor = true;
-            this.buttonLoadModel.Click += new System.EventHandler(this.buttonLoad_Click);
-            // 
-            // labelModelLoad
-            // 
-            this.labelModelLoad.AutoSize = true;
-            this.labelModelLoad.Location = new System.Drawing.Point(6, 21);
-            this.labelModelLoad.Name = "labelModelLoad";
-            this.labelModelLoad.Size = new System.Drawing.Size(86, 17);
-            this.labelModelLoad.TabIndex = 2;
-            this.labelModelLoad.Text = "Model (.dll) :";
-            // 
-            // textBoxDll
-            // 
-            this.textBoxDll.Location = new System.Drawing.Point(110, 18);
-            this.textBoxDll.Name = "textBoxDll";
-            this.textBoxDll.Size = new System.Drawing.Size(203, 22);
-            this.textBoxDll.TabIndex = 1;
-            // 
-            // buttonBrowseModel
-            // 
-            this.buttonBrowseModel.Location = new System.Drawing.Point(319, 14);
-            this.buttonBrowseModel.Name = "buttonBrowseModel";
-            this.buttonBrowseModel.Size = new System.Drawing.Size(75, 30);
-            this.buttonBrowseModel.TabIndex = 0;
-            this.buttonBrowseModel.Text = "Browse..";
-            this.buttonBrowseModel.UseVisualStyleBackColor = true;
-            this.buttonBrowseModel.Click += new System.EventHandler(this.buttonBrowseModel_Click);
-            // 
             // timerUpdateLists
             // 
             this.timerUpdateLists.Tick += new System.EventHandler(this.timerUpdateLists_Tick);
@@ -569,100 +655,31 @@
             // 
             this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
-            // panelLoadModel
+            // textBoxProjectName
             // 
-            this.panelLoadModel.Controls.Add(this.labelModelLoad);
-            this.panelLoadModel.Controls.Add(this.buttonBrowseModel);
-            this.panelLoadModel.Controls.Add(this.textBoxDll);
-            this.panelLoadModel.Controls.Add(this.buttonLoadModel);
-            this.panelLoadModel.Location = new System.Drawing.Point(12, 33);
-            this.panelLoadModel.Name = "panelLoadModel";
-            this.panelLoadModel.Size = new System.Drawing.Size(508, 54);
-            this.panelLoadModel.TabIndex = 24;
+            this.textBoxProjectName.Location = new System.Drawing.Point(104, 18);
+            this.textBoxProjectName.Name = "textBoxProjectName";
+            this.textBoxProjectName.Size = new System.Drawing.Size(143, 22);
+            this.textBoxProjectName.TabIndex = 29;
             // 
-            // panelLoadProject
+            // labelProjectNAme
             // 
-            this.panelLoadProject.Controls.Add(this.label6);
-            this.panelLoadProject.Controls.Add(this.btnBrowseProject);
-            this.panelLoadProject.Controls.Add(this.textBoxProjectXml);
-            this.panelLoadProject.Controls.Add(this.btnLoadProject);
-            this.panelLoadProject.Enabled = false;
-            this.panelLoadProject.Location = new System.Drawing.Point(12, 105);
-            this.panelLoadProject.Name = "panelLoadProject";
-            this.panelLoadProject.Size = new System.Drawing.Size(508, 54);
-            this.panelLoadProject.TabIndex = 25;
+            this.labelProjectNAme.AutoSize = true;
+            this.labelProjectNAme.Location = new System.Drawing.Point(6, 21);
+            this.labelProjectNAme.Name = "labelProjectNAme";
+            this.labelProjectNAme.Size = new System.Drawing.Size(95, 17);
+            this.labelProjectNAme.TabIndex = 30;
+            this.labelProjectNAme.Text = "Project name:";
             // 
-            // label6
+            // panel1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 17);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Project (.xml) :";
-            // 
-            // btnBrowseProject
-            // 
-            this.btnBrowseProject.Location = new System.Drawing.Point(319, 14);
-            this.btnBrowseProject.Name = "btnBrowseProject";
-            this.btnBrowseProject.Size = new System.Drawing.Size(75, 30);
-            this.btnBrowseProject.TabIndex = 0;
-            this.btnBrowseProject.Text = "Browse..";
-            this.btnBrowseProject.UseVisualStyleBackColor = true;
-            this.btnBrowseProject.Click += new System.EventHandler(this.btnBrowseProject_Click);
-            // 
-            // textBoxProjectXml
-            // 
-            this.textBoxProjectXml.Location = new System.Drawing.Point(110, 18);
-            this.textBoxProjectXml.Name = "textBoxProjectXml";
-            this.textBoxProjectXml.Size = new System.Drawing.Size(203, 22);
-            this.textBoxProjectXml.TabIndex = 1;
-            // 
-            // btnLoadProject
-            // 
-            this.btnLoadProject.Enabled = false;
-            this.btnLoadProject.Location = new System.Drawing.Point(400, 14);
-            this.btnLoadProject.Name = "btnLoadProject";
-            this.btnLoadProject.Size = new System.Drawing.Size(97, 30);
-            this.btnLoadProject.TabIndex = 3;
-            this.btnLoadProject.Text = "Load project";
-            this.btnLoadProject.UseVisualStyleBackColor = true;
-            this.btnLoadProject.Click += new System.EventHandler(this.btnLoadProject_Click);
-            // 
-            // checkBoxModel
-            // 
-            this.checkBoxModel.AutoSize = true;
-            this.checkBoxModel.Checked = true;
-            this.checkBoxModel.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxModel.Location = new System.Drawing.Point(12, 6);
-            this.checkBoxModel.Name = "checkBoxModel";
-            this.checkBoxModel.Size = new System.Drawing.Size(104, 21);
-            this.checkBoxModel.TabIndex = 26;
-            this.checkBoxModel.Text = "Load Model";
-            this.checkBoxModel.UseVisualStyleBackColor = true;
-            this.checkBoxModel.CheckedChanged += new System.EventHandler(this.checkBoxModel_CheckedChanged);
-            // 
-            // checkBoxProject
-            // 
-            this.checkBoxProject.AutoEllipsis = true;
-            this.checkBoxProject.AutoSize = true;
-            this.checkBoxProject.Location = new System.Drawing.Point(135, 6);
-            this.checkBoxProject.Name = "checkBoxProject";
-            this.checkBoxProject.Size = new System.Drawing.Size(110, 21);
-            this.checkBoxProject.TabIndex = 27;
-            this.checkBoxProject.Text = "Load Project";
-            this.checkBoxProject.UseVisualStyleBackColor = true;
-            this.checkBoxProject.CheckedChanged += new System.EventHandler(this.checkBoxProject_CheckedChanged);
-            // 
-            // btnSaveProject
-            // 
-            this.btnSaveProject.Location = new System.Drawing.Point(250, 505);
-            this.btnSaveProject.Name = "btnSaveProject";
-            this.btnSaveProject.Size = new System.Drawing.Size(75, 30);
-            this.btnSaveProject.TabIndex = 28;
-            this.btnSaveProject.Text = "Save Project";
-            this.btnSaveProject.UseVisualStyleBackColor = true;
-            this.btnSaveProject.Click += new System.EventHandler(this.btnSaveProject_Click);
+            this.panel1.Controls.Add(this.textBoxProjectName);
+            this.panel1.Controls.Add(this.labelProjectNAme);
+            this.panel1.Controls.Add(this.btnSaveProject);
+            this.panel1.Location = new System.Drawing.Point(12, 482);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(447, 56);
+            this.panel1.TabIndex = 31;
             // 
             // Form1
             // 
@@ -682,14 +699,16 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.panelLoadProject.ResumeLayout(false);
+            this.panelLoadProject.PerformLayout();
+            this.panelLoadModel.ResumeLayout(false);
+            this.panelLoadModel.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.panelModelAndSignals.ResumeLayout(false);
             this.panelModelAndSignals.PerformLayout();
-            this.panelLoadModel.ResumeLayout(false);
-            this.panelLoadModel.PerformLayout();
-            this.panelLoadProject.ResumeLayout(false);
-            this.panelLoadProject.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -719,7 +738,6 @@
         private System.Windows.Forms.TextBox textBoxDll;
         private System.Windows.Forms.Button buttonBrowseModel;
         private System.Windows.Forms.Button buttonLoadModel;
-        private System.Windows.Forms.Button buttonStep;
         private System.Windows.Forms.Button buttonConnectInSignal;
         private System.Windows.Forms.ListBox componentListBox;
         private System.Windows.Forms.Button buttonRemoveModel;
@@ -755,6 +773,9 @@
         private System.Windows.Forms.Button btnLoadProject;
         private System.Windows.Forms.Panel panelLoadModel;
         private System.Windows.Forms.Button btnSaveProject;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox textBoxProjectName;
+        private System.Windows.Forms.Label labelProjectNAme;
     }
 }
 
