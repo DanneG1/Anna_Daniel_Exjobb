@@ -249,46 +249,10 @@ namespace ReadDllForm
         }
         private static void WriteXml(string fileName)
         {
-            XmlTextWriter xWriter=new XmlTextWriter(fileName, Encoding.UTF8);
-            xWriter.WriteStartElement("InSignal");
-
-            xWriter.WriteStartElement("NumInSignals");
-            xWriter.WriteString(Inputs.Count.ToString());
-            xWriter.WriteEndElement();
-
-            xWriter.WriteStartElement("NumOutSignals");
-            xWriter.WriteString(Outputs.Count.ToString());
-            xWriter.WriteEndElement();
-
-            for (int i = 0; i < Inputs.Count; i++)
-            {
-                xWriter.WriteStartElement("InSignal");
-                WriteXmlSignal(xWriter,i,Inputs[i]);
-                xWriter.WriteEndElement();
-            }
-           
-            for (int i = 0; i < Outputs.Count; i++)
-            {
-                xWriter.WriteStartElement("OutSignal");
-                WriteXmlSignal(xWriter, i,Outputs[i]);
-                xWriter.WriteEndElement();
-            }
-            xWriter.WriteEndElement();
-
-
-            xWriter.Close();
-
-
+              XmlHelper xmlHelper = new XmlHelper();
+              xmlHelper.WriteModelXml(fileName,Inputs,Outputs);
         }
-        private static void WriteXmlSignal(XmlTextWriter xWriter, int i,string name)
-        {
-            xWriter.WriteStartElement("Name");
-            xWriter.WriteString(name);
-            xWriter.WriteEndElement();
-            xWriter.WriteStartElement("Port");
-            xWriter.WriteString(i.ToString());
-            xWriter.WriteEndElement();
-        }
+       
         private static void ResetIOLists()
         {
             Inputs.Clear();

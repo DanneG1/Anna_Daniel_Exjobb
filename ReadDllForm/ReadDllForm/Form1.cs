@@ -455,9 +455,9 @@ namespace ReadDllForm
         private void btnBrowseProject_Click(object sender, EventArgs e)
         {
             OpenFileDialog openXml = new OpenFileDialog();
-            if (Settings.Default[TargetFolder].ToString() != "")
+            if (Directory.Exists($@"{Settings.Default[TargetFolder]}{"\\Projects"}"))
             {
-               //openDll.InitialDirectory = Settings.Default[TargetFolder].ToString();
+               openXml.InitialDirectory = $@"{Settings.Default[TargetFolder]}{"\\Projects"}";
             }
 
             openXml.Filter = @"xml files(*.xml)|*.xml";

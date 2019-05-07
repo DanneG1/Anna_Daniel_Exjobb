@@ -147,53 +147,12 @@ namespace ReadDllForm
         #region modelFunctions
         private void ReadXml()
         {
-            XmlTextReader reader = new XmlTextReader(_directoryPath + "\\modelXML.xml");
-            reader.Read();
-            while (reader.Read())
-            {
-                if (reader.IsStartElement())
-                {
-                    if (reader.Name == "InSignal")
-                    {
-                        reader.Read();
-                        string name = "";
-                        if (reader.Name == "Name")
-                        {
-                            name = reader.ReadString();
-                        }
-
-                        reader.Read();
-                        int port = -1;
-                        if (reader.Name == "Port")
-                        {
-                            port = Convert.ToInt32(reader.ReadString());
-                        }
-                        InSignal inSignal = new InSignal(port, name, _path,_hiCore);
-                        //inSignal.SetSignal(5);
-                        _inSignals.Add(inSignal);
-
-
-                    }
-                    else if (reader.Name == "OutSignal")
-                    {
-                        string Name = "";
-                        int port = 0;
-                        reader.Read();
-                        if (reader.Name == "Name")
-                        {
-                            Name = reader.ReadString();
-                        }
-                        reader.Read();
-                        if (reader.Name == "Port")
-                        {
-                            port = Convert.ToInt32(reader.ReadString());
-                        }
-                        OutSignal outSignal = new OutSignal(port, Name, _path,_hiCore);
-                        _outSignals.Add(outSignal);
-                    }
-                }
-            }
+            XmlHelper xmlHelper = new XmlHelper();
+            List<ISignal>signals =xmlHelper.ReadXmlSimulinkModel(_directoryPath,_path,_hiCore);
+            _inSignals.AddRange(signals.OfType<InSignal>().ToList());
+            _outSignals.AddRange(signals.OfType<OutSignal>().ToList());
         }
+
         public string GetSignalsAsString()
         {
             string signals="";
