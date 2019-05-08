@@ -92,6 +92,7 @@ namespace ReadDllForm
 
         public SimulinkModel( string path, HiCoreClient hicore,List<ISignal>inSignals,List<ISignal>outSignals)
         {
+           
             _hiCore = hicore;
             _pDll = NativeMethods.LoadLibrary(path);
             _path = path;
@@ -102,8 +103,9 @@ namespace ReadDllForm
             _inSignals = inSignals;
             _outSignals = outSignals;
         }
-        public SimulinkModel(string path,HiCoreClient hicore)
+        public SimulinkModel(string path,HiCoreClient hicore, XmlHelper xmlHelper)
         {
+           
             _hiCore = hicore;
             _pDll = NativeMethods.LoadLibrary(path);
             _path = path;
@@ -155,8 +157,8 @@ namespace ReadDllForm
         #region modelFunctions
         private void ReadXml()
         {
-            XmlHelper xmlHelper = new XmlHelper();
-            List<ISignal>signals =xmlHelper.ReadXmlSimulinkModel(_directoryPath,_path,_hiCore);
+            XmlHelper _xmlHelper = new XmlHelper();
+            List<ISignal>signals =_xmlHelper.ReadXmlSimulinkModel(_directoryPath,_path,_hiCore);
             _inSignals.AddRange(signals.OfType<InSignal>().ToList());
             _outSignals.AddRange(signals.OfType<OutSignal>().ToList());
         }

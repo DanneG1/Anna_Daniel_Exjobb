@@ -64,6 +64,7 @@
     <Compile Include="FormHiCoreChannels.Designer.cs">
       <DependentUpon>FormHiCoreChannels.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageEventArgs.cs" />
     <Compile Include="ModelPerformance.cs">
       <SubType>Form</SubType>
     </Compile>

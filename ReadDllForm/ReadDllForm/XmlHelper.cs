@@ -13,9 +13,10 @@ using ReadDllForm.Properties;
 
 namespace ReadDllForm
 {
-    class XmlHelper
+    public class XmlHelper
     {
         private const string TargetFolder = "TargetFolder";
+        public event EventHandler<MessageEventArgs> MessageReadingXml; 
         private void CreateProjectFolder()
         {
            
@@ -34,7 +35,7 @@ namespace ReadDllForm
             string xmlFileNamePath = $@"{Settings.Default[TargetFolder]}{"\\Projects\\"}{fileName}{".xml"}";
             XmlTextWriter xWriter = new XmlTextWriter(xmlFileNamePath, Encoding.UTF8);
 
-            xWriter.WriteStartElement("Models");
+            xWriter.WriteStartElement("ProjectFile");
 
             for (int i = 0; i < models.Count; i++)
             {
@@ -57,11 +58,25 @@ namespace ReadDllForm
             string modelName = "";
             List<ISignal> inSignals = new List<ISignal>();
             List<ISignal> outSignals = new List<ISignal>();
-
+            bool IsFirstElement = true;
             while (reader.Read())
             {
                 if (reader.IsStartElement())
                 {
+                    if (IsFirstElement)
+                    {
+                        if (reader.Name == "ProjectFile")
+                        {
+                            IsFirstElement = false;
+
+                        }
+                        else
+                        {
+                            OnMessageReadingXml("Could not load project, invalid xml file.");
+                            return null;
+                        }
+
+                    }
                     if (reader.Name == "Model" && modelName != "")
                     {
 
@@ -137,6 +152,7 @@ namespace ReadDllForm
 
             SimulinkModel mod = new SimulinkModel(path, hicore, inSignals, outSignals);
             models.Add(mod);
+            OnMessageReadingXml("Project successfully loaded.");
             return models;
         }
 
@@ -186,6 +202,7 @@ namespace ReadDllForm
             {
                 if (reader.IsStartElement())
                 {
+                    
                     if (reader.Name == "InSignal")
                     {
                         reader.Read();
@@ -232,15 +249,7 @@ namespace ReadDllForm
         public void WriteModelXml(string fileName,List<string>Inputs,List<string>Outputs)
         {
             XmlTextWriter xWriter = new XmlTextWriter(fileName, Encoding.UTF8);
-            xWriter.WriteStartElement("InSignal");
-
-            xWriter.WriteStartElement("NumInSignals");
-            xWriter.WriteString(Inputs.Count.ToString());
-            xWriter.WriteEndElement();
-
-            xWriter.WriteStartElement("NumOutSignals");
-            xWriter.WriteString(Outputs.Count.ToString());
-            xWriter.WriteEndElement();
+            xWriter.WriteStartElement("ModelFile");
 
             for (int i = 0; i < Inputs.Count; i++)
             {
@@ -268,6 +277,12 @@ namespace ReadDllForm
             xWriter.WriteStartElement("Port");
             xWriter.WriteString(i.ToString());
             xWriter.WriteEndElement();
+        }
+
+
+        protected virtual void OnMessageReadingXml(string message)
+        {
+            MessageReadingXml?.Invoke(this,new MessageEventArgs{Message=message});
         }
 
     }

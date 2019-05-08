@@ -13,6 +13,7 @@ namespace ReadDllForm
 {
     public partial class Form1 : Form
     {
+        private XmlHelper _xmlHelper=new XmlHelper();
         private const string ConnectedString = "Connected";
         private const string NotConnectedString = "Disconnected";
         private const string Solution = "Solution";
@@ -30,7 +31,8 @@ namespace ReadDllForm
             InitializeComponent();
 
             FillOutFieldsFromSettings();
-            
+            _xmlHelper.MessageReadingXml += OnMessageReadingXml;
+
             Load += (s, e) =>
             {
                 if (!this.DesignMode)
@@ -364,7 +366,7 @@ namespace ReadDllForm
         }
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            SimulinkModel model = new SimulinkModel(textBoxDll.Text,_hiCore);
+            SimulinkModel model = new SimulinkModel(textBoxDll.Text,_hiCore,_xmlHelper);
             if (!_modelsDictionary.ContainsKey(model.GetName()))
             {
                 componentListBox.Items.Add(model.GetName());
@@ -372,21 +374,98 @@ namespace ReadDllForm
                 buttonRunModel.Text = model.getRunning() ? "Stop model" : "Run model";
             }
         }
-  
-        private void buttonStep_Click(object sender, EventArgs e)
+
+
+
+        private void btnSaveProject_Click(object sender, EventArgs e)
         {
-            if (componentListBox.SelectedIndex != -1)
+            if (textBoxProjectName.Text != "" && _modelsDictionary.Count > 0)
             {
-                _selectedModel.Step();
-                ShowSignals(_selectedModel);
+                List<SimulinkModel> models = new List<SimulinkModel>();
+                foreach (var model in _modelsDictionary)
+                {
+                    models.Add(model.Value);
+                }
+                _xmlHelper.SaveProject(models, textBoxProjectName.Text);
+                textBoxProjectName.Text = "";
+                ShowMessageToolStrip("Project saved.");
             }
-            
+            else
+            {
+                ShowMessageToolStrip("Could not save project.");
+            }
+
+
+        }
+
+        private void OnMessageReadingXml(object sender, MessageEventArgs e)
+        {
+            ShowMessageToolStrip(e.Message);
         }
 
 
 
-        #endregion
+        private void btnLoadProject_Click(object sender, EventArgs e)
+        {
+            int channelsNotFound = 0;
+            _modelsDictionary.Clear();
+            componentListBox.Items.Clear();
+            listViewInSignals.Items.Clear();
+            listViewOutSignals.Items.Clear();
 
+            
+            
+
+            List<SimulinkModel> models = _xmlHelper.LoadProject(textBoxProjectXml.Text, _hiCore);
+            if (models != null)
+            {
+            
+            foreach (var model in models)
+            {
+                _modelsDictionary.Add(model.GetName(), model);
+                componentListBox.Items.Add(model.GetName());
+                List<string> names = _hiCore.GetChannelNames("HiModels");
+                foreach (var signal in model.GetAllSignals())
+                {
+                    if (signal.GetChannelName() != "-" && !names.Contains(signal.GetChannelName()))
+                    {
+                        signal.SetChannelName("-");
+                        channelsNotFound += 1;
+                    }
+                    else
+                    {
+                        signal.update();
+                    }
+
+                }
+                if (channelsNotFound > 0)
+                {
+                    string message = $@"{channelsNotFound}{" signals had a connection to a channel that wasn't found in HiCore channels."}";
+                    string title = "Message";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, title, buttons);
+                }
+
+            }
+            }
+        }
+
+        private void btnBrowseProject_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openXml = new OpenFileDialog();
+            if (Directory.Exists($@"{Settings.Default[TargetFolder]}{"\\Projects"}"))
+            {
+                openXml.InitialDirectory = $@"{Settings.Default[TargetFolder]}{"\\Projects"}";
+            }
+
+            openXml.Filter = @"xml files(*.xml)|*.xml";
+            if (openXml.ShowDialog() == DialogResult.OK)
+            {
+                string xmlFileName = openXml.FileName;
+                textBoxProjectXml.Text = xmlFileName;
+                textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
+            }
+        }
         private void buttonRunModel_Click(object sender, EventArgs e)
         {
             foreach (var model in _modelsDictionary.Values)
@@ -416,13 +495,16 @@ namespace ReadDllForm
                     timerUpdateLists.Start();
                 }
             }
-            if(buttonRunModel.Text==@"Stop model")
+            if (buttonRunModel.Text == @"Stop model")
             {
                 ModelPerformance mp = new ModelPerformance(_modelsDictionary);
                 mp.Show();
             }
-            
+
         }
+        #endregion
+
+
 
         private void timerUpdateLists_Tick(object sender, EventArgs e)
         {
@@ -437,10 +519,7 @@ namespace ReadDllForm
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
 
         private void checkBoxModel_CheckedChanged(object sender, EventArgs e)
         {
@@ -454,83 +533,7 @@ namespace ReadDllForm
             panelLoadModel.Enabled = !checkBoxProject.Checked;
         }
 
-        private void btnSaveProject_Click(object sender, EventArgs e)
-        {
-            if (textBoxProjectName.Text != ""&&_modelsDictionary.Count>0)
-            {
-                List<SimulinkModel> models = new List<SimulinkModel>();
-                foreach (var model in _modelsDictionary)
-                {
-                    models.Add(model.Value);
-                }
-                XmlHelper xmlHelper = new XmlHelper();
-                xmlHelper.SaveProject(models, textBoxProjectName.Text);
-                textBoxProjectName.Text = "";
-                ShowMessageToolStrip("Project saved.");
-            }
-            else
-            {
-                ShowMessageToolStrip("Could not save project.");
-            }
-            
-
-        }
-
-        private void btnLoadProject_Click(object sender, EventArgs e)
-        {
-            int channelsNotFound = 0;
-           _modelsDictionary.Clear();
-            componentListBox.Items.Clear();
-            listViewInSignals.Items.Clear();
-            listViewOutSignals.Items.Clear();
-            
-            XmlHelper xmlHelper=new XmlHelper();
-
-            List<SimulinkModel> models = xmlHelper.LoadProject(textBoxProjectXml.Text, _hiCore);
-            foreach (var model in models)
-            {
-                _modelsDictionary.Add(model.GetName(),model);
-                componentListBox.Items.Add(model.GetName());
-                List<string> names=_hiCore.GetChannelNames("HiModels");
-                foreach (var signal in model.GetAllSignals())
-                {
-                    if (signal.GetChannelName() != "-" && !names.Contains(signal.GetChannelName()))
-                    {
-                        signal.SetChannelName("-");
-                        channelsNotFound += 1;
-                    }
-                    else{
-                        signal.update();
-                    }
-
-                }
-                if (channelsNotFound > 0)
-                {
-                    string message = $@"{channelsNotFound}{" signals had a connection to a channel that wasn't found in HiCore channels."}";
-                    string title = "Message";
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
-                    MessageBox.Show(message, title, buttons);
-                }
-                
-            }
-        }
-
-        private void btnBrowseProject_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openXml = new OpenFileDialog();
-            if (Directory.Exists($@"{Settings.Default[TargetFolder]}{"\\Projects"}"))
-            {
-               openXml.InitialDirectory = $@"{Settings.Default[TargetFolder]}{"\\Projects"}";
-            }
-
-            openXml.Filter = @"xml files(*.xml)|*.xml";
-            if (openXml.ShowDialog() == DialogResult.OK)
-            {
-                string xmlFileName = openXml.FileName;
-                textBoxProjectXml.Text = xmlFileName;
-                textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
-            }
-        }
+       
 
         public void ShowMessageToolStrip(string message)
         {
@@ -539,6 +542,14 @@ namespace ReadDllForm
             toolStripStatusLabelLoadPage.Text = message + @" " + time;
         }
 
-
+        private void modelPerformanceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (buttonRunModel.Text == @"Stop model")
+            {
+                ModelPerformance mp = new ModelPerformance(_modelsDictionary);
+                mp.Show();
+            }
+          
+        }
     }
 }
