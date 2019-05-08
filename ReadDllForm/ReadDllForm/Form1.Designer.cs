@@ -90,6 +90,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timerUpdateLists = new System.Windows.Forms.Timer(this.components);
             this.timerConnect = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripMessage = new System.Windows.Forms.ToolStripStatusLabel();
+            this.statusStrip2 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabelLoadPage = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -100,6 +104,8 @@
             this.panelLoadModel.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.panelModelAndSignals.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.statusStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnHeaderFile
@@ -253,11 +259,12 @@
             this.tabControlInputs.Location = new System.Drawing.Point(0, 0);
             this.tabControlInputs.Name = "tabControlInputs";
             this.tabControlInputs.SelectedIndex = 0;
-            this.tabControlInputs.Size = new System.Drawing.Size(938, 584);
+            this.tabControlInputs.Size = new System.Drawing.Size(938, 613);
             this.tabControlInputs.TabIndex = 16;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.statusStrip1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textBoxModelName);
@@ -266,13 +273,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(930, 555);
+            this.tabPage1.Size = new System.Drawing.Size(930, 584);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Create Model";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.statusStrip2);
             this.tabPage2.Controls.Add(this.panelSaveModel);
             this.tabPage2.Controls.Add(this.checkBoxProject);
             this.tabPage2.Controls.Add(this.checkBoxModel);
@@ -284,7 +292,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(930, 555);
+            this.tabPage2.Size = new System.Drawing.Size(930, 584);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Load Model";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -681,11 +689,45 @@
             // 
             this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMessage});
+            this.statusStrip1.Location = new System.Drawing.Point(3, 556);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(924, 25);
+            this.statusStrip1.TabIndex = 16;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripMessage
+            // 
+            this.toolStripMessage.Name = "toolStripMessage";
+            this.toolStripMessage.Size = new System.Drawing.Size(37, 20);
+            this.toolStripMessage.Text = "       ";
+            // 
+            // statusStrip2
+            // 
+            this.statusStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelLoadPage});
+            this.statusStrip2.Location = new System.Drawing.Point(3, 556);
+            this.statusStrip2.Name = "statusStrip2";
+            this.statusStrip2.Size = new System.Drawing.Size(924, 25);
+            this.statusStrip2.TabIndex = 32;
+            this.statusStrip2.Text = "statusStrip2";
+            // 
+            // toolStripStatusLabelLoadPage
+            // 
+            this.toolStripStatusLabelLoadPage.Name = "toolStripStatusLabelLoadPage";
+            this.toolStripStatusLabelLoadPage.Size = new System.Drawing.Size(41, 20);
+            this.toolStripStatusLabelLoadPage.Text = "        ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(938, 584);
+            this.ClientSize = new System.Drawing.Size(938, 613);
             this.Controls.Add(this.tabControlInputs);
             this.Name = "Form1";
             this.Text = "HiModels";
@@ -709,6 +751,10 @@
             this.groupBox3.PerformLayout();
             this.panelModelAndSignals.ResumeLayout(false);
             this.panelModelAndSignals.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.statusStrip2.ResumeLayout(false);
+            this.statusStrip2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -776,6 +822,10 @@
         private System.Windows.Forms.Panel panelSaveModel;
         private System.Windows.Forms.TextBox textBoxProjectName;
         private System.Windows.Forms.Label labelProjectNAme;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripMessage;
+        private System.Windows.Forms.StatusStrip statusStrip2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLoadPage;
     }
 }
 

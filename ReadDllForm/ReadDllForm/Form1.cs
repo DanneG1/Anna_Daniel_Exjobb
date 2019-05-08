@@ -159,6 +159,11 @@ namespace ReadDllForm
                 CreateDll dll = new CreateDll();
                 dll.CreateFile(_hPath, _cppPath, textBoxModelName.Text);
                 textBoxModelName.Text = "";
+                ShowMessageToolStrip("Model generated successfully.");
+            }
+            else
+            {
+                ShowMessageToolStrip("Could not generate model.");
             }
         }
         private void btnHeaderFile_Click(object sender, EventArgs e)
@@ -421,7 +426,7 @@ namespace ReadDllForm
 
         private void btnSaveProject_Click(object sender, EventArgs e)
         {
-            if (textBoxProjectName.Text != "")
+            if (textBoxProjectName.Text != ""&&_modelsDictionary.Count>0)
             {
                 List<SimulinkModel> models = new List<SimulinkModel>();
                 foreach (var model in _modelsDictionary)
@@ -431,8 +436,14 @@ namespace ReadDllForm
                 XmlHelper xmlHelper = new XmlHelper();
                 xmlHelper.SaveProject(models, textBoxProjectName.Text);
                 textBoxProjectName.Text = "";
+                ShowMessageToolStrip("Project saved.");
+            }
+            else
+            {
+                ShowMessageToolStrip("Could not save project.");
             }
             
+
         }
 
         private void btnLoadProject_Click(object sender, EventArgs e)
@@ -486,5 +497,14 @@ namespace ReadDllForm
                 textBoxDll.SelectionStart = txtBoxCpp.Text.Length;
             }
         }
+
+        public void ShowMessageToolStrip(string message)
+        {
+            DateTime time= DateTime.Now;
+            toolStripMessage.Text = message+" " + time;
+            toolStripStatusLabelLoadPage.Text = message + " " + time;
+        }
+
+
     }
 }
