@@ -142,25 +142,7 @@ namespace ReadDllForm
 
            
         }
-        private void UpdateShowSignals(SimulinkModel model)
-        {
-            listViewInSignals.Items.Clear();
-            listViewOutSignals.Items.Clear();
-            for (int i = 0; i < model.GetInSignals().Count; i++)
-            {
-                ListViewItem listViewItem = new ListViewItem(model.GetInSignals()[i].GetSignalName());
-                listViewItem.SubItems[1].Text = model.GetInSignals()[i].GetSignal().ToString();
-
-
-            }
-            for (int i = 0; i < model.GetOutSignals().Count; i++)
-            {
-                ListViewItem listViewItem = new ListViewItem(model.GetOutSignals()[i].GetSignalName());
-                listViewItem.SubItems[1].Text = model.GetOutSignals()[i].GetSignal().ToString();
-            }
-
-
-        }
+       
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (componentListBox.SelectedIndex != -1)
