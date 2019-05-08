@@ -289,20 +289,9 @@ namespace ReadDllForm
         }
         private void buttonConnectInSignal_Click(object sender, EventArgs e)
         {
-            List<string> channelsTaken=new List<string>();
-            foreach (var model in _modelsDictionary.Values)
-            {
-                List<ISignal> signals = model.GetInSignals();
-                foreach (var signal in signals)
-                {
-                    channelsTaken.Add(signal.GetChannelName());
-                }
-            }
-
-            List<string> channelsNotTaken = _hiCore.GetChannelNames("HiModels").Except(channelsTaken).ToList();
             if (listViewInSignals.SelectedItems.Count>0)
             {
-            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(channelsNotTaken, _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].GetSignalName());
+            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].GetSignalName());
             var result = hiCoreChannels.ShowDialog();
             if (result == DialogResult.OK)
             {
