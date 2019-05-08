@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ReadDllForm.Properties;
@@ -139,6 +140,25 @@ namespace ReadDllForm
 
            
         }
+        private void UpdateShowSignals(SimulinkModel model)
+        {
+            listViewInSignals.Items.Clear();
+            listViewOutSignals.Items.Clear();
+            for (int i = 0; i < model.GetInSignals().Count; i++)
+            {
+                ListViewItem listViewItem = new ListViewItem(model.GetInSignals()[i].GetSignalName());
+                listViewItem.SubItems[1].Text = model.GetInSignals()[i].GetSignal().ToString();
+
+
+            }
+            for (int i = 0; i < model.GetOutSignals().Count; i++)
+            {
+                ListViewItem listViewItem = new ListViewItem(model.GetOutSignals()[i].GetSignalName());
+                listViewItem.SubItems[1].Text = model.GetOutSignals()[i].GetSignal().ToString();
+            }
+
+
+        }
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (componentListBox.SelectedIndex != -1)
@@ -269,9 +289,20 @@ namespace ReadDllForm
         }
         private void buttonConnectInSignal_Click(object sender, EventArgs e)
         {
+            List<string> channelsTaken=new List<string>();
+            foreach (var model in _modelsDictionary.Values)
+            {
+                List<ISignal> signals = model.GetInSignals();
+                foreach (var signal in signals)
+                {
+                    channelsTaken.Add(signal.GetChannelName());
+                }
+            }
+
+            List<string> channelsNotTaken = _hiCore.GetChannelNames("HiModels").Except(channelsTaken).ToList();
             if (listViewInSignals.SelectedItems.Count>0)
             {
-            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].GetSignalName());
+            FormHiCoreChannels hiCoreChannels=new FormHiCoreChannels(channelsNotTaken, _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].GetSignalName());
             var result = hiCoreChannels.ShowDialog();
             if (result == DialogResult.OK)
             {
@@ -293,11 +324,21 @@ namespace ReadDllForm
 
         private void btnConnectOutsignal_Click(object sender, EventArgs e)
         {
+            List<string> channelsTaken = new List<string>();
+            foreach (var model in _modelsDictionary.Values)
+            {
+                List<ISignal> signals = model.GetOutSignals();
+                foreach (var signal in signals)
+                {
+                    channelsTaken.Add(signal.GetChannelName());
+                }
+            }
 
+            List<string> channelsNotTaken = _hiCore.GetChannelNames("HiModels").Except(channelsTaken).ToList();
 
             if (listViewOutSignals.SelectedItems.Count > 0)
             {
-                FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(_hiCore.GetChannelNames("HiModels"), _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].GetSignalName());
+                FormHiCoreChannels hiCoreChannels = new FormHiCoreChannels(channelsNotTaken, _selectedModel.GetOutSignals()[listViewOutSignals.SelectedIndices[0]].GetSignalName());
                 var result = hiCoreChannels.ShowDialog();
                 if (result == DialogResult.OK)
                 {
@@ -464,7 +505,7 @@ namespace ReadDllForm
                 List<string> names=_hiCore.GetChannelNames("HiModels");
                 foreach (var signal in model.GetAllSignals())
                 {
-                    if (signal.GetChannelName()!="-"&&!names.Contains(signal.GetChannelName()))
+                    if (signal.GetChannelName() != "-" && !names.Contains(signal.GetChannelName()))
                     {
                         signal.SetChannelName("-");
                         channelsNotFound += 1;
