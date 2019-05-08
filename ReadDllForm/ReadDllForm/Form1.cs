@@ -501,8 +501,8 @@ namespace ReadDllForm
         public void ShowMessageToolStrip(string message)
         {
             DateTime time= DateTime.Now;
-            toolStripMessage.Text = message+" " + time;
-            toolStripStatusLabelLoadPage.Text = message + " " + time;
+            toolStripStatusLabelCreatePage.Text = message+@" " + time;
+            toolStripStatusLabelLoadPage.Text = message + @" " + time;
         }
 
 
