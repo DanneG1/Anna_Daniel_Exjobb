@@ -499,6 +499,9 @@ namespace ReadDllForm
                         signal.SetChannelName("-");
                         channelsNotFound += 1;
                     }
+                    else{
+                        signal.update();
+                    }
 
                 }
                 if (channelsNotFound > 0)
@@ -508,6 +511,7 @@ namespace ReadDllForm
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     MessageBox.Show(message, title, buttons);
                 }
+                
             }
         }
 
