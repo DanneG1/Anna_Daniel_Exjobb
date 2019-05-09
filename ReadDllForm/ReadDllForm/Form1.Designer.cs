@@ -357,7 +357,7 @@
             // modelPerformanceToolStripMenuItem
             // 
             this.modelPerformanceToolStripMenuItem.Name = "modelPerformanceToolStripMenuItem";
-            this.modelPerformanceToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.modelPerformanceToolStripMenuItem.Size = new System.Drawing.Size(214, 26);
             this.modelPerformanceToolStripMenuItem.Text = "Model Performance";
             this.modelPerformanceToolStripMenuItem.Click += new System.EventHandler(this.modelPerformanceToolStripMenuItem_Click);
             // 
@@ -567,6 +567,7 @@
             this.textBoxFrequency.Size = new System.Drawing.Size(74, 22);
             this.textBoxFrequency.TabIndex = 21;
             this.textBoxFrequency.Text = "1";
+            this.textBoxFrequency.TextChanged += new System.EventHandler(this.textBoxFrequency_TextChanged);
             // 
             // worstRuntimeInfoLabel
             // 
