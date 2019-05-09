@@ -14,6 +14,7 @@ namespace ReadDllForm
 {
     public class CreateDll
     {
+        public event EventHandler<MessageEventArgs> MessageCreatingModel;
         private const string Solution = "Solution";
         private const string MsBuild = "MsBuild";
         private const string TargetFolder = "TargetFolder";
@@ -210,7 +211,7 @@ namespace ReadDllForm
 
             File.WriteAllLines(TargetFileName, newContent);
         }
-        private static void CreateModelDll()
+        private void CreateModelDll()
         {
             string solutionDirectory = Path.GetDirectoryName(Settings.Default[Solution].ToString());
 
@@ -246,6 +247,18 @@ namespace ReadDllForm
 
             string xmlFileNamePath = $@"{Settings.Default[TargetFolder]}{"\\"}{_modelFolderName}{"\\"}{"modelXML.xml"}";
             WriteXml(xmlFileNamePath);
+
+            string dllFile= $@"{ Settings.Default[TargetFolder]}{ "\\"}{ _modelFolderName}{"\\"}{_modelDllName}";
+            string xmlFile = $@"{ Settings.Default[TargetFolder]}{ "\\"}{ _modelFolderName}{"\\"}{"modelXML.xml"}";
+
+            if (!File.Exists(dllFile) || !File.Exists(xmlFile))
+            {
+                OnMessageCreatingModel("Someting went wrong, model could not be created.");
+            }
+            else
+            {
+                OnMessageCreatingModel("Model created successfully.");
+            }
         }
         private static void WriteXml(string fileName)
         {
@@ -258,5 +271,10 @@ namespace ReadDllForm
             Inputs.Clear();
             Outputs.Clear();
         }
+        protected virtual void OnMessageCreatingModel(string message)
+        {
+            MessageCreatingModel?.Invoke(this, new MessageEventArgs { Message = message });
+        }
+
     }
 }

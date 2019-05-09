@@ -161,13 +161,13 @@ namespace ReadDllForm
             if (AllFieldsOk())
             {
                 CreateDll dll = new CreateDll();
+                dll.MessageCreatingModel += OnMessageCreatingModel;
                 dll.CreateFile(_hPath, _cppPath, textBoxModelName.Text);
                 textBoxModelName.Text = "";
-                ShowMessageToolStrip("Model generated successfully.");
             }
             else
             {
-                ShowMessageToolStrip("Could not generate model.");
+                ShowMessageToolStrip("Could not generate model. Fill out all fields specified.");
             }
         }
         private void btnHeaderFile_Click(object sender, EventArgs e)
@@ -381,6 +381,11 @@ namespace ReadDllForm
         }
 
         private void OnMessageReadingXml(object sender, MessageEventArgs e)
+        {
+            ShowMessageToolStrip(e.Message);
+        }
+
+        private void OnMessageCreatingModel(object sender, MessageEventArgs e)
         {
             ShowMessageToolStrip(e.Message);
         }
