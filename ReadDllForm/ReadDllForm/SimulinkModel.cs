@@ -21,15 +21,14 @@ namespace ReadDllForm
         private readonly string _directoryPath;
         private readonly string _path;
         private readonly string _name;
-        private HiCoreClient _hiCore;
-        private readonly string _worstTime;
-        private Boolean running = false;
-        private double sleep;
-        public Thread threadRun;
+        private readonly HiCoreClient _hiCore;
+        private Boolean _running;
+        private double _sleep;
+        public Thread ThreadRun;
 
         private List<ISignal> _inSignals = new List<ISignal>();
         private List<ISignal> _outSignals = new List<ISignal>();
-        public List<double> timeSample = new List<double>();
+        public List<double> TimeSample = new List<double>();
 
         #region Dlldelegates
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -62,25 +61,18 @@ namespace ReadDllForm
         {
             return _name;
         }
-        public string GetWorstTime()
-        {
-            return _worstTime;
-        }
+
         public void SetRunning(Boolean state)
         {
-            running = state;
+            _running = state;
         }
         public Boolean GetRunning()
         {
-            return running;
+            return _running;
         }
         public void SetSleep(double sleepy)
         {
-            sleep = sleepy;
-        }
-        public double GetSleep()
-        {
-            return sleep;
+            _sleep = sleepy;
         }
 
         public string GetPath()
@@ -114,13 +106,8 @@ namespace ReadDllForm
 
             Initialze();
             ReadXml();
-            _worstTime = FindWorstTime();
         }
-        public void LoadSignalLists(List<ISignal> inSignals, List<ISignal> outSignals)
-        {
-           _inSignals = inSignals;
-            _outSignals=outSignals;
-        }
+       
 
         #region dllFunctions
         private void Initialze()
@@ -163,35 +150,16 @@ namespace ReadDllForm
             _outSignals.AddRange(signals.OfType<OutSignal>().ToList());
         }
 
-
-        public string FindWorstTime()
-        {
-            List<double> timer = new List<double>();
-            for (int i = 0; i < 11; ++i)
-            {
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                Step();
-                sw.Stop();
-                Console.WriteLine(sw.Elapsed);
-                //Första tiden när första modellen laddas in är orimligt hög, sparar därför endast efter i>0
-                if (i > 0)
-                {
-                    timer.Add(sw.Elapsed.TotalMilliseconds);
-                }
-            }
-            return timer.Max().ToString();
-        }
         public void Run()
         {
             //skapa någon slags funktion som kör samtidigt som hiCore är igång på samma freq
-            threadRun = new Thread(RunFunc)
+            ThreadRun = new Thread(RunFunc)
             {
                 IsBackground = true
             };
             try
             {
-                threadRun.Start();
+                ThreadRun.Start();
             }
             catch(Exception e){}
             
@@ -199,23 +167,23 @@ namespace ReadDllForm
 
         public void StopRun()
         {
-            threadRun.Abort();
+            ThreadRun.Abort();
 
             //timer
-            timeSample.Clear();
+            TimeSample.Clear();
         }
 
 
         public void RunFunc()
         {
-            while (running)
+            while (_running)
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
                 Step();
                 sw.Stop();
-                timeSample.Add(sw.Elapsed.TotalMilliseconds);
-                Thread.Sleep(Convert.ToInt32(1000/sleep));
+                TimeSample.Add(sw.Elapsed.TotalMilliseconds);
+                Thread.Sleep(Convert.ToInt32(1000/_sleep));
             }
         }
 

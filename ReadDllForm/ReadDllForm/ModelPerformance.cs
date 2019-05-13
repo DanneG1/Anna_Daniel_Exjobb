@@ -42,18 +42,18 @@ namespace ReadDllForm
         }
         private void updateLabels()
         {
-            if (_selectedModel.timeSample!=null)
+            if (_selectedModel.TimeSample!=null)
             {
                 try
                 {
-                    maxRuntimeInfo.Text = Math.Round(_selectedModel.timeSample.Max(), 4).ToString();
-                    minRuntimeInfo.Text = Math.Round(_selectedModel.timeSample.Min(), 4).ToString();
+                    maxRuntimeInfo.Text = Math.Round(_selectedModel.TimeSample.Max(), 4).ToString();
+                    minRuntimeInfo.Text = Math.Round(_selectedModel.TimeSample.Min(), 4).ToString();
                     double sum = 0;
-                    foreach (var time in _selectedModel.timeSample)
+                    foreach (var time in _selectedModel.TimeSample)
                     {
                         sum += time;
                     }
-                    meanRuntimeInfo.Text = Math.Round((sum / _selectedModel.timeSample.Count), 4).ToString();
+                    meanRuntimeInfo.Text = Math.Round((sum / _selectedModel.TimeSample.Count), 4).ToString();
                 }
                 catch(Exception e)
                 {
