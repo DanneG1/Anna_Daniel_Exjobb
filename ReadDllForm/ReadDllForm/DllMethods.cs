@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReadDllForm
 {
-    static class NativeMethods
+    static class DllMethods
     {
         [DllImport("kernel32.dll")]
         public static extern IntPtr LoadLibrary(string dllToLoad);

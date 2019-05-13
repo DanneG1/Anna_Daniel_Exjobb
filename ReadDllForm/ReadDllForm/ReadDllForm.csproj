@@ -71,7 +71,7 @@
     <Compile Include="ModelPerformance.Designer.cs">
       <DependentUpon>ModelPerformance.cs</DependentUpon>
     </Compile>
-    <Compile Include="NativeMethods.cs" />
+    <Compile Include="DllMethods.cs" />
     <Compile Include="OutSignal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

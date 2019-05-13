@@ -94,7 +94,7 @@ namespace ReadDllForm
         {
            
             _hiCore = hicore;
-            _pDll = NativeMethods.LoadLibrary(path);
+            _pDll = DllMethods.LoadLibrary(path);
             _path = path;
             _directoryPath = Path.GetDirectoryName(path);
             _name = new DirectoryInfo(_directoryPath).Name;
@@ -107,7 +107,7 @@ namespace ReadDllForm
         {
            
             _hiCore = hicore;
-            _pDll = NativeMethods.LoadLibrary(path);
+            _pDll = DllMethods.LoadLibrary(path);
             _path = path;
             _directoryPath = Path.GetDirectoryName(path);
             _name = new DirectoryInfo(_directoryPath).Name;
@@ -125,7 +125,7 @@ namespace ReadDllForm
         #region dllFunctions
         private void Initialze()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "initialize");
+            IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "initialize");
             initialize Initialize =
                 (initialize)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(initialize));
             Initialize();
@@ -137,7 +137,7 @@ namespace ReadDllForm
             {
                 inSignal.update();
             }
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "step");
+            IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "step");
             step Step =
                 (step)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(step));
             Step();
@@ -148,7 +148,7 @@ namespace ReadDllForm
         }
         private void Terminate()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "terminate");
+            IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "terminate");
             terminate Terminate =
                 (terminate)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(terminate));
             Terminate();

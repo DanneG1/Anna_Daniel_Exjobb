@@ -28,7 +28,7 @@ namespace ReadDllForm
             _hiCore = hiCore;
             _portNumber = port;
             _portName = name;
-            _pDll = NativeMethods.LoadLibrary(path);
+            _pDll = DllMethods.LoadLibrary(path);
 
         }
         public InSignal(int port, string name, string path, HiCoreClient hiCore,string channelName)
@@ -36,7 +36,7 @@ namespace ReadDllForm
             _hiCore = hiCore;
             _portNumber = port;
             _portName = name;
-            _pDll = NativeMethods.LoadLibrary(path);
+            _pDll = DllMethods.LoadLibrary(path);
             _channelName = channelName;
 
         }
@@ -44,7 +44,7 @@ namespace ReadDllForm
         #region DllFunctions
         public void SetSignal(double value)
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "setInputs");
+            IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "setInputs");
             SetInputs setinputs =
                 (SetInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(SetInputs));
 
@@ -52,7 +52,7 @@ namespace ReadDllForm
         }
         public double GetSignal()
         {
-            IntPtr pAddressOfFunctionToCall = NativeMethods.GetProcAddress(_pDll, "getInputs");
+            IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "getInputs");
             GetInputs getInputs =
                 (GetInputs)Marshal.GetDelegateForFunctionPointer(pAddressOfFunctionToCall, typeof(GetInputs));
             return getInputs(_portNumber);
