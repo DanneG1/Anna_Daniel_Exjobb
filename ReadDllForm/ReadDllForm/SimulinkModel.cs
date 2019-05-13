@@ -62,23 +62,23 @@ namespace ReadDllForm
         {
             return _name;
         }
-        public string getWorstTime()
+        public string GetWorstTime()
         {
             return _worstTime;
         }
-        public void setRunning(Boolean state)
+        public void SetRunning(Boolean state)
         {
             running = state;
         }
-        public Boolean getRunning()
+        public Boolean GetRunning()
         {
             return running;
         }
-        public void setSleep(double sleepy)
+        public void SetSleep(double sleepy)
         {
             sleep = sleepy;
         }
-        public double getSleep()
+        public double GetSleep()
         {
             return sleep;
         }
@@ -114,7 +114,7 @@ namespace ReadDllForm
 
             Initialze();
             ReadXml();
-            _worstTime = findWorstTime();
+            _worstTime = FindWorstTime();
         }
         public void LoadSignalLists(List<ISignal> inSignals, List<ISignal> outSignals)
         {
@@ -135,7 +135,7 @@ namespace ReadDllForm
         {
             foreach (var inSignal in _inSignals)
             {
-                inSignal.update();
+                inSignal.Update();
             }
             IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "step");
             step Step =
@@ -143,7 +143,7 @@ namespace ReadDllForm
             Step();
             foreach (var outSignal in _outSignals)
             {
-                outSignal.update();
+                outSignal.Update();
             }
         }
         private void Terminate()
@@ -163,23 +163,8 @@ namespace ReadDllForm
             _outSignals.AddRange(signals.OfType<OutSignal>().ToList());
         }
 
-        public string GetSignalsAsString()
-        {
-            string signals="";
-            signals += "In signals: " + Environment.NewLine;
-            foreach (var signal in _inSignals)
-            {
-                signals+= signal.GetSignalAsString();
-                signals += "\n";
-            }
-            signals += Environment.NewLine+ "Out signals: " + Environment.NewLine;
-            foreach (var signal in _outSignals)
-            {
-                signals += signal.GetSignalAsString();
-            }
-            return signals;
-        }
-        public string findWorstTime()
+
+        public string FindWorstTime()
         {
             List<double> timer = new List<double>();
             for (int i = 0; i < 11; ++i)

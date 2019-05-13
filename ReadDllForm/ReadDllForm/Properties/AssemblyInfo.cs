@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
-// set of attributes. Change these attribute values to update the information
+// set of attributes. Change these attribute values to Update the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ReadDllForm")]
 [assembly: AssemblyDescription("")]

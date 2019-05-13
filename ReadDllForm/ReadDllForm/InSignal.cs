@@ -59,28 +59,23 @@ namespace ReadDllForm
         }
         #endregion
 
-
-        public string GetSignalAsString()
-        {
-            return _portName + "\t" + GetSignal() + Environment.NewLine;
-        }
-
-        public string GetSignalName()
-        {
-            return _portName;
-        }
-
         public void SetChannelName(string channelName)
         {
             _channelName = channelName;
         }
-
+        public string GetChannelName()
+        {
+            return _channelName;
+        }
         public int GetPortNumber()
         {
             return _portNumber;
         }
-
-        public void update()
+        public string GetSignalName()
+        {
+            return _portName;
+        }
+        public void Update()
         {
             if (_channelName != "-")
             {
@@ -88,9 +83,6 @@ namespace ReadDllForm
             }
         }
 
-        public string GetChannelName()
-        {
-            return _channelName;
-        }
+       
     }
 }

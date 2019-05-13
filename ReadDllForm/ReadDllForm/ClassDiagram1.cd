@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ReadDllForm.SimulinkModel">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="ReadDllForm.SimulinkModel.initialize" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SimulinkModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="ReadDllForm.SimulinkModel.step" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SimulinkModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="ReadDllForm.SimulinkModel.terminate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SimulinkModel.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gAAAIIAAiAQCEAEACAAAgAgCAAsCAIAQIRAUAAIIBQI=</HashCode>
+      <FileName>SimulinkModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReadDllForm.OutSignal" BaseTypeListCollapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="ReadDllForm.OutSignal.getOutputs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>OutSignal.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAASAACAQgAAIAAAAAAAAAEAAAQAACACAAgAAAAAA=</HashCode>
+      <FileName>OutSignal.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ReadDllForm.InSignal" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="ReadDllForm.InSignal.SetInputs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InSignal.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="ReadDllForm.InSignal.GetInputs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>InSignal.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAASAACAQgAAIAAAAAAAAAEAAAQAACACAAgAAAAAA=</HashCode>
+      <FileName>InSignal.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="ReadDllForm.ISignal">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAgAAIAAAAAAAAAAAAAAAACACAAgAAAAAA=</HashCode>
+      <FileName>ISignal.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -9,17 +9,13 @@ namespace ReadDllForm
     public interface ISignal
     {
         void SetSignal(double value);
-
         double GetSignal();
-
-        string GetSignalAsString();
-
-        string GetSignalName();
-
         void SetChannelName(string channelName);
-
-        int GetPortNumber();
-        void update();
         string GetChannelName();
+        int GetPortNumber();
+        string GetSignalName();
+        void Update();
+
     }
 }
+ 

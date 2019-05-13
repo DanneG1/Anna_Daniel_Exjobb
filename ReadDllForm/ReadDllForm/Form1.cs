@@ -281,7 +281,7 @@ namespace ReadDllForm
             {
                 string channelName = hiCoreChannels.selectedChannel;
                 _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].SetChannelName(channelName);
-                _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].update();
+                _selectedModel.GetInSignals()[listViewInSignals.SelectedIndices[0]].Update();
                 ShowSignals(_selectedModel);
             }
                
@@ -353,7 +353,7 @@ namespace ReadDllForm
             {
                 componentListBox.Items.Add(model.GetName());
                 _modelsDictionary.Add(model.GetName(), model);
-                buttonRunModel.Text = model.getRunning() ? "Stop model" : "Run model";
+                buttonRunModel.Text = model.GetRunning() ? "Stop model" : "Run model";
             }
         }
 
@@ -421,7 +421,7 @@ namespace ReadDllForm
                     }
                     else
                     {
-                        signal.update();
+                        signal.Update();
                     }
 
                 }
@@ -457,9 +457,9 @@ namespace ReadDllForm
         {
             foreach (var model in _modelsDictionary.Values)
             {
-                if (model.getRunning())
+                if (model.GetRunning())
                 {
-                    model.setRunning(false);
+                    model.SetRunning(false);
                     panelSaveModel.Enabled = true;
                     buttonRunModel.Text = @"Run model";
                     timerUpdateLists.Stop();
@@ -467,7 +467,7 @@ namespace ReadDllForm
                 }
                 else
                 {
-                    model.setRunning(true);
+                    model.SetRunning(true);
                     panelSaveModel.Enabled = false;
                     buttonRunModel.Text = @"Stop model";
                     string rate = textBoxFrequency.Text;
@@ -477,7 +477,7 @@ namespace ReadDllForm
                     }
                     double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
                     textBoxFrequency.Text = scanrate.ToString();
-                    model.setSleep(scanrate);
+                    model.SetSleep(scanrate);
                     model.Run();
                     timerUpdateLists.Start();
                 }
@@ -553,7 +553,7 @@ namespace ReadDllForm
                     }
                     double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
                     textBoxFrequency.Text = scanrate.ToString();
-                    model.setSleep(scanrate);
+                    model.SetSleep(scanrate);
                 }
             }
         }

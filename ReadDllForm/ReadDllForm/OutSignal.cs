@@ -10,7 +10,7 @@ namespace ReadDllForm
 {
     class OutSignal:ISignal
     {
-        private IntPtr _pDll;
+        private readonly IntPtr _pDll;
         private readonly int _portNumber;
         private readonly string _portName;
         private string _channelName="-";
@@ -40,6 +40,11 @@ namespace ReadDllForm
         }
 
         #region DllFunctions
+
+        public void SetSignal(double value)
+        {
+            //do nothing
+        }
         public double GetSignal()
         {
             IntPtr pAddressOfFunctionToCall = DllMethods.GetProcAddress(_pDll, "getOutputs");
@@ -48,36 +53,26 @@ namespace ReadDllForm
 
             return GetOutputs(_portNumber);
         }
-
-        public void SetSignal(double value)
-        {
-            //do nothing
-        }
         #endregion
-
-      
-
-        public string GetSignalAsString()
-        {
-            return _portName + "\t" + GetSignal() + Environment.NewLine;
-        }
-
-        public string GetSignalName()
-        {
-            return _portName;
-        }
 
         public void SetChannelName(string channelName)
         {
             _channelName = channelName;
         }
-
+        public string GetChannelName()
+        {
+            return _channelName;
+        }
         public int GetPortNumber()
         {
             return _portNumber;
         }
-
-        public void update()
+        public string GetSignalName()
+        {
+            return _portName;
+        }
+        
+        public void Update()
         {
             if (_channelName != "-")
             {
@@ -85,9 +80,6 @@ namespace ReadDllForm
             }
         }
 
-        public string GetChannelName()
-        {
-            return _channelName;
-        }
+       
     }
 }
