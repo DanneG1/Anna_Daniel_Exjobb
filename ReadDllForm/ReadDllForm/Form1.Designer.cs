@@ -96,6 +96,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timerUpdateLists = new System.Windows.Forms.Timer(this.components);
             this.timerConnect = new System.Windows.Forms.Timer(this.components);
+            this.buttonChangeRate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControlInputs.SuspendLayout();
@@ -520,6 +521,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonChangeRate);
             this.groupBox3.Controls.Add(this.labelFrequency);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.labelHiCoreConnection);
@@ -535,7 +537,7 @@
             // labelFrequency
             // 
             this.labelFrequency.AutoSize = true;
-            this.labelFrequency.Location = new System.Drawing.Point(59, 60);
+            this.labelFrequency.Location = new System.Drawing.Point(22, 60);
             this.labelFrequency.Name = "labelFrequency";
             this.labelFrequency.Size = new System.Drawing.Size(114, 17);
             this.labelFrequency.TabIndex = 22;
@@ -544,7 +546,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 34);
+            this.label5.Location = new System.Drawing.Point(6, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(128, 17);
             this.label5.TabIndex = 19;
@@ -553,7 +555,7 @@
             // labelHiCoreConnection
             // 
             this.labelHiCoreConnection.AutoSize = true;
-            this.labelHiCoreConnection.Location = new System.Drawing.Point(198, 34);
+            this.labelHiCoreConnection.Location = new System.Drawing.Point(164, 34);
             this.labelHiCoreConnection.Name = "labelHiCoreConnection";
             this.labelHiCoreConnection.Size = new System.Drawing.Size(13, 17);
             this.labelHiCoreConnection.TabIndex = 13;
@@ -561,10 +563,10 @@
             // 
             // textBoxFrequency
             // 
-            this.textBoxFrequency.Location = new System.Drawing.Point(203, 60);
+            this.textBoxFrequency.Location = new System.Drawing.Point(166, 60);
             this.textBoxFrequency.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFrequency.Name = "textBoxFrequency";
-            this.textBoxFrequency.Size = new System.Drawing.Size(74, 22);
+            this.textBoxFrequency.Size = new System.Drawing.Size(54, 22);
             this.textBoxFrequency.TabIndex = 21;
             this.textBoxFrequency.Text = "1";
             this.textBoxFrequency.TextChanged += new System.EventHandler(this.textBoxFrequency_TextChanged);
@@ -742,6 +744,16 @@
             // 
             this.timerConnect.Tick += new System.EventHandler(this.timerConnect_Tick);
             // 
+            // buttonChangeRate
+            // 
+            this.buttonChangeRate.Location = new System.Drawing.Point(225, 56);
+            this.buttonChangeRate.Name = "buttonChangeRate";
+            this.buttonChangeRate.Size = new System.Drawing.Size(58, 30);
+            this.buttonChangeRate.TabIndex = 23;
+            this.buttonChangeRate.Text = "Apply";
+            this.buttonChangeRate.UseVisualStyleBackColor = true;
+            this.buttonChangeRate.Click += new System.EventHandler(this.buttonChangeRate_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -849,6 +861,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modelPerformanceToolStripMenuItem;
+        private System.Windows.Forms.Button buttonChangeRate;
     }
 }
 

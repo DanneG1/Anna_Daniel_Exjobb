@@ -541,11 +541,14 @@ namespace ReadDllForm
 
         private void textBoxFrequency_TextChanged(object sender, EventArgs e)
         {
+           
+        }
+
+        private void buttonChangeRate_Click(object sender, EventArgs e)
+        {
             foreach (var model in _modelsDictionary.Values)
             {
-                if (buttonRunModel.Text == @"Stop model")
-                {
-                    
+
                     string rate = textBoxFrequency.Text;
                     if (rate.Contains("."))
                     {
@@ -554,7 +557,7 @@ namespace ReadDllForm
                     double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
                     textBoxFrequency.Text = scanrate.ToString();
                     model.SetSleep(scanrate);
-                }
+
             }
         }
     }
