@@ -478,14 +478,7 @@ namespace ReadDllForm
                     model.SetRunning(true);
                     panelSaveModel.Enabled = false;
                     buttonRunModel.Text = @"Stop model";
-                    string rate = textBoxFrequency.Text;
-                    if (rate.Contains("."))
-                    {
-                        rate = rate.Replace(".", ",");
-                    }
-                    double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
-                    textBoxFrequency.Text = scanrate.ToString();
-                    model.SetSleep(scanrate);
+  
                     model.Run();
                     timerUpdateLists.Start();
                 }
@@ -558,11 +551,11 @@ namespace ReadDllForm
             {
 
                     string rate = textBoxFrequency.Text;
-                    if (rate.Contains("."))
+                    if (rate.Contains(","))
                     {
-                        rate = rate.Replace(".", ",");
+                        rate = rate.Replace(",", ".");
                     }
-                    double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
+                double scanrate = double.TryParse(rate, out double scanRate) ? scanRate : 1;
                     textBoxFrequency.Text = scanrate.ToString();
                     model.SetSleep(scanrate);
 
