@@ -123,24 +123,32 @@ namespace ReadDllForm
         {
             listViewInSignals.Items.Clear();
             listViewOutSignals.Items.Clear();
-            for (int i = 0; i < model.GetInSignals().Count; i++)
+            try
             {
-                ListViewItem listViewItem=new ListViewItem(model.GetInSignals()[i].GetSignalName());
-                listViewItem.SubItems.Add(model.GetInSignals()[i].GetSignal().ToString());
-                listViewItem.SubItems.Add(model.GetInSignals()[i].GetChannelName());
-                listViewInSignals.Items.Add(listViewItem);
-               
+                for (int i = 0; i < model.GetInSignals().Count; i++)
+                {
+                    ListViewItem listViewItem = new ListViewItem(model.GetInSignals()[i].GetSignalName());
+                    listViewItem.SubItems.Add(model.GetInSignals()[i].GetSignal().ToString());
+                    listViewItem.SubItems.Add(model.GetInSignals()[i].GetChannelName());
+                    listViewInSignals.Items.Add(listViewItem);
+
+                }
+                for (int i = 0; i < model.GetOutSignals().Count; i++)
+                {
+                    ListViewItem listViewItem = new ListViewItem(model.GetOutSignals()[i].GetSignalName());
+                    listViewItem.SubItems.Add(model.GetOutSignals()[i].GetSignal().ToString());
+                    listViewItem.SubItems.Add(model.GetOutSignals()[i].GetChannelName());
+                    listViewOutSignals.Items.Add(listViewItem);
+
+                }
             }
-            for (int i = 0; i < model.GetOutSignals().Count; i++)
+            catch(Exception e)
             {
-                ListViewItem listViewItem = new ListViewItem(model.GetOutSignals()[i].GetSignalName());
-                listViewItem.SubItems.Add(model.GetOutSignals()[i].GetSignal().ToString());
-                listViewItem.SubItems.Add(model.GetOutSignals()[i].GetChannelName());
-                listViewOutSignals.Items.Add(listViewItem);
-                
+                Console.WriteLine(e);
             }
 
-           
+
+
         }
        
         private void componentListBox_SelectedIndexChanged(object sender, EventArgs e)
