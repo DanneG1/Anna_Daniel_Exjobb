@@ -23,7 +23,7 @@ namespace ReadDllForm
         private readonly string _name;
         private readonly HiCoreClient _hiCore;
         private Boolean _running;
-        private double _sleep;
+        private double _sleep=1;
         public Thread ThreadRun;
 
         private List<ISignal> _inSignals = new List<ISignal>();
