@@ -37,18 +37,20 @@
             // listBoxHiCoreChannels
             // 
             this.listBoxHiCoreChannels.FormattingEnabled = true;
-            this.listBoxHiCoreChannels.ItemHeight = 16;
-            this.listBoxHiCoreChannels.Location = new System.Drawing.Point(12, 54);
+            this.listBoxHiCoreChannels.ItemHeight = 24;
+            this.listBoxHiCoreChannels.Location = new System.Drawing.Point(16, 81);
+            this.listBoxHiCoreChannels.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBoxHiCoreChannels.Name = "listBoxHiCoreChannels";
-            this.listBoxHiCoreChannels.Size = new System.Drawing.Size(411, 308);
+            this.listBoxHiCoreChannels.Size = new System.Drawing.Size(564, 460);
             this.listBoxHiCoreChannels.TabIndex = 0;
             this.listBoxHiCoreChannels.SelectedIndexChanged += new System.EventHandler(this.listBoxHiCoreChannels_SelectedIndexChanged);
             // 
             // btnSelectChannel
             // 
-            this.btnSelectChannel.Location = new System.Drawing.Point(337, 380);
+            this.btnSelectChannel.Location = new System.Drawing.Point(463, 570);
+            this.btnSelectChannel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSelectChannel.Name = "btnSelectChannel";
-            this.btnSelectChannel.Size = new System.Drawing.Size(86, 31);
+            this.btnSelectChannel.Size = new System.Drawing.Size(118, 46);
             this.btnSelectChannel.TabIndex = 1;
             this.btnSelectChannel.Text = "Select";
             this.btnSelectChannel.UseVisualStyleBackColor = true;
@@ -57,31 +59,34 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 13);
+            this.label1.Location = new System.Drawing.Point(16, 20);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 17);
+            this.label1.Size = new System.Drawing.Size(127, 25);
             this.label1.TabIndex = 2;
             this.label1.Text = "Signal name:";
             // 
             // labelSignalName
             // 
             this.labelSignalName.AutoSize = true;
-            this.labelSignalName.Location = new System.Drawing.Point(109, 12);
+            this.labelSignalName.Location = new System.Drawing.Point(150, 18);
+            this.labelSignalName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSignalName.Name = "labelSignalName";
-            this.labelSignalName.Size = new System.Drawing.Size(0, 17);
+            this.labelSignalName.Size = new System.Drawing.Size(0, 25);
             this.labelSignalName.TabIndex = 3;
             // 
             // FormHiCoreChannels
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(435, 428);
+            this.ClientSize = new System.Drawing.Size(598, 642);
             this.Controls.Add(this.labelSignalName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSelectChannel);
             this.Controls.Add(this.listBoxHiCoreChannels);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormHiCoreChannels";
-            this.Text = "FormHiCoreChannels";
+            this.Text = "Connect to channel";
             this.ResumeLayout(false);
             this.PerformLayout();
 
